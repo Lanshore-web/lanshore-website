@@ -1,0 +1,150 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import CtaBand from "@/components/CtaBand";
+
+export const metadata: Metadata = {
+  description:
+    "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, white papers, the SPM & agentic AI glossary, and press.",
+  alternates: { canonical: "/resources" },
+  openGraph: {
+    title: "Resources: Blog, White Papers, Glossary & Press | Lanshore",
+    description:
+      "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, white papers, the SPM & agentic AI glossary, and press.",
+    url: "/resources",
+    type: "website",
+  },
+};
+
+const BLOG_POSTS = [
+  {
+    title: "Elevating Sales Performance: The Power of Agentic AI in SPM",
+    summary:
+      "How agentic AI changes sales performance management: autonomous multi-step comp tasks, better forecasting, less administrative burden. The foundational read on Agentic SPM.",
+    url: "/blog/elevating-sales-performance-the-power-of-agentic-ai-in-spm",
+    featured: true,
+  },
+  {
+    title: "Sales Performance Management: Build vs. Buy in the Agentic AI Era",
+    summary:
+      "When to build custom comp tooling and when to buy a platform, now that agents change the economics of both.",
+    url: "/blog/sales-performance-management-build-vs-buy-in-the-agentic-ai-era",
+    featured: false,
+  },
+  {
+    title: "Beyond Dashboards: Selecting an SPM System in the Age of Agentic AI",
+    summary:
+      "Selection criteria for SPM platforms that go beyond traditional reporting capabilities.",
+    url: "/blog/beyond-dashboards-selecting-an-spm-system-in-the-age-of-agentic-ai",
+    featured: false,
+  },
+  {
+    title:
+      "Territory White Space in Sales Performance Management: What It Is, Why It Matters, and How to Fix It",
+    summary:
+      "Unallocated territory gaps in SPM frameworks and how to find and fix them.",
+    url: "/blog/territory-white-space-in-sales-performance-management-what-it-is-why-it-matters-and-how-to-fix-it",
+    featured: false,
+  },
+  {
+    title:
+      "The Agent Advantage: How AI-Powered Agents Are Transforming Dispute Management",
+    summary:
+      "How intelligent agents streamline dispute resolution across HR, finance, CRM, and sales performance management.",
+    url: "/blog/the-agent-advantage-how-ai-powered-agents-are-transforming-dispute-management-across-hr-finance-crm-and-sales-performance-management",
+    featured: false,
+  },
+];
+
+export default function ResourcesPage() {
+  return (
+    <>
+      <section className="bg-ink text-white">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">
+            Resources
+          </p>
+          <h1 className="text-4xl font-bold sm:text-5xl">
+            Agentic SPM, explained in depth
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg text-white/75">
+            Blog posts, white papers, and the glossary behind Agentic SPM by Lanshore.
+          </p>
+        </div>
+      </section>
+
+      {/* Blog */}
+      <section id="blog" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:px-6">
+        <h2 className="mb-8 text-2xl font-bold text-ink sm:text-3xl">Blog</h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          {BLOG_POSTS.map((post) => (
+            <a
+              key={post.url}
+              href={post.url}
+              className={`group rounded-lg border p-6 hover:border-accent ${
+                post.featured ? "border-accent bg-paper md:col-span-2" : "border-line"
+              }`}
+            >
+              {post.featured && (
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-accent">
+                  Start here
+                </p>
+              )}
+              <h3 className="font-bold text-ink group-hover:text-accent">{post.title}</h3>
+              <p className="mt-2 text-sm text-muted">{post.summary}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* White papers */}
+      <section id="white-papers" className="scroll-mt-20 bg-paper">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <h2 className="mb-4 text-2xl font-bold text-ink sm:text-3xl">White Papers</h2>
+          <p className="max-w-2xl text-muted">
+            In-depth guides on SPM platform selection, comp operations, and agentic AI
+            architecture. Request any of our current white papers through the contact
+            form and we&rsquo;ll send them directly.
+          </p>
+          <Link
+            href="/contact"
+            className="mt-6 inline-block font-semibold text-accent hover:text-accent-hover"
+          >
+            Request a white paper →
+          </Link>
+        </div>
+      </section>
+
+      {/* Glossary */}
+      <section id="glossary" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:px-6">
+        <h2 className="mb-4 text-2xl font-bold text-ink sm:text-3xl">FAQ & Glossary</h2>
+        <p className="max-w-2xl text-muted">
+          Plain-English definitions of SPM and agentic AI terms — from Agentic SPM and
+          crediting to clawbacks, SPIFs, and true-ups.
+        </p>
+        <Link
+          href="/resources/glossary"
+          className="mt-6 inline-block font-semibold text-accent hover:text-accent-hover"
+        >
+          Browse the glossary →
+        </Link>
+      </section>
+
+      {/* Events & Press */}
+      <section id="events-press" className="scroll-mt-20 bg-paper">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <h2 className="mb-4 text-2xl font-bold text-ink sm:text-3xl">Events & Press</h2>
+          <p className="max-w-2xl text-muted">
+            Find us at SPM and RevOps industry events, or reach our team for press
+            inquiries at{" "}
+            <a href="mailto:info@lanshore.com" className="font-semibold text-accent">
+              info@lanshore.com
+            </a>
+            .
+          </p>
+        </div>
+      </section>
+
+      <CtaBand />
+    </>
+  );
+}

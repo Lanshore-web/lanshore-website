@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* Brand palette ported from the original lanshore.com site (live-site CSS
+   exact values). Token names kept from this repo so existing components keep
+   working; values converged on the old brand: deep teal #003e50, primary
+   #135a76, logo gold #C9A84C. */
+:root {
+  --background: #ffffff;
+  --foreground: #1a202c;
+  --ink: #003e50; /* brand dark — footer/hero backgrounds, headings on light */
+  --ink-deep: #001e2d; /* hero overlay, deepest shade */
+  --ink-soft: #1d7082; /* cta teal */
+  --nav: #173c4d; /* nav text, dropdown bg, heading tint */
+  --accent: #135a76; /* links, accents (brand primary) */
+  --accent-hover: #1d7082;
+  --link-hover: #63b3ed;
+  --button: #125773; /* CTA button bg */
+  --button-hover: #6492a9;
+  --cta: #1d7082; /* hero CTA button */
+  --cta-hover: #155f73;
+  --gold: #c9a84c; /* Lanshore logo gold */
+  --gold-hover: #b8963e;
+  --gold-light: #e2c87a;
+  --teal-light: #eef6f9; /* icon backgrounds, comparison header tint */
+  --muted: #475467;
+  --line: #e2e8f0;
+  --paper: #f2f6f8; /* light alternating sections */
+  /* Chart mark colors — validated against the dark dashboard surface
+     #003e50. Raw brand tokens fail contrast checks on that surface; use
+     these for data marks, brand tokens for everything else. */
+  --chart-blue: #3d94c9;
+  --chart-gold: #a8862e;
+  --chart-surface: #003e50;
+  --chart-panel: #003245;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
+  --color-ink-soft: var(--ink-soft);
+  --color-nav: var(--nav);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-link-hover: var(--link-hover);
+  --color-button: var(--button);
+  --color-button-hover: var(--button-hover);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-gold: var(--gold);
+  --color-gold-hover: var(--gold-hover);
+  --color-gold-light: var(--gold-light);
+  --color-teal-light: var(--teal-light);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-paper: var(--paper);
+  --color-chart-blue: var(--chart-blue);
+  --color-chart-gold: var(--chart-gold);
+  --color-chart-surface: var(--chart-surface);
+  --color-chart-panel: var(--chart-panel);
+  --font-sans: var(--font-avenir-book);
+  --font-heading: var(--font-avenir-black);
+  --font-mono: var(--font-geist-mono);
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-card-hover: 0 4px 12px 0 rgb(0 0 0 / 0.12);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-avenir-book), Roboto, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-avenir-black), Roboto, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  line-height: 1.2;
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded bg-button px-6 py-3 text-sm font-bold text-white transition-all duration-150 hover:bg-button-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded border border-accent px-6 py-3 text-sm font-bold text-accent transition-all duration-150 hover:bg-accent hover:text-white focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 active:scale-[0.98];
+  }
+
+  .btn-outline-white {
+    @apply inline-flex items-center justify-center gap-2 rounded border border-white px-6 py-3 text-sm font-bold text-white transition-all duration-150 hover:bg-white hover:text-ink active:scale-[0.98];
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded bg-gold px-6 py-3 text-sm font-bold text-ink-deep transition-all duration-150 hover:bg-gold-hover active:scale-[0.98];
+  }
+}
