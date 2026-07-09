@@ -150,7 +150,7 @@ export default async function SpmPlatformPage({
             ))}
           </ul>
           <Link href="/contact" className="btn-primary mt-6">
-            Get a {platform.name} Assessment
+            Get an assessment
           </Link>
         </div>
 
@@ -173,7 +173,7 @@ export default async function SpmPlatformPage({
       <FaqSection items={platform.faq} heading={`${platform.name} — FAQ`} />
 
       <CtaBand
-        heading={`Talk to a ${platform.name} specialist`}
+        heading={`Talk to ${platform.name} specialists`}
         body="A 30-minute call. We look at your stack, your plans, and whether this platform — or another — fits best."
       />
     </>

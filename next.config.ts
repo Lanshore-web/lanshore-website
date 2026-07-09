@@ -144,7 +144,10 @@ const SIMPLE_REDIRECTS: Record<string, string[]> = {
   "/spm/anaplan": ["/anaplan"],
   "/spm/salesforce-spiff": ["/spiff"],
   "/spm/performio": ["/performio"],
-  "/spm": ["/akeron", "/iconixx", "/incentivate"],
+  "/spm/akeron": ["/akeron"],
+  /* /spm/everstage is a retired page from this site (replaced by /spm/akeron,
+     a different vendor — so it points at the index, not the new page). */
+  "/spm": ["/iconixx", "/incentivate", "/spm/everstage"],
   /* Old automation/RPA pages → the automation & integration services page. */
   "/services/automation": [
     "/uipath",
