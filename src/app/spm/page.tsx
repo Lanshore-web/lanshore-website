@@ -8,7 +8,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "SPM Platforms We Implement | Lanshore",
   description:
-    "Lanshore implements and operates the leading sales performance management platforms — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, and Everstage — technology-agnostic, with agentic AI on top.",
+    "Lanshore implements and operates the leading sales performance management platforms — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, and Akeron — technology-agnostic, with agentic AI on top.",
   alternates: { canonical: "/spm" },
   openGraph: {
     title: "SPM Platforms We Implement | Lanshore",
@@ -79,7 +79,7 @@ export default function SpmIndexPage() {
 
         <p className="mt-10 text-sm text-muted">
           Also supported through our partner network: {NEAR_MISS_VENDORS.join(", ")}, and
-          legacy estates on Akeron, Iconixx, and Incentivate. If your platform isn&apos;t
+          legacy estates on Iconixx and Incentivate. If your platform isn&apos;t
           listed, <Link href="/contact" className="font-semibold text-accent hover:text-accent-hover">talk to us</Link> — odds are we&apos;ve worked in it.
         </p>
       </section>

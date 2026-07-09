@@ -80,7 +80,7 @@ export default function GlossaryPage() {
             See the SPM platforms Lanshore implements
           </Link>{" "}
           — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, and
-          Everstage.
+          Akeron.
         </p>
       </section>
 

@@ -1,8 +1,12 @@
+import { Suspense, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import JsonLd from "@/components/JsonLd";
 import FaqSection from "@/components/FaqSection";
 import CtaBand from "@/components/CtaBand";
+import CustomAppDemo from "@/components/CustomAppDemo";
+import DemoDashboard from "@/components/DemoDashboard";
+import OperationsDemo from "@/components/OperationsDemo";
 import PillarGraphic from "@/components/PillarGraphic";
 import { faqSchema, serviceSchema } from "@/lib/schema";
 import { PILLARS, type Pillar } from "@/lib/pillars";
@@ -31,8 +35,37 @@ const DEMO_PERSONAS = [
   },
 ];
 
+/* Each pillar's live demo, embedded on the page itself. Intros are condensed
+   from the standalone demo pages' hero copy. */
+const DEMO_SECTIONS: Record<string, { intro: string; demo: ReactNode }> = {
+  "executive-dashboards": {
+    intro:
+      "The Executive Dashboards pillar running on Meridian Trust Bank, a fictitious regional financial institution. Pick your role and see what the dashboard answers for you — on an engagement, this runs on your comp platform, CRM, and finance data.",
+    demo: (
+      // DemoDashboard reads ?persona= via useSearchParams, which requires a
+      // Suspense boundary while the page prerenders.
+      <Suspense
+        fallback={<div className="min-h-[480px] rounded-xl bg-chart-surface shadow-2xl" />}
+      >
+        <DemoDashboard />
+      </Suspense>
+    ),
+  },
+  operations: {
+    intro:
+      "The June comp cycle executed by agents with humans approving what matters, and a live migration from Xactly Incent to Varicent ICM — running on Meridian Trust Bank, a fictitious regional financial institution. Try the exception queue: approve a fix and watch it apply.",
+    demo: <OperationsDemo />,
+  },
+  "custom-apps": {
+    intro:
+      "Meridian Comp Hub, a purpose-built comp tool for a fictitious regional bank. You’re signed in as a relationship manager — read your statement, ask the dispute bot why June came in low, track a SPIF approval, and drag the payout calculator’s sliders to model your quarter.",
+    demo: <CustomAppDemo />,
+  },
+};
+
 export default function PillarPage({ pillar }: { pillar: Pillar }) {
   const others = PILLARS.filter((p) => p.slug !== pillar.slug);
+  const demoSection = DEMO_SECTIONS[pillar.slug];
 
   return (
     <>
@@ -49,18 +82,22 @@ export default function PillarPage({ pillar }: { pillar: Pillar }) {
             <h1 className="text-4xl font-bold sm:text-5xl">{pillar.h1}</h1>
             <p className="mt-4 text-xl text-white/85">{pillar.sub}</p>
             <p className="mt-6 max-w-xl text-white/70">{pillar.firstSentence}</p>
-            {pillar.demoHref && (
-              <Link
-                href={pillar.demoHref}
-                className="mt-8 inline-block rounded-md bg-gold px-6 py-3 font-semibold text-ink-deep hover:bg-gold-hover"
-              >
-                See the live demo
-              </Link>
-            )}
           </div>
           <PillarGraphic slug={pillar.slug} />
         </div>
       </section>
+
+      {/* Live demo */}
+      {demoSection && (
+        <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <h2 className="mb-2 text-2xl font-bold text-ink sm:text-3xl">The live demo</h2>
+          <p className="mb-8 max-w-2xl text-muted">{demoSection.intro}</p>
+          {demoSection.demo}
+          <p className="mt-4 text-center text-xs text-muted">
+            Meridian Trust Bank is fictitious; all demo data is illustrative.
+          </p>
+        </section>
+      )}
 
       {/* Pain cards */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">

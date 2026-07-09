@@ -21,7 +21,7 @@ const SERVICES = [
     title: "Implementation & Consulting",
     href: "/spm",
     description:
-      "Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, and Everstage implementations, plan builds, and migrations, delivered by consultants who have done this for 15+ years.",
+      "Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, and Akeron implementations, plan builds, and migrations, delivered by consultants who have done this for 15+ years.",
     cta: "See the platforms we implement →",
   },
   {

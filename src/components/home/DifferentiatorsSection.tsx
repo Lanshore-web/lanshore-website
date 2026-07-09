@@ -13,7 +13,7 @@ const STATS = [
     value: "9",
     label: "SPM Platforms",
     description:
-      "Supported — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, Everstage & more",
+      "Supported — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, Akeron & more",
   },
   {
     icon: Bot,

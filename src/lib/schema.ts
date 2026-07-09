@@ -63,7 +63,7 @@ export const organizationSchema = {
     "Anaplan",
     "Salesforce Spiff",
     "Performio",
-    "Everstage",
+    "Vulki by Akeron",
     "UiPath",
     "n8n",
     "Claude Code",

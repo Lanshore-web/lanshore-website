@@ -349,43 +349,47 @@ export const SPM_PLATFORMS: SpmPlatform[] = [
     ],
   },
   {
-    slug: "everstage",
-    name: "Everstage",
-    vendor: "Everstage",
-    officialUrl: "https://www.everstage.com",
-    titleTag: "Everstage Implementation & Services | Lanshore",
+    slug: "akeron",
+    name: "Akeron",
+    vendor: "Akeron",
+    officialUrl: "https://www.akeron.com",
+    titleTag: "Vulki by Akeron Implementation & Services | Lanshore",
     metaDescription:
-      "Lanshore implements Everstage — the top-rated ICM platform on G2 and Gartner Peer Insights — and extends it with its Agent Core agentic layer.",
+      "Lanshore implements Vulki by Akeron — enterprise SPM with incentive compensation for sales and non-sales roles — and builds on its Akyba AI agent center.",
     firstSentence:
-      "Everstage is an incentive compensation management platform with the category's highest customer ratings on G2 and Gartner Peer Insights; Lanshore implements Everstage and builds on its Agent Core agentic layer.",
+      "Akeron is the company behind Vulki, an enterprise sales performance management platform covering incentive compensation for sales and non-sales roles, territory and quota planning, and the Akyba AI agent center; Lanshore implements Vulki as an Akeron partner.",
     positioning:
-      "Everstage has grown fast on the strength of rep-facing experience — commission visibility, gamified quota tracking, and clean statements — while building out enterprise-grade calculation and its Agent Core agentic layer.",
+      "Vulki by Akeron combines no-code incentive compensation — commissions, bonuses, and MBOs for any employee population, not just sales — with territory and quota planning, and embeds Akyba, a governed agent center whose specialized AI agents act on certified comp data inside the platform.",
     capabilities: [
-      "Commission calculation and no-code plan designer",
-      "Rep-facing commission visibility and earnings forecasting",
-      "Quota and territory management",
-      "Advanced analytics for comp and revenue teams",
+      "Incentive compensation for sales: commissions, bonuses, simulations, approvals, and dispute management",
+      "Variable compensation and MBOs for non-sales roles — marketing, operations, finance, and professional services",
+      "Territory and quota planning",
+      "No-code plan configuration with digital plan distribution and acknowledgment tracking",
+      "Embedded analytics and natural-language reporting on Microsoft Power BI",
     ],
     customerProfile:
-      "Growth and enterprise teams that weight seller experience heavily and want strong customer-rated support behind the platform.",
-    aiFeatures: ["Agent Core — Everstage's agentic AI layer for comp workflows"],
+      "Enterprise organizations — consumer goods, insurance, telecom, banking, retail, travel — that pay variable compensation across sales and non-sales populations and want business users, not IT, configuring plans.",
+    aiFeatures: [
+      "Akyba agent center — specialized AI agents for plan proposals, dispute triage, performance analysis, and user coaching, acting on governed platform data",
+      "LLM-agnostic by design: bring your own model (GPT, Claude, Gemini) with policy and cost control",
+    ],
     analystNote:
-      "Named a Strong Performer in The Forrester Wave™: Incentive Compensation Management, Q1 2025; rated #1 in the category on G2 and Gartner Peer Insights.",
+      "Named a Representative Vendor in the 2025 Gartner® Market Guide for Sales Performance Management for the fourth consecutive year, and an Exemplary Provider in the 2025 ISG Buyers Guides™ for Sales Performance Management, Incentive Compensation Management, and Revenue Performance Management.",
     lanshoreAngle: [
-      "Everstage implementation and migration from spreadsheets or legacy ICM",
-      "Comp operations support and plan administration",
-      "Agentic augmentation alongside Agent Core for cross-stack workflows",
+      "Vulki implementation as an Akeron partner — plan design, configuration, data integration, and go-live",
+      "Comp operations support and plan administration after launch",
+      "Agentic augmentation alongside Akyba for workflows that span CRM, ERP, and the rest of your stack",
     ],
     faq: [
       {
-        question: "How does Everstage compare to the enterprise SPM leaders?",
+        question: "What is Vulki by Akeron?",
         answer:
-          "Everstage leads the category in customer ratings (G2, Gartner Peer Insights) and is a Forrester Strong Performer; the enterprise leaders differ mainly in calculation depth for extreme plan complexity. Lanshore assesses fit per plan portfolio.",
+          "Vulki is Akeron's sales performance management platform. It handles incentive compensation for sales and non-sales roles, territory and quota planning, and includes Akyba — an agent center whose specialized AI agents work on governed data inside the platform.",
       },
       {
-        question: "Does Lanshore implement Everstage?",
+        question: "Does Lanshore implement Akeron?",
         answer:
-          "Yes — implementation, plan builds, data integration, and ongoing comp operations support on Everstage.",
+          "Yes — Lanshore is an Akeron implementation partner, delivering Vulki rollouts, plan builds, data integration, and ongoing comp operations support.",
       },
     ],
   },
