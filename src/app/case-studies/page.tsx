@@ -4,6 +4,7 @@ import CtaBand from "@/components/CtaBand";
 import { CASE_STUDIES } from "@/lib/caseStudies";
 
 export const metadata: Metadata = {
+  title: "SPM & Agentic AI Case Studies | Lanshore",
   description:
     "Enterprise sales performance management and automation case studies from Lanshore, with numbers attached.",
   alternates: { canonical: "/case-studies" },

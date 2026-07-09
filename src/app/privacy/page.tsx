@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CONTACT } from "@/lib/site";
 
 export const metadata: Metadata = {
+  title: "Privacy Policy | Lanshore",
   description: "How Lanshore collects, uses, and protects information on this site.",
   alternates: { canonical: "/privacy" },
   openGraph: {

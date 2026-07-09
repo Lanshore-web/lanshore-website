@@ -20,6 +20,7 @@ export async function generateMetadata({
   const industry = getIndustry(slug);
   if (!industry) return {};
   return {
+    title: industry.titleTag,
     description: industry.metaDescription,
     alternates: { canonical: `/industries/${industry.slug}` },
     openGraph: {

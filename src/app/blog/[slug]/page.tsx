@@ -19,6 +19,7 @@ export async function generateMetadata({
   const post = getPost(slug);
   if (!post) return {};
   return {
+    title: `${post.title} | Lanshore`,
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {

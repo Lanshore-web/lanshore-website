@@ -7,6 +7,7 @@ import FaqSection from "@/components/FaqSection";
 import { breadcrumbSchema, faqSchema, serviceSchema, type FaqItem } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  title: "Automation & Integration Services | Lanshore",
   description:
     "Tool-agnostic automation delivery: UiPath and Power Automate RPA, n8n workflow orchestration, agentic development with Claude Code and VS Code, and direct API integrations — whatever tools your team prefers.",
   alternates: { canonical: "/services/automation" },

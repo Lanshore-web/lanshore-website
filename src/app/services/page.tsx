@@ -3,6 +3,7 @@ import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
+  title: "SPM Implementation, Managed Services & AI Development | Lanshore",
   description:
     "Lanshore's services are how Agentic SPM gets delivered — from platform implementation to ongoing managed operations. One team from platform selection to agents in production.",
   alternates: { canonical: "/services" },

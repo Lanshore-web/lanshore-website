@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
+  title: "About Lanshore | SPM Consultancy & Agentic AI Builders",
   description:
     "Lanshore is a Houston-area consultancy that has implemented sales performance management for enterprises for 15+ years — and now builds the AI agents that run it.",
   alternates: { canonical: "/about" },

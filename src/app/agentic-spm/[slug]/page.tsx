@@ -18,6 +18,7 @@ export async function generateMetadata({
   const pillar = getPillar(slug);
   if (!pillar) return {};
   return {
+    title: pillar.titleTag,
     description: pillar.metaDescription,
     alternates: { canonical: pillar.path },
     openGraph: {

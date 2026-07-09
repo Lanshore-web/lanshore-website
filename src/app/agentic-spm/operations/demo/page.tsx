@@ -4,6 +4,7 @@ import OperationsDemo from "@/components/OperationsDemo";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
+  title: "SPM Operations Live Demo | Agentic SPM by Lanshore",
   description:
     "See the SPM Operations pillar of Agentic SPM by Lanshore in action: an agent-run monthly comp cycle and a live Xactly-to-Varicent vendor migration, modeled on a fictitious financial institution.",
   alternates: { canonical: "/agentic-spm/operations/demo" },

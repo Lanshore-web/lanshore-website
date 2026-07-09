@@ -20,6 +20,7 @@ export async function generateMetadata({
   const study = getCaseStudy(slug);
   if (!study) return {};
   return {
+    title: `${study.title} | Lanshore`,
     description: study.outcome,
     alternates: { canonical: `/case-studies/${study.slug}` },
     openGraph: {

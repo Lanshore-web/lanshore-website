@@ -4,6 +4,7 @@ import CustomAppDemo from "@/components/CustomAppDemo";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
+  title: "Custom SPM App Live Demo | Agentic SPM by Lanshore",
   description:
     "See the Custom Apps pillar of Agentic SPM by Lanshore in action: a working custom comp tool with a statement viewer, dispute bot, approval workflows, and an interactive payout calculator.",
   alternates: { canonical: "/agentic-spm/custom-apps/demo" },

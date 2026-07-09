@@ -6,6 +6,7 @@ import { GLOSSARY } from "@/lib/glossary";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
+  title: "SPM & Agentic AI Glossary | Lanshore",
   description:
     "Plain-English definitions of sales performance management and agentic AI terms — Agentic SPM, ICM, crediting, clawbacks, SPIFs, true-ups, and more.",
   alternates: { canonical: "/resources/glossary" },

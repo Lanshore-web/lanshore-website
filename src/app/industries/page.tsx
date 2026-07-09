@@ -4,6 +4,7 @@ import CtaBand from "@/components/CtaBand";
 import { INDUSTRIES } from "@/lib/industries";
 
 export const metadata: Metadata = {
+  title: "Industries | Agentic SPM by Lanshore",
   description:
     "Agentic SPM by Lanshore serves healthcare, telecom, technology, retail, oil & gas, and financial services sales organizations.",
   alternates: { canonical: "/industries" },

@@ -6,6 +6,7 @@ import { SPM_PLATFORMS, NEAR_MISS_VENDORS } from "@/lib/spmPlatforms";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  title: "SPM Platforms We Implement | Lanshore",
   description:
     "Lanshore implements and operates the leading sales performance management platforms — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, and Everstage — technology-agnostic, with agentic AI on top.",
   alternates: { canonical: "/spm" },

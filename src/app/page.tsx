@@ -13,6 +13,7 @@ import HomeContactSection from "@/components/home/HomeContactSection";
 import { faqSchema, type FaqItem } from "@/lib/schema";
 
 export const metadata: Metadata = {
+  title: "Agentic SPM by Lanshore | AI Agents for Sales Performance Management",
   description:
     "Agentic SPM by Lanshore pairs 15+ years of sales performance management delivery with AI agents that run comp operations, answer executive questions, and fill platform gaps.",
   alternates: { canonical: "/" },

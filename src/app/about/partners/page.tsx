@@ -4,6 +4,7 @@ import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
+  title: "Partners | Microsoft, UiPath & SPM Platform Partnerships | Lanshore",
   description:
     "Lanshore's partnerships: Microsoft Gold, UiPath Fast Track, and platform partnerships with Varicent, Xactly, CaptivateIQ, Performio, and SAP.",
   alternates: { canonical: "/about/partners" },

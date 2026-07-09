@@ -5,6 +5,7 @@ import DemoDashboard from "@/components/DemoDashboard";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
+  title: "Executive Dashboard Live Demo | Agentic SPM by Lanshore",
   description:
     "See the Executive Dashboards pillar of Agentic SPM by Lanshore in action: a working demo modeled on a financial institution, with views for the CRO, VP of Sales, CFO, and RevOps lead.",
   alternates: { canonical: "/agentic-spm/executive-dashboards/demo" },

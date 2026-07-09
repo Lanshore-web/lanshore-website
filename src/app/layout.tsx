@@ -31,9 +31,9 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  // Every tab reads the same. Pages intentionally do not set `title`; they
-  // differentiate through `openGraph.title` and `description` instead.
-  title: "Agentic AI by Lanshore",
+  // Fallback only — every page sets its own `title`. No `title.template`: the
+  // per-page strings already carry the "| Lanshore" suffix.
+  title: "Agentic SPM by Lanshore",
   description:
     "Agentic SPM by Lanshore pairs 15+ years of sales performance management delivery with AI agents that run comp operations, answer executive questions, and fill platform gaps.",
   openGraph: {
@@ -56,6 +56,9 @@ export default function RootLayout({
       className={`${avenirBook.variable} ${avenirBlack.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        {/* Answer-engine index. /llms.txt is found by convention; this link
+            advertises it to crawlers that look for one. React hoists it. */}
+        <link rel="alternate" type="text/plain" href="/llms.txt" />
         <JsonLd data={organizationSchema} />
         <JsonLd data={webSiteSchema} />
         {localBusinessSchemas.map((schema) => (

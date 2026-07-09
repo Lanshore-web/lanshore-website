@@ -4,6 +4,7 @@ import CtaBand from "@/components/CtaBand";
 import { BLOG_POSTS } from "@/lib/blog";
 
 export const metadata: Metadata = {
+  title: "Blog: Agentic AI & Sales Performance Management | Lanshore",
   description:
     "The Lanshore blog on Agentic SPM: agentic AI in sales performance management, platform selection, territory design, and dispute management.",
   alternates: { canonical: "/blog" },

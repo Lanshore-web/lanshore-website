@@ -148,9 +148,9 @@ Port the old site's brand system into Tailwind v4 tokens; everything later build
 ### Phase 7 — Ship checks
 - [x] `npm run lint` + `npm run build` clean
 - [x] Run `/verify` skill: drive home page, nav, one platform page, all three demos end-to-end in the running app
-- [ ] Run `/plan-audit docs/plans/lanshore-site-convergence.md` and reconcile MISSING/UNPLANNED
-- [ ] Run `/cold-review docs/plans/lanshore-site-convergence.md` findings resolved (required before PR)
-- [ ] Init git repo if still absent (needed for cold-review/PR flow) — confirm with owner first
+- [x] Run `/plan-audit docs/plans/lanshore-site-convergence.md` and reconcile MISSING/UNPLANNED — audited 2026-07-08 against `e666c88`; all Phase 1–6 items verified in code, one PARTIAL (Person schema, conditional)
+- [ ] Run `/cold-review docs/plans/lanshore-site-convergence.md` findings resolved (required before PR) — review written to `lanshore-site-convergence.review.md` 2026-07-08; **4 findings open** (V1 titles, V2 tracker consent, V3 llms.txt discovery, V5 screenshot)
+- [x] Init git repo if still absent (needed for cold-review/PR flow) — confirm with owner first — owner confirmed 2026-07-08; `e666c88` pushed to `origin/main`
 - **Verify:** all checks green; walkthrough of the site in dev matches the Goal paragraph.
 
 ## Verification criteria (whole feature)

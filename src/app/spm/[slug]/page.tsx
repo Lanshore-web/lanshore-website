@@ -21,6 +21,7 @@ export async function generateMetadata({
   const platform = getSpmPlatform(slug);
   if (!platform) return {};
   return {
+    title: platform.titleTag,
     description: platform.metaDescription,
     alternates: { canonical: `/spm/${platform.slug}` },
     openGraph: {
