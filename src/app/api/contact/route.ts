@@ -9,6 +9,9 @@ export async function POST(request: Request) {
   if (!body?.email || !body?.name) {
     return NextResponse.json({ error: "Name and email are required." }, { status: 400 });
   }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(body.email))) {
+    return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
+  }
 
   if (!HUBSPOT_FORM_ID) {
     console.error(
@@ -30,21 +33,27 @@ export async function POST(request: Request) {
     { objectTypeId: "0-1", name: "message", value: body.message ?? "" },
   ].filter((f) => f.value !== "");
 
-  const response = await fetch(
-    `https://api-na2.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        fields,
-        context: {
-          hutk: body.hutk || undefined,
-          pageUri: body.pageUri || undefined,
-          pageName: body.pageName || undefined,
-        },
-      }),
-    }
-  );
+  let response: Response;
+  try {
+    response = await fetch(
+      `https://api-na2.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields,
+          context: {
+            hutk: body.hutk || undefined,
+            pageUri: body.pageUri || undefined,
+            pageName: body.pageName || undefined,
+          },
+        }),
+      }
+    );
+  } catch (err) {
+    console.error("HubSpot form submission failed:", err);
+    return NextResponse.json({ error: "Submission failed." }, { status: 502 });
+  }
 
   if (!response.ok) {
     const detail = await response.text();

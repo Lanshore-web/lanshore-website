@@ -44,14 +44,14 @@ function StatementView() {
                     line.amount < 0 ? "text-red-300" : "text-white"
                   }`}
                 >
-                  {line.amount < 0 ? "−" : ""}${Math.abs(line.amount).toLocaleString()}
+                  {line.amount < 0 ? "−" : ""}${Math.abs(line.amount).toLocaleString("en-US")}
                 </td>
               </tr>
             ))}
             <tr className="border-t-2 border-gold">
               <td className="py-3 font-bold text-white">Net payout</td>
               <td className="py-3 text-right text-lg font-bold text-gold-light">
-                ${net.toLocaleString()}
+                ${net.toLocaleString("en-US")}
               </td>
             </tr>
           </tbody>
@@ -386,7 +386,7 @@ function PayoutCurve({ volumeM, plan }: { volumeM: number; plan: Plan }) {
         fontWeight="700"
         fill="var(--gold-light)"
       >
-        ${Math.round(current).toLocaleString()}
+        ${Math.round(current).toLocaleString("en-US")}
       </text>
       {/* axis labels */}
       <text x="30" y={h - 8} fontSize="10" className="fill-white/60">$0</text>
@@ -471,25 +471,25 @@ function CalculatorView() {
           <div className="flex justify-between text-white/80">
             <span>Base — up to quota @ {(plan.baseRate * 100).toFixed(2)}%</span>
             <span className="font-semibold text-white">
-              ${Math.round(result.base).toLocaleString()}
+              ${Math.round(result.base).toLocaleString("en-US")}
             </span>
           </div>
           <div className="flex justify-between text-white/80">
             <span>Accelerator — above quota @ {(plan.accelRate * 100).toFixed(2)}%</span>
             <span className="font-semibold text-gold-light">
-              ${Math.round(result.accel).toLocaleString()}
+              ${Math.round(result.accel).toLocaleString("en-US")}
             </span>
           </div>
           <div className="flex justify-between text-white/80">
             <span>Referral SPIF @ ${plan.spif}</span>
             <span className="font-semibold text-white">
-              ${result.spif.toLocaleString()}
+              ${result.spif.toLocaleString("en-US")}
             </span>
           </div>
           <div className="flex justify-between border-t border-gold pt-2 text-base font-bold">
             <span className="text-white">Projected payout</span>
             <span className="text-gold-light">
-              ${Math.round(result.total).toLocaleString()}
+              ${Math.round(result.total).toLocaleString("en-US")}
             </span>
           </div>
         </div>
@@ -537,7 +537,7 @@ export default function CustomAppDemo() {
       <div className="grid lg:grid-cols-[190px_1fr]">
         {/* Sidebar nav */}
         <nav
-          className="flex gap-1 border-b border-white/10 p-3 lg:flex-col lg:border-b-0 lg:border-r"
+          className="flex flex-wrap gap-1 border-b border-white/10 p-3 lg:flex-col lg:border-b-0 lg:border-r"
           aria-label="App sections"
         >
           {TABS.map((t) => (
@@ -552,7 +552,7 @@ export default function CustomAppDemo() {
               }`}
             >
               <span aria-hidden>{t.icon}</span>
-              <span className="hidden sm:inline">{t.label}</span>
+              <span>{t.label}</span>
             </button>
           ))}
         </nav>

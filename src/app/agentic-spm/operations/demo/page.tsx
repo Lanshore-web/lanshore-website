@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "See the SPM Operations pillar of Agentic SPM by Lanshore in action: an agent-run monthly comp cycle and a live Xactly-to-Varicent vendor migration, modeled on a fictitious financial institution.",
   alternates: { canonical: "/agentic-spm/operations/demo" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "SPM Operations Live Demo | Agentic SPM by Lanshore",
     description:
       "An agent-run monthly comp cycle and a live Xactly-to-Varicent migration demo.",

@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "Agentic SPM by Lanshore serves healthcare, telecom, technology, retail, oil & gas, and financial services sales organizations.",
   alternates: { canonical: "/industries" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "Industries | Agentic SPM by Lanshore",
     description:
       "Agentic SPM by Lanshore serves healthcare, telecom, technology, retail, oil & gas, and financial services sales organizations.",

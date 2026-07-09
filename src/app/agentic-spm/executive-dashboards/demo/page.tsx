@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     "See the Executive Dashboards pillar of Agentic SPM by Lanshore in action: a working demo modeled on a financial institution, with views for the CRO, VP of Sales, CFO, and RevOps lead.",
   alternates: { canonical: "/agentic-spm/executive-dashboards/demo" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "Executive Dashboard Live Demo | Agentic SPM by Lanshore",
     description:
       "A working executive comp dashboard demo with views for the CRO, VP of Sales, CFO, and RevOps lead.",

@@ -51,7 +51,8 @@ export default function Footer() {
           </div>
         ))}
       </div>
-      <div className="border-t border-white/10">
+      {/* Bottom padding keeps this row clear of the fixed MobileContactBar. */}
+      <div className="border-t border-white/10 pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-0">
         <div className="container-site flex flex-wrap items-center justify-between gap-4 py-5 text-sm text-white/60">
           <span>© {new Date().getFullYear()} Lanshore. All rights reserved.</span>
           <span className="flex items-center gap-5">

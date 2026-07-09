@@ -11,6 +11,8 @@ export const metadata: Metadata = {
     "Lanshore implements and operates the leading sales performance management platforms — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, and Akeron — technology-agnostic, with agentic AI on top.",
   alternates: { canonical: "/spm" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "SPM Platforms We Implement | Lanshore",
     description:
       "Technology-agnostic implementation, managed operations, and agentic augmentation across the leading SPM platforms.",

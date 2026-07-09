@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: "How Lanshore collects, uses, and protects information on this site.",
   alternates: { canonical: "/privacy" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "Privacy Policy | Lanshore",
     description:
       "How Lanshore collects, uses, and protects information on this site.",

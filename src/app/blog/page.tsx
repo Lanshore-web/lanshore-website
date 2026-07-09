@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "The Lanshore blog on Agentic SPM: agentic AI in sales performance management, platform selection, territory design, and dispute management.",
   alternates: { canonical: "/blog" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "Blog: Agentic AI & Sales Performance Management | Lanshore",
     description:
       "The Lanshore blog on Agentic SPM: agentic AI in sales performance management, platform selection, territory design, and dispute management.",

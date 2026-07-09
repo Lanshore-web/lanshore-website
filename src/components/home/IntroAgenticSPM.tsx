@@ -32,7 +32,7 @@ export default function IntroAgenticSPM() {
       {/* Dark teal banner */}
       <section
         id="agentic-spm"
-        className="relative overflow-hidden bg-button pb-32 pt-20 text-center"
+        className="relative scroll-mt-20 overflow-hidden bg-button pb-32 pt-20 text-center"
       >
         {/* Decorative background rings */}
         <div

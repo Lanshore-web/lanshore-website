@@ -25,6 +25,8 @@ export async function generateMetadata({
     description: platform.metaDescription,
     alternates: { canonical: `/spm/${platform.slug}` },
     openGraph: {
+      siteName: "Lanshore",
+      locale: "en_US",
       title: platform.titleTag,
       description: platform.metaDescription,
       url: `/spm/${platform.slug}`,

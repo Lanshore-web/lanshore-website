@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     "Lanshore's services are how Agentic SPM gets delivered — from platform implementation to ongoing managed operations. One team from platform selection to agents in production.",
   alternates: { canonical: "/services" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "SPM Implementation, Managed Services & AI Development | Lanshore",
     description:
       "From platform implementation to ongoing managed operations — one team from platform selection to agents in production.",

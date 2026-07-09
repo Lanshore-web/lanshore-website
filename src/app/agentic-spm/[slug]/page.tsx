@@ -22,6 +22,8 @@ export async function generateMetadata({
     description: pillar.metaDescription,
     alternates: { canonical: pillar.path },
     openGraph: {
+      siteName: "Lanshore",
+      locale: "en_US",
       title: pillar.titleTag,
       description: pillar.metaDescription,
       url: pillar.path,

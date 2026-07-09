@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "Lanshore's partnerships: Microsoft Gold, UiPath Fast Track, and platform partnerships with Varicent, Xactly, CaptivateIQ, Performio, and SAP.",
   alternates: { canonical: "/about/partners" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "Partners | Microsoft, UiPath & SPM Platform Partnerships | Lanshore",
     description:
       "Lanshore's partnerships: Microsoft Gold, UiPath Fast Track, and platform partnerships with Varicent, Xactly, CaptivateIQ, Performio, and SAP.",

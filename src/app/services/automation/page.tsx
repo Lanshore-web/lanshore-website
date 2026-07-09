@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     "Tool-agnostic automation delivery: UiPath and Power Automate RPA, n8n workflow orchestration, agentic development with Claude Code and VS Code, and direct API integrations — whatever tools your team prefers.",
   alternates: { canonical: "/services/automation" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "Automation & Integration Services | Lanshore",
     description:
       "Tool-agnostic automation delivery: RPA, workflow orchestration, agentic AI development, and direct API integrations.",

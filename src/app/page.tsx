@@ -18,6 +18,8 @@ export const metadata: Metadata = {
     "Agentic SPM by Lanshore pairs 15+ years of sales performance management delivery with AI agents that run comp operations, answer executive questions, and fill platform gaps.",
   alternates: { canonical: "/" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "Agentic SPM by Lanshore | AI Agents for Sales Performance Management",
     description:
       "15+ years of sales performance management delivery, converged with agentic AI: executive dashboards, comp operations, and custom apps.",

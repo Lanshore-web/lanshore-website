@@ -65,9 +65,7 @@ export default function RootLayout({
           <JsonLd key={schema["@id"]} data={schema} />
         ))}
         <Header />
-        <main className="flex-1 pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-0">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
         <Footer />
         <MobileContactBar />
         {/* HubSpot tracking (portal 6603479, NA2) */}

@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     "Why teams pick Lanshore for Agentic SPM: we've run comp, not just advised on it; one team from platform to agents; and we own outcomes through managed services.",
   alternates: { canonical: "/about/why-lanshore" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "Why Lanshore | One Team From Platform to Agents",
     description:
       "Why teams pick Lanshore for Agentic SPM: we've run comp, not just advised on it; one team from platform to agents; and we own outcomes through managed services.",

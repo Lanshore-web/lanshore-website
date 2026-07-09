@@ -23,6 +23,8 @@ export async function generateMetadata({
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
+      siteName: "Lanshore",
+      locale: "en_US",
       title: post.title,
       description: post.description,
       url: `/blog/${post.slug}`,

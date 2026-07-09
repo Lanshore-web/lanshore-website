@@ -11,6 +11,8 @@ export const metadata: Metadata = {
     "Plain-English definitions of sales performance management and agentic AI terms — Agentic SPM, ICM, crediting, clawbacks, SPIFs, true-ups, and more.",
   alternates: { canonical: "/resources/glossary" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "SPM & Agentic AI Glossary | Lanshore",
     description:
       "Plain-English definitions of sales performance management and agentic AI terms — Agentic SPM, ICM, crediting, clawbacks, SPIFs, true-ups, and more.",

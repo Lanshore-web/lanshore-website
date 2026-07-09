@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     "Lanshore is a Houston-area consultancy that has implemented sales performance management for enterprises for 15+ years — and now builds the AI agents that run it.",
   alternates: { canonical: "/about" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "About Lanshore | SPM Consultancy & Agentic AI Builders",
     description:
       "Lanshore is a Houston-area consultancy that has implemented sales performance management for enterprises for 15+ years — and now builds the AI agents that run it.",

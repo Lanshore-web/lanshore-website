@@ -24,6 +24,8 @@ export async function generateMetadata({
     description: study.outcome,
     alternates: { canonical: `/case-studies/${study.slug}` },
     openGraph: {
+      siteName: "Lanshore",
+      locale: "en_US",
       title: study.title,
       description: study.outcome,
       url: `/case-studies/${study.slug}`,

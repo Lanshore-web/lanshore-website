@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     "Join Lanshore: SPM consultants, comp analysts, and agentic AI engineers building the agents that run sales performance management.",
   alternates: { canonical: "/about/careers" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "Careers at Lanshore | SPM & Agentic AI Consulting",
     description:
       "Join Lanshore: SPM consultants, comp analysts, and agentic AI engineers building the agents that run sales performance management.",

@@ -24,6 +24,8 @@ export async function generateMetadata({
     description: industry.metaDescription,
     alternates: { canonical: `/industries/${industry.slug}` },
     openGraph: {
+      siteName: "Lanshore",
+      locale: "en_US",
       title: industry.titleTag,
       description: industry.metaDescription,
       url: `/industries/${industry.slug}`,

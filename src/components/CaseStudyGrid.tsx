@@ -31,7 +31,7 @@ export default function CaseStudyGrid({ studies }: { studies: CaseStudy[] }) {
           <select
             value={pillar}
             onChange={(e) => setPillar(e.target.value)}
-            className="rounded-md border border-line px-3 py-2"
+            className="rounded-md border border-line px-3 py-2 text-base"
           >
             {pillars.map((p) => (
               <option key={p}>{p}</option>
@@ -43,7 +43,7 @@ export default function CaseStudyGrid({ studies }: { studies: CaseStudy[] }) {
           <select
             value={industry}
             onChange={(e) => setIndustry(e.target.value)}
-            className="rounded-md border border-line px-3 py-2"
+            className="rounded-md border border-line px-3 py-2 text-base"
           >
             {industries.map((i) => (
               <option key={i}>{i}</option>

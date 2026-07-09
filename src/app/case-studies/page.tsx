@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     "Enterprise sales performance management and automation case studies from Lanshore, with numbers attached.",
   alternates: { canonical: "/case-studies" },
   openGraph: {
+    siteName: "Lanshore",
+    locale: "en_US",
     title: "SPM & Agentic AI Case Studies | Lanshore",
     description:
       "Enterprise sales performance management and automation case studies from Lanshore, with numbers attached.",

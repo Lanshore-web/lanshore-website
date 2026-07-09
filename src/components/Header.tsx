@@ -3,12 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { NAV } from "@/lib/site";
 
 export default function Header() {
   const [open, setOpen] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -16,6 +18,14 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Back/forward navigation bypasses the links' onClick close handlers.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setMobileOpen(false);
+    setOpen(null);
+  }
 
   return (
     <header
@@ -116,7 +126,7 @@ export default function Header() {
       {/* Mobile menu */}
       {mobileOpen && (
         <nav
-          className="max-h-[calc(100vh-3.5rem)] overflow-y-auto border-t border-line bg-white px-4 pb-4 lg:hidden"
+          className="max-h-[calc(100dvh-3.5rem)] overflow-y-auto border-t border-line bg-white px-4 pb-4 lg:hidden"
           aria-label="Mobile"
         >
           {NAV.map((item) => (
@@ -128,7 +138,7 @@ export default function Header() {
                     <Link
                       key={child.label}
                       href={child.href}
-                      className="block py-1.5 pl-3 text-sm text-muted"
+                      className="block py-2.5 pl-3 text-sm text-muted"
                       onClick={() => setMobileOpen(false)}
                     >
                       {child.label}
@@ -138,7 +148,7 @@ export default function Header() {
               ) : (
                 <Link
                   href={item.href!}
-                  className="block py-1 text-sm font-bold text-nav"
+                  className="block py-2.5 text-sm font-bold text-nav"
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
