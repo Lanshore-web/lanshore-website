@@ -52,9 +52,10 @@ export default function AboutPage() {
       <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
         <p className="text-lg text-foreground">
           We started as an SPM implementation shop: Varicent, Xactly, CaptivateIQ,
-          Performio, and SAP Commissions, delivered for enterprises across healthcare,
+          SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio,
+          and Akeron, delivered for enterprises across healthcare,
           telecom, technology, retail, oil and gas, and financial services. Along the way
-          we added RPA and automation practice, then managed services — running comp
+          we added an RPA and automation practice, then managed services — running comp
           operations for clients, not just building them. Agentic SPM is the next step of
           the same trajectory: the AI agents we build today do the work our consultants
           have done by hand for fifteen years, which is exactly why they work.

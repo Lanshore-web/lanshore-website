@@ -115,7 +115,7 @@ export const GLOSSARY: GlossaryTerm[] = [
   {
     term: "Sales performance management (SPM)",
     definition:
-      "The discipline and software category covering how companies plan, manage, and pay their sales organization: territory design, quota setting, incentive compensation, and performance analytics. Major SPM platforms include Varicent, Xactly, CaptivateIQ, Performio, and SAP Commissions.",
+      "The discipline and software category covering how companies plan, manage, and pay their sales organization: territory design, quota setting, incentive compensation, and performance analytics. Major SPM platforms include Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, and Akeron.",
   },
   {
     term: "SPIF",

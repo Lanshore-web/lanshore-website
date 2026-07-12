@@ -46,7 +46,7 @@ export const organizationSchema = {
     { "@type": "Country", name: "Costa Rica" },
   ],
   sameAs: [
-    "https://www.linkedin.com/company/lanshore",
+    "https://www.linkedin.com/company/lanshore-llc",
     "https://www.facebook.com/lanshore1",
     "https://x.com/LanshoreLLC",
     "https://www.youtube.com/@Lanshore",

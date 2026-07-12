@@ -6,7 +6,16 @@
 export const DEMO_COMPANY = "Meridian Trust Bank";
 export const DEMO_AS_OF = "Q2 2026 · data as of May 31, refreshed 22 minutes ago";
 
-export type Kpi = { label: string; value: string; delta?: string; note?: string };
+export type Kpi = {
+  label: string;
+  value: string;
+  delta?: string;
+  note?: string;
+  /* Optional monthly series rendered as a sparkline in the KPI tile. */
+  trend?: number[];
+  /* "warn" renders the delta as a warning instead of an accent. */
+  tone?: "warn";
+};
 
 export type QA = { question: string; answer: string; sources: string };
 
@@ -32,32 +41,50 @@ export type MonthlyPoint = {
   projected: boolean;
 };
 
-/* Attainment % and comp spend ($M) by month; June is a projection. */
+/* Attainment % and comp spend ($M) by month; June is a projection.
+   Jan–Mar are Q1 actuals averaging 84.2% — the "+3.2 pts vs. Q1" baseline.
+   The April dip is the realignment's crediting gaps, fixed through May. */
 export const MONTHLY: MonthlyPoint[] = [
+  { month: "Jan", attainment: 82.6, spend: 1.87, projected: false },
+  { month: "Feb", attainment: 84.4, spend: 1.94, projected: false },
+  { month: "Mar", attainment: 85.6, spend: 2.01, projected: false },
   { month: "Apr", attainment: 84.1, spend: 2.06, projected: false },
   { month: "May", attainment: 90.5, spend: 2.22, projected: false },
   { month: "Jun", attainment: 96.0, spend: 2.31, projected: true },
 ];
 
 /* Per-district monthly series. Spend sums to the blended MONTHLY figures:
-   Apr 2.06, May 2.22, Jun 2.31. */
+   Jan 1.87, Feb 1.94, Mar 2.01, Apr 2.06, May 2.22, Jun 2.31.
+   Gulf Coast declines into April — the story the CRO agent insight flags. */
 export const MONTHLY_BY_DISTRICT: Record<string, MonthlyPoint[]> = {
   Northeast: [
+    { month: "Jan", attainment: 86.4, spend: 0.57, projected: false },
+    { month: "Feb", attainment: 88.6, spend: 0.59, projected: false },
+    { month: "Mar", attainment: 89.5, spend: 0.61, projected: false },
     { month: "Apr", attainment: 90.2, spend: 0.63, projected: false },
     { month: "May", attainment: 97.4, spend: 0.68, projected: false },
     { month: "Jun", attainment: 102.5, spend: 0.71, projected: true },
   ],
   Central: [
+    { month: "Jan", attainment: 83.2, spend: 0.49, projected: false },
+    { month: "Feb", attainment: 85.1, spend: 0.51, projected: false },
+    { month: "Mar", attainment: 85.8, spend: 0.52, projected: false },
     { month: "Apr", attainment: 85.6, spend: 0.54, projected: false },
     { month: "May", attainment: 92.1, spend: 0.58, projected: false },
     { month: "Jun", attainment: 97.8, spend: 0.6, projected: true },
   ],
   Southeast: [
+    { month: "Jan", attainment: 80.1, spend: 0.43, projected: false },
+    { month: "Feb", attainment: 82.3, spend: 0.44, projected: false },
+    { month: "Mar", attainment: 81.6, spend: 0.46, projected: false },
     { month: "Apr", attainment: 80.3, spend: 0.47, projected: false },
     { month: "May", attainment: 85.9, spend: 0.51, projected: false },
     { month: "Jun", attainment: 91.4, spend: 0.53, projected: true },
   ],
   "Gulf Coast": [
+    { month: "Jan", attainment: 78.9, spend: 0.38, projected: false },
+    { month: "Feb", attainment: 76.2, spend: 0.4, projected: false },
+    { month: "Mar", attainment: 71.8, spend: 0.42, projected: false },
     { month: "Apr", attainment: 65.9, spend: 0.42, projected: false },
     { month: "May", attainment: 70.2, spend: 0.45, projected: false },
     { month: "Jun", attainment: 78.6, spend: 0.47, projected: true },
@@ -240,31 +267,66 @@ export const ACCRUALS: {
   },
 ];
 
-/* "What if quarter-end attainment finishes +5 pts?" scenario for the CFO
-   view. June recomputes; April and May are actuals and don't move. */
-export const CFO_SCENARIO = {
-  label: "What if quarter-end attainment finishes +5 pts (101%)?",
-  june: {
-    booked: 2.25,
-    calculated: 2.43,
-    variance: "+8.0%",
-    status: "Open — true-up est. $178K",
-    drivers: [
-      { label: "Accelerator exposure — Northeast at 107%", amountK: 96 },
-      { label: "Accelerator exposure — Central at 103%", amountK: 66 },
-      { label: "Realignment corrections + proration", amountK: 16 },
-    ] as AccrualDriver[],
-  },
-  liability: "$6.71M",
-  liabilityNote: "at 101% attainment",
-  trueUp: "$178K",
-  trueUpDelta: "exceeds 1% tolerance — review",
+/* CFO what-if: drag quarter-end attainment and June recomputes; April and
+   May are actuals and don't move. At the 96% baseline this reproduces the
+   June ACCRUALS row exactly ($58K true-up, $6.59M liability). Accelerators
+   are piecewise: Northeast (runs ~6.5 pts hot) crosses 100% district
+   attainment near a 93% blended finish; Central (~2 pts hot) near 98%. */
+export const CFO_BASELINE_ATT = 96;
+export const CFO_ATT_RANGE = { min: 92, max: 104 };
+/* 1% of the $6.49M booked quarter. */
+export const CFO_TOLERANCE_K = 65;
+
+export type CfoWhatIf = {
+  drivers: AccrualDriver[];
+  trueUpK: number;
+  juneCalculated: number; // $M
+  juneVariance: string;
+  juneStatus: string;
+  liability: string;
+  breach: boolean;
 };
+
+export function cfoWhatIf(att: number): CfoWhatIf {
+  const northeastK = Math.max(0, Math.round((att - 92) * 10.5));
+  const centralK = Math.max(0, Math.round((att - 98) * 22));
+  const drivers: AccrualDriver[] = [];
+  if (northeastK > 0) {
+    drivers.push({
+      label: `Accelerator exposure — Northeast at ${(att + 6.5).toFixed(1)}%`,
+      amountK: northeastK,
+    });
+  }
+  if (centralK > 0) {
+    drivers.push({
+      label: `Accelerator exposure — Central at ${(att + 2).toFixed(1)}%`,
+      amountK: centralK,
+    });
+  }
+  drivers.push(
+    { label: "Realignment crediting corrections — Gulf Coast", amountK: 11 },
+    { label: "New-hire proration — June class", amountK: 5 }
+  );
+
+  const trueUpK = drivers.reduce((sum, d) => sum + d.amountK, 0);
+  const juneCalculated = Math.round((2.25 + trueUpK / 1000) * 100) / 100;
+  /* $6.49M booked + $40K April/May variance already reconciled. */
+  const liability = 6.53 + trueUpK / 1000;
+  return {
+    drivers,
+    trueUpK,
+    juneCalculated,
+    juneVariance: `+${(((juneCalculated - 2.25) / 2.25) * 100).toFixed(1)}%`,
+    juneStatus: `Open — true-up est. $${trueUpK}K`,
+    liability: `$${liability.toFixed(2)}M`,
+    breach: trueUpK > CFO_TOLERANCE_K,
+  };
+}
 
 export const AUDIT_TRAIL = [
   {
     timestamp: "May 31, 23:42",
-    action: "Monthly calculation run #148 completed — 1,247 statements generated",
+    action: "Monthly calculation run #148 completed — 170 statements generated",
     actor: "Agent (auto)",
   },
   {
@@ -381,8 +443,18 @@ export const PERSONAS: {
     label: "CRO",
     tagline: "Attainment vs. comp spend in real time, without waiting on ops.",
     kpis: [
-      { label: "Blended attainment (QTD)", value: "87.4%", delta: "+3.2 pts vs. Q1" },
-      { label: "Comp spend (QTD)", value: "$4.28M", note: "vs. $4.31M plan" },
+      {
+        label: "Blended attainment (QTD)",
+        value: "87.4%",
+        delta: "+3.2 pts vs. Q1",
+        trend: [82.6, 84.4, 85.6, 84.1, 90.5, 96.0],
+      },
+      {
+        label: "Comp spend (QTD)",
+        value: "$4.28M",
+        note: "vs. $4.31M plan",
+        trend: [1.87, 1.94, 2.01, 2.06, 2.22, 2.31],
+      },
       { label: "Comp cost of revenue", value: "8.9%", delta: "−0.4 pts vs. Q1" },
       { label: "Projected quarter-end", value: "96%", note: "attainment at current pace" },
     ],
@@ -446,7 +518,7 @@ export const PERSONAS: {
       {
         question: "Can I get the audit trail for the May calculation?",
         answer:
-          "Yes — 1,247 statements from run #148, every action logged with timestamp, input, output, and approver. One exception (duplicate credit, deal #88213) was routed, fixed, and approved by S. Patel. Export is SOX-formatted.",
+          "Yes — 170 statements from run #148, every action logged with timestamp, input, output, and approver. One exception (duplicate credit, deal #88213) was routed, fixed, and approved by S. Patel. Export is SOX-formatted.",
         sources: "Agent audit log · Varicent ICM · export to internal audit",
       },
     ],

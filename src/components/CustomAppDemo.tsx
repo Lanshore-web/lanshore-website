@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 /* "Meridian Comp Hub" — a fictitious custom comp app of the kind the Custom Apps
    pillar delivers: statement viewer, dispute bot, approval workflows, and a
@@ -20,16 +20,65 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
 
 /* ---------- My Statement ---------- */
 
+/* Quota ($2.4M) is crossed mid-June, so the statement splits June volume at
+   the crossing: $290K to quota at base rate, $190K above at the accelerator.
+   Every rate × base must equal its amount — CalculatorView runs the same plan. */
 const STATEMENT_LINES = [
-  { item: "Base commission — funded volume $2.59M @ 0.85%", amount: 4120 },
-  { item: "Accelerator — $190K above quota @ 1.25%", amount: 860 },
-  { item: "Treasury referral SPIF — 3 referrals @ $150", amount: 450 },
-  { item: "Clawback — Hartwell Logistics early paydown", amount: -1840 },
-  { item: "Draw recovery — month 4 of 6", amount: -500 },
+  {
+    item: "Base commission — $290K to quota @ 0.85%",
+    amount: 2465,
+    trace: {
+      deal: "4 facilities funded in June before the quota crossing — largest: Brightline Capital (60% split with T. Nguyen)",
+      clause: "Plan §2.1 — base rate, 0.85% to 100% of quota",
+      run: "Calc run #149 · Jun 30, 02:47",
+    },
+  },
+  {
+    item: "Accelerator — $190K above quota @ 1.25%",
+    amount: 2375,
+    trace: {
+      deal: "Quota ($2.4M) crossed Jun 9 with the Meridian Grain facility; $190K funded above it",
+      clause: "Plan §2.3 — 1.25% accelerator above 100%, uncapped to 200%",
+      run: "Calc run #149 · Jun 30, 02:47",
+    },
+  },
+  {
+    item: "Treasury referral SPIF — 3 referrals @ $150",
+    amount: 450,
+    trace: {
+      deal: "Referrals accepted: Brightline Capital, Gulfstream Logistics, Pier & Main",
+      clause: "Plan §3.4 — $150 per accepted treasury referral",
+      run: "Calc run #149 · referral log synced Jun 28",
+    },
+  },
+  {
+    item: "Clawback — Hartwell Logistics early paydown",
+    amount: -1840,
+    trace: {
+      deal: "Hartwell Logistics facility — funded Mar 4, borrower paydown May 22 (day 79 of the 90-day window)",
+      clause: "Plan §5.1 — clawback inside 90 days of funding",
+      run: "Calc run #149 · validation check #221",
+    },
+  },
+  {
+    item: "Draw recovery — month 4 of 6",
+    amount: -500,
+    trace: {
+      deal: "Recovery month 4 of 6 · $1,000 balance remains after this deduction",
+      clause: "Plan §4.2 — draw recovery, negative carryforward",
+      run: "Recovery schedule R-2211",
+    },
+  },
 ];
 
 function StatementView() {
+  const [openLine, setOpenLine] = useState<string | null>(null);
   const net = STATEMENT_LINES.reduce((sum, line) => sum + line.amount, 0);
+
+  function toggleLine(item: string) {
+    setOpenLine(openLine === item ? null : item);
+  }
+
   return (
     <div className="grid gap-4 lg:grid-cols-[1fr_240px]">
       <div className={panel}>
@@ -37,16 +86,61 @@ function StatementView() {
         <table className="w-full text-left text-sm">
           <tbody className="text-white/85">
             {STATEMENT_LINES.map((line) => (
-              <tr key={line.item} className="border-t border-white/10">
-                <td className="py-2.5 pr-4">{line.item}</td>
-                <td
-                  className={`py-2.5 text-right font-semibold ${
-                    line.amount < 0 ? "text-red-300" : "text-white"
-                  }`}
+              <Fragment key={line.item}>
+                <tr
+                  onClick={() => toggleLine(line.item)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      toggleLine(line.item);
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-expanded={openLine === line.item}
+                  className="cursor-pointer border-t border-white/10 hover:bg-white/5"
                 >
-                  {line.amount < 0 ? "−" : ""}${Math.abs(line.amount).toLocaleString("en-US")}
-                </td>
-              </tr>
+                  <td className="py-2.5 pr-4">
+                    <span aria-hidden className="mr-1.5 inline-block text-[10px] text-gold-light">
+                      {openLine === line.item ? "▾" : "▸"}
+                    </span>
+                    {line.item}
+                  </td>
+                  <td
+                    className={`py-2.5 text-right font-semibold tabular-nums ${
+                      line.amount < 0 ? "text-red-300" : "text-white"
+                    }`}
+                  >
+                    {line.amount < 0 ? "−" : ""}${Math.abs(line.amount).toLocaleString("en-US")}
+                  </td>
+                </tr>
+                {openLine === line.item && (
+                  <tr className="bg-ink-soft/10">
+                    <td colSpan={2} className="px-2 pb-3 pt-1">
+                      <div className="grid gap-2.5 text-xs sm:grid-cols-3">
+                        <div>
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
+                            Deal record
+                          </p>
+                          <p className="mt-0.5 text-white/80">{line.trace.deal}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
+                            Plan clause
+                          </p>
+                          <p className="mt-0.5 text-white/80">{line.trace.clause}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
+                            Calc run
+                          </p>
+                          <p className="mt-0.5 text-white/80">{line.trace.run}</p>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </Fragment>
             ))}
             <tr className="border-t-2 border-gold">
               <td className="py-3 font-bold text-white">Net payout</td>
@@ -57,7 +151,8 @@ function StatementView() {
           </tbody>
         </table>
         <p className="mt-2 text-[11px] text-white/45">
-          Every line links to the deal, the plan clause, and the calc run that produced it.
+          Click any line to trace it to the deal, the plan clause, and the calc run that
+          produced it.
         </p>
       </div>
       <div className="space-y-4">
@@ -87,7 +182,7 @@ const BOT_SCRIPT: BotItem[] = [
   {
     question: "Why is my June payout lower than May?",
     answer:
-      "Your June statement includes a $1,840 clawback on the Hartwell Logistics facility — it closed in March and was paid down early on May 22, inside the 90-day clawback window (plan §5.1). Your base commission is actually up 6% month-over-month. Without the clawback, June would have been $4,930.",
+      "Your June statement includes a $1,840 clawback on the Hartwell Logistics facility — it closed in March and was paid down early on May 22, inside the 90-day clawback window (plan §5.1). Your base commission is actually up 6% month-over-month. Without the clawback, June would have been $4,790.",
     followUps: [
       {
         question: "Can I dispute the Hartwell clawback?",
@@ -111,12 +206,12 @@ const BOT_SCRIPT: BotItem[] = [
   {
     question: "How does my accelerator work?",
     answer:
-      "Once your funded volume passes 100% of quota ($2.4M), every dollar above it pays 1.25% instead of 0.85%. You're at $2.59M, so $190K is earning the accelerated rate — worth $860 this quarter so far. There's no cap until 200% of quota.",
+      "Once your funded volume passes 100% of quota ($2.4M), every dollar above it pays 1.25% instead of 0.85%. You're at $2.59M, so $190K is earning the accelerated rate — worth $2,375 this quarter so far. There's no cap until 200% of quota.",
   },
   {
     question: "When is my draw fully recovered?",
     answer:
-      "You're in month 4 of a 6-month recovery at $500/month, so $1,000 remains — July and August are the last deductions. From September your statement shows no draw line, which at your current pace puts your net payout around $3,600/month. If a month's earnings ever fall below the recovery amount, the balance carries forward instead of going negative (plan §4.2).",
+      "You're in month 4 of a 6-month recovery at $500/month, so $1,000 remains — July and August are the last deductions. From September your statement shows no draw line, which at your current pace puts your net payout around $3,450/month. If a month's earnings ever fall below the recovery amount, the balance carries forward instead of going negative (plan §4.2).",
   },
 ];
 

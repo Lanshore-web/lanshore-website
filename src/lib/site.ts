@@ -6,7 +6,7 @@ export const CONTACT = {
   email: "info@lanshore.com",
   phone: "408-899-0140",
   address: "1795 N Fry Rd Suite 289, Katy, TX 77449, USA",
-  linkedin: "https://www.linkedin.com/company/lanshore",
+  linkedin: "https://www.linkedin.com/company/lanshore-llc",
 };
 
 export const PLATFORMS = [
@@ -78,7 +78,7 @@ export const SPM_PLATFORM_LINKS = [
   { label: "Varicent", href: "/spm/varicent" },
   { label: "Xactly", href: "/spm/xactly" },
   { label: "CaptivateIQ", href: "/spm/captivateiq" },
-  { label: "SAP Incentive Management", href: "/spm/sap-incentive-management" },
+  { label: "SAP SuccessFactors Incentive Management", href: "/spm/sap-incentive-management" },
   { label: "Anaplan", href: "/spm/anaplan" },
   { label: "Salesforce Spiff", href: "/spm/salesforce-spiff" },
   { label: "Performio", href: "/spm/performio" },
@@ -92,6 +92,7 @@ export const FOOTER_COLUMNS = [
       { label: "Executive Dashboards", href: "/agentic-spm/executive-dashboards" },
       { label: "SPM Operations", href: "/agentic-spm/operations" },
       { label: "Custom Apps", href: "/agentic-spm/custom-apps" },
+      { label: "Services Overview", href: "/services" },
       { label: "Automation & Integration", href: "/services/automation" },
     ],
   },

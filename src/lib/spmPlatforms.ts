@@ -80,7 +80,6 @@ export const SPM_PLATFORMS: SpmPlatform[] = [
     slug: "xactly",
     name: "Xactly",
     vendor: "Xactly Corp",
-    formerNames: ["Xactly Incent"],
     officialUrl: "https://www.xactlycorp.com",
     titleTag: "Xactly Incent Implementation & Managed Services | Lanshore",
     metaDescription:

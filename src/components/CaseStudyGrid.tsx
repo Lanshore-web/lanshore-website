@@ -4,40 +4,23 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { CaseStudy } from "@/lib/caseStudies";
 
+/* No offering filter: every current study carries the same pillar value, so
+   the control would filter nothing. Reinstate it when offering tags diverge. */
 export default function CaseStudyGrid({ studies }: { studies: CaseStudy[] }) {
-  const [pillar, setPillar] = useState<string>("All");
   const [industry, setIndustry] = useState<string>("All");
 
-  const pillars = useMemo(
-    () => ["All", ...Array.from(new Set(studies.map((s) => s.pillar)))],
-    [studies]
-  );
   const industries = useMemo(
     () => ["All", ...Array.from(new Set(studies.map((s) => s.industry))).sort()],
     [studies]
   );
 
   const filtered = studies.filter(
-    (s) =>
-      (pillar === "All" || s.pillar === pillar) &&
-      (industry === "All" || s.industry === industry)
+    (s) => industry === "All" || s.industry === industry
   );
 
   return (
     <div>
       <div className="mb-8 flex flex-wrap gap-6">
-        <label className="text-sm">
-          <span className="mb-1 block font-medium text-ink">Filter by offering</span>
-          <select
-            value={pillar}
-            onChange={(e) => setPillar(e.target.value)}
-            className="rounded-md border border-line px-3 py-2 text-base"
-          >
-            {pillars.map((p) => (
-              <option key={p}>{p}</option>
-            ))}
-          </select>
-        </label>
         <label className="text-sm">
           <span className="mb-1 block font-medium text-ink">Filter by industry</span>
           <select
@@ -62,9 +45,6 @@ export default function CaseStudyGrid({ studies }: { studies: CaseStudy[] }) {
             <div className="mb-3 flex flex-wrap gap-2 text-xs font-semibold">
               <span className="rounded-full bg-paper px-2.5 py-1 text-muted">
                 {study.industry}
-              </span>
-              <span className="rounded-full bg-paper px-2.5 py-1 text-muted">
-                {study.pillar}
               </span>
             </div>
             <h2 className="font-bold text-ink group-hover:text-accent">{study.client}</h2>

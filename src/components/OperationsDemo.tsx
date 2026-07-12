@@ -25,7 +25,7 @@ const CYCLE_STAGES: { name: string; status: StageStatus; detail: string }[] = [
 
 const CYCLE_KPIS = [
   { label: "Close progress", value: "Day 2", note: "target: day 3 close" },
-  { label: "Statements staged", value: "1,247", note: "all 170 payees" },
+  { label: "Statements staged", value: "170", note: "all 170 payees" },
   { label: "Open exceptions", value: "3", delta: "agent fixes suggested on all 3" },
   { label: "Admin hours this cycle", value: "6.5", delta: "was 68 before agents" },
 ];
@@ -36,7 +36,7 @@ const STAGE_LOGS: { time: string; entry: string }[][] = [
     { time: "02:00", entry: "Loaded Salesforce closed-won, core banking funded volume, HR roster, FX rates" },
     { time: "02:14", entry: "Roster delta: 2 new hires added to Commercial RM plan, 1 termination processed" },
   ],
-  [{ time: "02:47", entry: "Calculation run #149 complete — 1,247 statements staged" }],
+  [{ time: "02:47", entry: "Calculation run #149 complete — 170 statements staged" }],
   [{ time: "03:05", entry: "98 validation checks run; 2 warnings raised, both explained by realignment" }],
   [{ time: "03:06", entry: "3 exceptions routed to queue, each with a suggested fix attached" }],
   [{ time: "03:07", entry: "Approval packet sent to S. Patel; accrual preview posted to Workday sandbox" }],
@@ -80,6 +80,7 @@ function CycleView() {
   const [runState, setRunState] = useState<RunState>("idle");
   const [progress, setProgress] = useState(0); // stages completed in the replay
   const [streamLog, setStreamLog] = useState<{ time: string; entry: string }[]>([]);
+  const [stageFilter, setStageFilter] = useState<number | null>(null);
 
   useEffect(() => {
     if (runState !== "running") return;
@@ -108,14 +109,19 @@ function CycleView() {
     return index < progress ? "done" : index === progress ? "active" : "pending";
   }
 
-  const logRows = runState === "idle" ? RUN_LOG : streamLog;
+  const logRows =
+    stageFilter !== null
+      ? STAGE_LOGS[stageFilter]
+      : runState === "idle"
+        ? RUN_LOG
+        : streamLog;
 
   return (
     <div className="space-y-4">
       {/* Pipeline stepper */}
       <div className={panel}>
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h3 className={panelTitle}>June cycle · agent-run pipeline</h3>
+          <h3 className={panelTitle}>June cycle · agent-run pipeline · click a stage for its log</h3>
           <button
             onClick={startRun}
             disabled={runState === "running"}
@@ -143,14 +149,17 @@ function CycleView() {
             const status = stageStatus(i);
             return (
               <div key={stage.name} className="relative">
-                <div
-                  className={`rounded-md border p-3 text-center ${
+                <button
+                  onClick={() => setStageFilter(stageFilter === i ? null : i)}
+                  aria-pressed={stageFilter === i}
+                  aria-label={`${stage.name} — show this stage's log`}
+                  className={`w-full rounded-md border p-3 text-center transition-colors ${
                     status === "done"
                       ? "border-ink-soft bg-ink-soft/20"
                       : status === "active"
                         ? "animate-pulse border-gold bg-gold/10"
                         : "border-white/10 bg-white/5"
-                  }`}
+                  } ${stageFilter === i ? "ring-1 ring-gold" : "hover:border-gold/50"}`}
                 >
                   <p
                     className={`text-xs font-bold ${
@@ -161,7 +170,7 @@ function CycleView() {
                     {stage.name}
                   </p>
                   <p className="mt-1 text-[10px] text-white/50">{stage.detail}</p>
-                </div>
+                </button>
                 {i < CYCLE_STAGES.length - 1 && (
                   <span
                     aria-hidden
@@ -230,9 +239,20 @@ function CycleView() {
         {/* Run log + validations */}
         <div className="space-y-4">
           <div className={panel}>
-            <h3 className={panelTitle}>
-              Agent run log{runState === "running" ? " · streaming" : ""}
-            </h3>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className={panelTitle}>
+                Agent run log{runState === "running" && stageFilter === null ? " · streaming" : ""}
+                {stageFilter !== null ? ` · ${CYCLE_STAGES[stageFilter].name}` : ""}
+              </h3>
+              {stageFilter !== null && (
+                <button
+                  onClick={() => setStageFilter(null)}
+                  className="mb-4 text-xs font-semibold text-white/50 hover:text-white"
+                >
+                  Show full log ✕
+                </button>
+              )}
+            </div>
             <div className="space-y-2" aria-live="polite">
               {logRows.map((row) => (
                 <div key={`${row.time}-${row.entry}`} className="flex gap-3 text-sm">
@@ -240,7 +260,7 @@ function CycleView() {
                   <span className="text-white/80">{row.entry}</span>
                 </div>
               ))}
-              {runState === "running" && (
+              {runState === "running" && stageFilter === null && (
                 <div className="flex gap-3 text-sm">
                   <span className="shrink-0 animate-pulse font-mono text-xs text-gold-light">▋</span>
                   <span className="animate-pulse text-white/50">
@@ -291,10 +311,37 @@ const MIGRATION_KPIS = [
 ];
 
 const PARALLEL_RUN = [
-  { group: "Commercial RM", legacy: 612400, target: 612400, status: "Matched" },
-  { group: "Treasury Sales", legacy: 148220, target: 148220, status: "Matched" },
-  { group: "Wealth Advisors", legacy: 201880, target: 203140, status: "Investigating" },
-  { group: "Retail / Branch", legacy: 96310, target: 96310, status: "Matched" },
+  {
+    group: "Commercial RM",
+    legacy: 612400,
+    target: 612400,
+    status: "Matched",
+    detail:
+      "52 payees matched to the penny. Tiered rates, draw recovery, and accelerator logic all reproduce exactly — statement checksums equal in both systems.",
+  },
+  {
+    group: "Treasury Sales",
+    legacy: 148220,
+    target: 148220,
+    status: "Matched",
+    detail:
+      "24 payees matched, including 14 referral splits verified line-by-line against the crediting hierarchy.",
+  },
+  {
+    group: "Wealth Advisors",
+    legacy: 201880,
+    target: 203140,
+    status: "Investigating",
+    detail:
+      "The agent isolated the $1,260 delta to the 2.00–2.25% tier boundary: the legacy engine rounds the rate before applying it, the new one after. 11 of 26 payees affected, $9–$186 each — the new system is right.",
+  },
+  {
+    group: "Retail / Branch",
+    legacy: 96310,
+    target: 96310,
+    status: "Matched",
+    detail: "68 payees matched. Flat-rate branch plans translated 1:1 with no manual rebuild.",
+  },
 ];
 
 const RULE_TRANSLATION = [
@@ -310,6 +357,7 @@ function money(n: number) {
 }
 
 function MigrationView() {
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
   const max = Math.max(...PARALLEL_RUN.map((r) => Math.max(r.legacy, r.target)));
 
   return (
@@ -373,12 +421,24 @@ function MigrationView() {
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Parallel run comparison */}
         <div className={panel}>
-          <h3 className={panelTitle}>Parallel run · May payouts, both systems</h3>
-          <div className="space-y-4">
+          <h3 className={panelTitle}>Parallel run · May payouts, both systems · click a group</h3>
+          <div className="space-y-3">
             {PARALLEL_RUN.map((row) => (
-              <div key={row.group}>
-                <div className="mb-1 flex justify-between text-xs">
-                  <span className="font-semibold text-white">{row.group}</span>
+              <button
+                key={row.group}
+                onClick={() => setOpenGroup(openGroup === row.group ? null : row.group)}
+                aria-expanded={openGroup === row.group}
+                className={`block w-full rounded-md p-1.5 text-left transition-colors ${
+                  openGroup === row.group ? "bg-white/10" : "hover:bg-white/5"
+                }`}
+              >
+                <div className="mb-1 flex justify-between gap-2 text-xs">
+                  <span className="font-semibold text-white">
+                    <span aria-hidden className="mr-1 text-[10px] text-gold-light">
+                      {openGroup === row.group ? "▾" : "▸"}
+                    </span>
+                    {row.group}
+                  </span>
                   <span
                     className={`font-bold ${
                       row.status === "Matched" ? "text-emerald-300" : "text-gold-light"
@@ -405,7 +465,10 @@ function MigrationView() {
                     <span className="text-[10px] text-white/50">{money(row.target)} new</span>
                   </div>
                 </div>
-              </div>
+                {openGroup === row.group && (
+                  <p className={`${inset} mt-2 p-2.5 text-xs text-white/80`}>{row.detail}</p>
+                )}
+              </button>
             ))}
           </div>
           <p className={`${inset} mt-4 p-3 text-xs text-white/70`}>

@@ -6,7 +6,10 @@ import { SITE_URL } from "@/lib/site";
 const AI_CRAWLERS = [
   "GPTBot",
   "ClaudeBot",
+  "Claude-User",
+  "Claude-SearchBot",
   "PerplexityBot",
+  "Googlebot",
   "Google-Extended",
   "Applebot-Extended",
   "cohere-ai",

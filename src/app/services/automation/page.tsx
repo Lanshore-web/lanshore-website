@@ -77,7 +77,7 @@ const AUTOMATION_FAQ: FaqItem[] = [
   {
     question: "What's the difference between RPA and agentic AI?",
     answer:
-      "RPA replays fixed steps and excels at structured, rules-based work but breaks when screens or formats change. Agentic AI works toward an outcome, handles variation, reasons over unstructured data, and escalates when unsure. We've built both for 15+ years and use each where it fits — often together.",
+      "RPA replays fixed steps and excels at structured, rules-based work but breaks when screens or formats change. Agentic AI works toward an outcome, handles variation, reasons over unstructured data, and escalates when unsure. We've delivered automation for 15+ years — RPA since its earliest enterprise wave, agentic AI as the technology matured — and use each where it fits, often together.",
   },
   {
     question: "We have an existing UiPath estate. Can Lanshore take it over?",
@@ -250,6 +250,7 @@ export default function AutomationServicesPage() {
       <CtaBand
         heading="Get an Automation Assessment"
         body="A 30-minute call. We look at your processes, your tooling, and where automation pays back first."
+        ctaLabel="Get an Automation Assessment"
       />
     </>
   );

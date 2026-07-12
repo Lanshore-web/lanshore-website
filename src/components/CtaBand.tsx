@@ -3,9 +3,11 @@ import Link from "next/link";
 export default function CtaBand({
   heading = "Get an SPM Assessment",
   body = "A 30-minute call. We look at your stack, your plan, and where agents remove manual work first.",
+  ctaLabel = "Get an SPM Assessment",
 }: {
   heading?: string;
   body?: string;
+  ctaLabel?: string;
 }) {
   return (
     <section className="bg-ink">
@@ -18,7 +20,7 @@ export default function CtaBand({
           href="/contact"
           className="rounded-md bg-gold px-6 py-3 font-semibold text-ink-deep hover:bg-gold-hover"
         >
-          Get an SPM Assessment
+          {ctaLabel}
         </Link>
       </div>
     </section>

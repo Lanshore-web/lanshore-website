@@ -1,11 +1,16 @@
 /* Blog posts migrated verbatim from lanshore.com. */
 
+import type { FaqItem } from "./schema";
+
 export type BlogBlock = { type: "h2" | "h3" | "p" | "li"; text: string };
 
 export type BlogPost = {
   slug: string;
   title: string;
   description: string;
+  /* Q&A also rendered in the post body — required for FAQPage schema,
+     which must mirror visible content. */
+  faq?: FaqItem[];
   blocks: BlogBlock[];
 };
 
@@ -13,7 +18,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     "slug": "elevating-sales-performance-the-power-of-agentic-ai-in-spm",
     "title": "Elevating Sales Performance: The Power of Agentic AI in SPM",
-    "description": "The landscape of Sales Performance Management (SPM) is being reshaped by the emergence of Agentic AI. This isn’t just about automation; it’s about intelligent, autonomous systems that can…",
+    "description": "What agentic AI changes in sales performance management: autonomous agents that accelerate deals, sharpen forecasts, and cut admin work — and what successful adoption requires.",
     "blocks": [
       {
         "type": "p",
@@ -29,15 +34,15 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         "type": "p",
-        "text": "Accelerated Deal Management: Agentic AI can prioritize accounts, identify buying signals, and even draft personalized follow-up emails, enabling sellers to close deals faster and focus on high-value interactions. (#Salesloft, 2025; Everest Group, 2025)"
+        "text": "Accelerated Deal Management: Agentic AI can prioritize accounts, identify buying signals, and even draft personalized follow-up emails, enabling sellers to close deals faster and focus on high-value interactions. (Salesloft, 2025; Everest Group, 2025)"
       },
       {
         "type": "p",
-        "text": "Enhanced Lead Qualification & Nurturing: AI agents can analyze vast datasets to score leads, predict conversion likelihood, and engage with prospects autonomously, ensuring that sales teams focus on the most promising opportunities. (#IBM, 2025)"
+        "text": "Enhanced Lead Qualification & Nurturing: AI agents can analyze vast datasets to score leads, predict conversion likelihood, and engage with prospects autonomously, ensuring that sales teams focus on the most promising opportunities. (IBM, 2025)"
       },
       {
         "type": "p",
-        "text": "Improved Sales Forecasting: By analyzing historical data and current trends, agentic AI provides highly accurate sales forecasts, enabling better resource allocation and strategic decision-making. (Forecastio, 2025; #Xactly, 2025)"
+        "text": "Improved Sales Forecasting: By analyzing historical data and current trends, agentic AI provides highly accurate sales forecasts, enabling better resource allocation and strategic decision-making. (Forecastio, 2025; Xactly, 2025)"
       },
       {
         "type": "p",
@@ -82,10 +87,6 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         "type": "p",
         "text": "Agentic AI is not about replacing human sellers but augmenting their capabilities, shifting from a “human-in-the-loop” to a “human-on-the-loop” model. (Everest Group, 2025) By embracing this transformative technology strategically, organizations can unlock new levels of efficiency, productivity, and ultimately, unparalleled sales performance."
-      },
-      {
-        "type": "p",
-        "text": "#AgenticAI #SalesPerformanceManagement #SPM #SalesTech #AIinSales #FutureofSales #RevenueGrowth #DigitalTransformation"
       },
       {
         "type": "p",
@@ -144,7 +145,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     "slug": "sales-performance-management-build-vs-buy-in-the-agentic-ai-era",
     "title": "Sales Performance Management: Build vs. Buy in the Agentic AI Era",
-    "description": "Sales performance management—the build vs. buy decision in particular—sits at the heart of modern revenue strategy. Sales Performance Management (SPM) is the discipline of planning, executing, and…",
+    "description": "Build or buy your SPM stack? A decision framework for the agentic AI era: where platforms win, where custom builds win, and how hybrid approaches keep comp teams in control.",
     "blocks": [
       {
         "type": "h2",
@@ -267,7 +268,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     "slug": "beyond-dashboards-selecting-an-spm-system-in-the-age-of-agentic-ai",
     "title": "Beyond Dashboards: Selecting an SPM System in the Age of Agentic AI",
-    "description": "It is 2026, and the sales performance management landscape has fractured into two distinct eras: the organizations still watching dashboards waiting for insight, and those whose AI agents have…",
+    "description": "Selecting an SPM system in 2026 means looking past dashboards: how to evaluate platforms when AI agents, not analysts, will run your comp operations day to day.",
     "blocks": [
       {
         "type": "h2",
@@ -414,7 +415,29 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     "slug": "territory-white-space-in-sales-performance-management-what-it-is-why-it-matters-and-how-to-fix-it",
     "title": "Territory White Space in Sales Performance Management: What It Is, Why It Matters, and How to Fix It",
-    "description": "Sales Performance Management (SPM) is only as effective as the territory design underpinning it. When sales territories are poorly balanced — or worse, when large portions of addressable market are…",
+    "description": "What territory white space is, why unworked market segments quietly drain revenue, and how SPM platforms, data, and AI-driven analytics find and fix coverage gaps.",
+    "faq": [
+      {
+        "question": "What is the difference between territory white space and market expansion?",
+        "answer": "Territory white space refers specifically to segments of your defined total addressable market that are already within scope but not actively covered. Market expansion refers to entering new markets or verticals that are outside your current TAM definition. White space analysis is an internal coverage exercise; market expansion is a strategic growth decision."
+      },
+      {
+        "question": "How often should organizations conduct a territory white space analysis?",
+        "answer": "Leading sales organizations conduct a formal white space analysis at least annually as part of the sales planning cycle, and many perform quarterly reviews to catch mid-year drift. Organizations experiencing rapid growth, significant rep attrition, or major product changes should conduct white space analysis more frequently."
+      },
+      {
+        "question": "Can white space analysis be automated?",
+        "answer": "Yes — to a significant degree. Modern SPM platforms and CRM-integrated analytics tools can automate much of the data aggregation, territory coverage mapping, and gap identification that previously required manual analysis. However, the strategic prioritization of white space and the territory redesign decisions that follow still require human judgment and cross-functional alignment."
+      },
+      {
+        "question": "What is the typical revenue impact of addressing territory white space?",
+        "answer": "The impact varies significantly by organization, but industry research consistently shows that companies with well-balanced, actively managed territories outperform those with structural coverage gaps. McKinsey and Gartner research on sales effectiveness suggests that territory optimization initiatives can yield revenue improvements ranging from 5% to 20% depending on the severity of existing white space and the quality of remediation."
+      },
+      {
+        "question": "How does territory white space relate to quota fairness?",
+        "answer": "Directly and significantly. Quota attainment is heavily influenced by territory quality. Reps assigned to territories with large white space — either because of sparse market opportunity or structural under-coverage — face a structural disadvantage that quota-setting processes often fail to account for. Addressing white space is therefore inseparable from building fair, credible quota processes."
+      }
+    ],
     "blocks": [
       {
         "type": "p",
@@ -769,7 +792,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     "slug": "the-agent-advantage-how-ai-powered-agents-are-transforming-dispute-management-across-hr-finance-crm-and-sales-performance-management",
     "title": "The Agent Advantage: How AI-Powered Agents Are Transforming Dispute Management Across HR, Finance, CRM, and Sales Performance Management",
-    "description": "Disputes are a fact of business life. A compensation discrepancy flagged by a sales rep. A payroll calculation challenged by an employee. A billing error escalated by a customer. A contract term…",
+    "description": "How AI-powered agents transform dispute management across HR, finance, CRM, and sales comp: faster resolution, consistent outcomes, and audit trails manual processes can't match.",
     "blocks": [
       {
         "type": "p",
@@ -934,10 +957,6 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         "type": "p",
         "text": "If your organization is ready to move from reactive dispute management to intelligent, autonomous resolution, Lanshore is ready to help you build it. Contact us to explore what an agent-driven dispute management framework could look like for your enterprise."
-      },
-      {
-        "type": "p",
-        "text": "#AgenticAI #DisputeManagement #SalesPerformanceManagement #HRAutomation #FinanceAutomation #CRMAutomation #AIAgents #EnterpriseAI #Lanshore #AdvancingIntelligence #GEO #DigitalTransformation"
       },
       {
         "type": "p",

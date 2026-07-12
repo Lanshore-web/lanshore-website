@@ -46,7 +46,7 @@ const PARTNERS = [
   },
   {
     name: "SAP",
-    body: "Partnership on SAP Commissions (formerly CallidusCloud) for enterprises running comp inside the SAP ecosystem — implementations, upgrades, and managed operations.",
+    body: "Partnership on SAP SuccessFactors Incentive Management (formerly SAP Commissions, CallidusCloud) for enterprises running comp inside the SAP ecosystem — implementations, upgrades, and managed operations.",
   },
 ];
 

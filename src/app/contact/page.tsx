@@ -5,14 +5,14 @@ import { CONTACT } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact Lanshore | Get an SPM Assessment",
   description:
-    "Contact Lanshore for an SPM assessment. We respond within one business day; first step is a 30-minute assessment call. Houston/Pearland-area presence, clients nationwide.",
+    "Contact Lanshore for an SPM assessment. We respond within one business day; first step is a 30-minute assessment call. Houston-area presence, clients nationwide.",
   alternates: { canonical: "/contact" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
     title: "Contact Lanshore | Get an SPM Assessment",
     description:
-      "Contact Lanshore for an SPM assessment. We respond within one business day; first step is a 30-minute assessment call. Houston/Pearland-area presence, clients nationwide.",
+      "Contact Lanshore for an SPM assessment. We respond within one business day; first step is a 30-minute assessment call. Houston-area presence, clients nationwide.",
     url: "/contact",
     type: "website",
   },

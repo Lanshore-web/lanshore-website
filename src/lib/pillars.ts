@@ -82,7 +82,7 @@ export const PILLARS: Pillar[] = [
       {
         question: "Which data sources can it connect to?",
         answer:
-          "Your SPM platform (Varicent, Xactly, CaptivateIQ, Performio, or SAP Commissions), your CRM (HubSpot, Salesforce, Zoho), and structured spreadsheets or data warehouse tables.",
+          "Your SPM platform (Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, or Akeron), your CRM (HubSpot, Salesforce, Zoho), and structured spreadsheets or data warehouse tables.",
       },
       {
         question: "How long until we see the first dashboard?",
@@ -103,7 +103,7 @@ export const PILLARS: Pillar[] = [
     pillarNumber: 2,
     titleTag: "AI Agents for Sales Comp Operations | Agentic SPM by Lanshore",
     metaDescription:
-      "SPM Operations from Agentic SPM by Lanshore: AI agents that run calculations, validations, and exceptions inside Varicent, Xactly, CaptivateIQ, Performio, or SAP Commissions — with a full audit trail.",
+      "SPM Operations from Agentic SPM by Lanshore: AI agents that run calculations, validations, and exceptions inside Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, or Akeron — with a full audit trail.",
     firstSentence:
       "SPM Operations is the execution pillar of Agentic SPM by Lanshore: AI agents that run recurring comp administration — calculations, validations, and exceptions — inside the platform you already own.",
     h1: "SPM operations",
@@ -120,7 +120,7 @@ export const PILLARS: Pillar[] = [
       {
         title: "Agent-run cycles",
         description:
-          "Scheduled loads, calc runs, and reconciliation across Varicent, Xactly, CaptivateIQ, Performio, and SAP.",
+          "Scheduled loads, calc runs, and reconciliation across all eight SPM platforms we support.",
       },
       {
         title: "Exception handling",
@@ -154,7 +154,7 @@ export const PILLARS: Pillar[] = [
       {
         question: "Which SPM platforms does Lanshore's operations team support?",
         answer:
-          "Varicent, Xactly, CaptivateIQ, Performio, and SAP Commissions — for both implementation and agent-run ongoing operations.",
+          "Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, and Akeron — for both implementation and agent-run ongoing operations.",
       },
       {
         question: "Do agents replace our comp admin team?",

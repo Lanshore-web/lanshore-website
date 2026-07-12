@@ -37,7 +37,8 @@ export default function CareersPage() {
       <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
         <p className="text-lg text-foreground">
           We hire SPM consultants who have implemented Varicent, Xactly, CaptivateIQ,
-          Performio, or SAP Commissions; comp operations analysts who have run live
+          SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio,
+          or Akeron; comp operations analysts who have run live
           cycles; and engineers building agentic systems on commercial AI models. Most
           roles are remote-friendly with a Houston-area home base.
         </p>
@@ -50,7 +51,11 @@ export default function CareersPage() {
         </p>
       </section>
 
-      <CtaBand heading="Work with us" body="Tell us what you've built and what you want to build next." />
+      <CtaBand
+        heading="Work with us"
+        body="Tell us what you've built and what you want to build next."
+        ctaLabel="Get in touch"
+      />
     </>
   );
 }

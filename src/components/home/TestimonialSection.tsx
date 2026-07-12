@@ -2,7 +2,7 @@ const TESTIMONIALS = [
   {
     quote:
       "The Lanshore Team was instrumental in Whip Media's quick start along the path of automated data processing utilizing UiPath. In short order, Lanshore provided a complete project plan, pulled together an extremely skilled and accessible team, and orchestrated a clear and comprehensive training curriculum to set our team up for success despite a very aggressive schedule.",
-    name: "Patrick Killkelly",
+    name: "Patrick Kilkelly",
     company: "Whip Media",
     initials: "PK",
   },

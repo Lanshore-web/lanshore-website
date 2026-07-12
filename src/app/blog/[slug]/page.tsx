@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { BLOG_POSTS, getPost, type BlogBlock } from "@/lib/blog";
 
 export function generateStaticParams() {
@@ -31,6 +31,30 @@ export async function generateMetadata({
       type: "article",
     },
   };
+}
+
+/* Render bare URLs (e.g. the "Retrieved from https://…" references) as links. */
+function linkify(text: string) {
+  const parts = text.split(/(https?:\/\/[^\s]+)/g);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => {
+    if (!/^https?:\/\//.test(part)) return part;
+    const url = part.replace(/[.,);]+$/, "");
+    const trailing = part.slice(url.length);
+    return (
+      <span key={i}>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="break-all font-medium text-accent underline hover:text-accent-hover"
+        >
+          {url}
+        </a>
+        {trailing}
+      </span>
+    );
+  });
 }
 
 /* Group consecutive li blocks into lists so they render as real <ul>s. */
@@ -70,6 +94,7 @@ export default async function BlogPostPage({
           { name: post.title, href: `/blog/${post.slug}` },
         ])}
       />
+      {post.faq && <JsonLd data={faqSchema(post.faq)} />}
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">
@@ -85,7 +110,7 @@ export default async function BlogPostPage({
             return (
               <ul key={i} className="my-4 list-disc space-y-2 pl-6 text-muted">
                 {group.items.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item}>{linkify(item)}</li>
                 ))}
               </ul>
             );
@@ -106,7 +131,7 @@ export default async function BlogPostPage({
           }
           return (
             <p key={i} className="my-4 text-foreground">
-              {group.text}
+              {linkify(group.text)}
             </p>
           );
         })}

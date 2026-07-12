@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Sparkles } from "lucide-react";
 import {
   ACCRUALS,
   AUDIT_TRAIL,
   BUCKET_REPS,
-  CFO_SCENARIO,
+  CFO_ATT_RANGE,
+  CFO_BASELINE_ATT,
+  cfoWhatIf,
   CRO_INSIGHTS,
   DEMO_AS_OF,
   DEMO_COMPANY,
@@ -30,6 +32,8 @@ import {
 const panel = "rounded-lg bg-chart-panel p-5";
 const panelTitle = "mb-4 text-xs font-semibold uppercase tracking-wider text-white/50";
 const inset = "rounded-md bg-ink-soft/20";
+const tooltipBox =
+  "pointer-events-none absolute z-10 w-max rounded-md border border-white/15 bg-ink-deep px-3 py-2 shadow-lg";
 const filterPill = (active: boolean) =>
   `rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
     active ? "bg-gold text-ink-deep" : "bg-white/5 text-white/60 hover:text-white"
@@ -37,14 +41,49 @@ const filterPill = (active: boolean) =>
 
 type ViewProps = { kpis: Kpi[] };
 
+function Sparkline({ points }: { points: number[] }) {
+  const w = 72;
+  const h = 22;
+  const min = Math.min(...points);
+  const range = Math.max(...points) - min || 1;
+  const x = (i: number) => 4 + (i / (points.length - 1)) * (w - 8);
+  const y = (v: number) => h - 4 - ((v - min) / range) * (h - 8);
+  const last = points.length - 1;
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="h-[22px] w-[72px] shrink-0" aria-hidden>
+      <polyline
+        points={points.map((v, i) => `${x(i)},${y(v)}`).join(" ")}
+        fill="none"
+        stroke="var(--chart-blue)"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        opacity="0.55"
+      />
+      <circle cx={x(last)} cy={y(points[last])} r="2.5" fill="var(--gold-light)" />
+    </svg>
+  );
+}
+
 function KpiRow({ kpis }: { kpis: Kpi[] }) {
   return (
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
       {kpis.map((kpi) => (
         <div key={kpi.label} className={panel}>
           <p className="text-xs text-white/50">{kpi.label}</p>
-          <p className="mt-1 text-2xl font-bold text-white">{kpi.value}</p>
-          {kpi.delta && <p className="text-xs font-semibold text-gold-light">{kpi.delta}</p>}
+          <div className="mt-1 flex items-end justify-between gap-2">
+            <p className="text-2xl font-bold text-white">{kpi.value}</p>
+            {kpi.trend && <Sparkline points={kpi.trend} />}
+          </div>
+          {kpi.delta && (
+            <p
+              className={`text-xs font-semibold ${
+                kpi.tone === "warn" ? "text-red-300" : "text-gold-light"
+              }`}
+            >
+              {kpi.tone === "warn" ? "⚠ " : ""}
+              {kpi.delta}
+            </p>
+          )}
           {kpi.note && <p className="text-xs text-white/50">{kpi.note}</p>}
         </div>
       ))}
@@ -52,49 +91,242 @@ function KpiRow({ kpis }: { kpis: Kpi[] }) {
   );
 }
 
-function AttainmentVsSpendChart({ data }: { data: MonthlyPoint[] }) {
-  // Bars = spend ($M), line = attainment (%). Fixed 3-month window.
+/* Bar with a 4px rounded data-end and a square baseline. */
+function barPath(cx: number, top: number, base: number, width: number) {
+  const r = Math.min(4, Math.max(0, (base - top) / 2));
+  const left = cx - width / 2;
+  return [
+    `M ${left} ${base}`,
+    `V ${top + r}`,
+    `Q ${left} ${top} ${left + r} ${top}`,
+    `H ${left + width - r}`,
+    `Q ${left + width} ${top} ${left + width} ${top + r}`,
+    `V ${base}`,
+    "Z",
+  ].join(" ");
+}
+
+/* Attainment (line) and comp spend (bars) as two aligned small multiples on
+   one shared x-axis — one scale per plot, never two scales on one plot.
+   Hover or focus any month for a crosshair and a tooltip across both. */
+function TrendPanel({ data, heading }: { data: MonthlyPoint[]; heading: string }) {
+  const [hover, setHover] = useState<number | null>(null);
+  const [showTable, setShowTable] = useState(false);
+
   const w = 460;
-  const h = 200;
-  const maxSpend = Math.max(...data.map((m) => m.spend)) * 1.2;
-  const barW = 64;
+  const h = 250;
+  const attTop = 22;
+  const attBottom = 118;
+  const barTop = 154;
+  const barBase = 232;
   const slot = w / data.length;
   const x = (i: number) => slot * i + slot / 2;
-  const spendY = (v: number) => h - 24 - (v / maxSpend) * (h - 60);
-  const attY = (v: number) => h - 24 - ((v - 60) / 45) * (h - 60);
-  const linePoints = data.map((m, i) => `${x(i)},${attY(m.attainment)}`).join(" ");
+
+  const attMin = 60;
+  const attMax = 110;
+  const attY = (v: number) =>
+    attBottom - ((v - attMin) / (attMax - attMin)) * (attBottom - attTop);
+  const maxSpend = Math.max(...data.map((m) => m.spend)) * 1.15;
+  const barY = (v: number) => barBase - (v / maxSpend) * (barBase - barTop);
+  const spendTick = maxSpend > 2 ? 2 : maxSpend > 1 ? 1 : 0.5;
+  const barW = 22;
+
+  const lastActual = data.reduce((acc, m, i) => (m.projected ? acc : i), 0);
+  const solidPts = data
+    .slice(0, lastActual + 1)
+    .map((m, i) => `${x(i)},${attY(m.attainment)}`)
+    .join(" ");
+  const dashedPts = data
+    .map((m, i) => ({ m, i }))
+    .filter(({ i }) => i >= lastActual)
+    .map(({ m, i }) => `${x(i)},${attY(m.attainment)}`)
+    .join(" ");
+  const last = data[data.length - 1];
 
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full" role="img" aria-label="Attainment versus comp spend by month">
-      {data.map((m, i) => (
-        <g key={m.month}>
-          <rect
-            x={x(i) - barW / 2}
-            y={spendY(m.spend)}
-            width={barW}
-            height={h - 24 - spendY(m.spend)}
-            rx="4"
-            fill="var(--chart-blue)"
-            opacity={m.projected ? 0.45 : 1}
-          />
-          <text x={x(i)} y={spendY(m.spend) - 8} textAnchor="middle" fontSize="12" className="fill-white/60">
-            ${m.spend.toFixed(2)}M{m.projected ? " (proj.)" : ""}
-          </text>
-          <text x={x(i)} y={h - 6} textAnchor="middle" fontSize="12" className="fill-white/60">
-            {m.month}
-          </text>
-        </g>
-      ))}
-      <polyline points={linePoints} fill="none" stroke="var(--chart-gold)" strokeWidth="3" strokeLinecap="round" />
-      {data.map((m, i) => (
-        <g key={m.month}>
-          <circle cx={x(i)} cy={attY(m.attainment)} r="5" fill="var(--chart-gold)" stroke="var(--chart-panel)" strokeWidth="2" />
-          <text x={x(i)} y={attY(m.attainment) - 10} textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--gold-light)">
-            {m.attainment.toFixed(1)}%
-          </text>
-        </g>
-      ))}
-    </svg>
+    <div className={panel}>
+      <div className="flex items-start justify-between gap-2">
+        <h3 className={panelTitle}>{heading}</h3>
+        <button className={filterPill(showTable)} onClick={() => setShowTable(!showTable)}>
+          {showTable ? "Chart view" : "Table view"}
+        </button>
+      </div>
+
+      {showTable ? (
+        <table className="w-full text-left text-sm">
+          <thead>
+            <tr className="text-xs uppercase tracking-wider text-white/50">
+              <th className="pb-2 font-semibold">Month</th>
+              <th className="pb-2 font-semibold">Attainment</th>
+              <th className="pb-2 font-semibold">Comp spend</th>
+            </tr>
+          </thead>
+          <tbody className="text-white/85">
+            {data.map((m) => (
+              <tr key={m.month} className="border-t border-white/10">
+                <td className="py-2 font-semibold text-white">
+                  {m.month}
+                  {m.projected && <span className="text-white/50"> (proj.)</span>}
+                </td>
+                <td className="py-2 tabular-nums">{m.attainment.toFixed(1)}%</td>
+                <td className="py-2 tabular-nums">${m.spend.toFixed(2)}M</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="relative">
+          {hover !== null && (
+            <div
+              className={`${tooltipBox} top-2`}
+              style={{
+                left: `${Math.min(Math.max((x(hover) / w) * 100, 15), 85)}%`,
+                transform: "translateX(-50%)",
+              }}
+            >
+              <p className="text-[11px] font-semibold text-white/60">
+                {data[hover].month}
+                {data[hover].projected ? " · projected" : ""}
+              </p>
+              <p className="mt-1 flex items-center gap-2 text-sm">
+                <span aria-hidden className="inline-block h-0.5 w-3 rounded bg-chart-gold" />
+                <span className="font-bold text-white">
+                  {data[hover].attainment.toFixed(1)}%
+                </span>
+                <span className="text-xs text-white/60">attainment</span>
+              </p>
+              <p className="mt-0.5 flex items-center gap-2 text-sm">
+                <span aria-hidden className="inline-block h-2.5 w-2.5 rounded-sm bg-chart-blue" />
+                <span className="font-bold text-white">${data[hover].spend.toFixed(2)}M</span>
+                <span className="text-xs text-white/60">comp spend</span>
+              </p>
+            </div>
+          )}
+
+          <svg
+            viewBox={`0 0 ${w} ${h}`}
+            className="w-full"
+            role="img"
+            aria-label="Attainment percent and comp spend by month, two aligned charts"
+            onPointerLeave={() => setHover(null)}
+          >
+            {/* attainment band */}
+            <text x="4" y={attTop - 8} fontSize="9" className="fill-white/40" style={{ letterSpacing: "0.08em" }}>
+              ATTAINMENT %
+            </text>
+            {[70, 90].map((tick) => (
+              <g key={tick}>
+                <line x1="0" x2={w} y1={attY(tick)} y2={attY(tick)} className="stroke-white/10" strokeWidth="1" />
+                <text x="4" y={attY(tick) - 3} fontSize="9" className="fill-white/40">
+                  {tick}%
+                </text>
+              </g>
+            ))}
+            {/* spend band */}
+            <text x="4" y={barTop - 8} fontSize="9" className="fill-white/40" style={{ letterSpacing: "0.08em" }}>
+              COMP SPEND ($M)
+            </text>
+            <line x1="0" x2={w} y1={barY(spendTick)} y2={barY(spendTick)} className="stroke-white/10" strokeWidth="1" />
+            <text x="4" y={barY(spendTick) - 3} fontSize="9" className="fill-white/40">
+              ${spendTick}M
+            </text>
+            <line x1="0" x2={w} y1={barBase} y2={barBase} className="stroke-white/15" strokeWidth="1" />
+
+            {/* crosshair */}
+            {hover !== null && (
+              <line
+                x1={x(hover)}
+                x2={x(hover)}
+                y1={attTop - 4}
+                y2={barBase}
+                className="stroke-white/25"
+                strokeWidth="1"
+              />
+            )}
+
+            {/* spend bars */}
+            {data.map((m, i) => (
+              <g key={m.month}>
+                <path
+                  d={barPath(x(i), barY(m.spend), barBase, barW)}
+                  fill="var(--chart-blue)"
+                  opacity={m.projected ? 0.45 : 1}
+                />
+                {hover === i && (
+                  <path d={barPath(x(i), barY(m.spend), barBase, barW)} fill="white" opacity="0.12" />
+                )}
+              </g>
+            ))}
+
+            {/* attainment line: solid actuals, dashed projection */}
+            <polyline
+              points={solidPts}
+              fill="none"
+              stroke="var(--chart-gold)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {dashedPts.split(" ").length > 1 && (
+              <polyline
+                points={dashedPts}
+                fill="none"
+                stroke="var(--chart-gold)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeDasharray="5 5"
+              />
+            )}
+            {data.map((m, i) => (
+              <circle
+                key={m.month}
+                cx={x(i)}
+                cy={attY(m.attainment)}
+                r={hover === i ? 6 : 4.5}
+                fill="var(--chart-gold)"
+                stroke="var(--chart-panel)"
+                strokeWidth="2"
+              />
+            ))}
+            {/* direct label on the endpoint only — the tooltip carries the rest */}
+            <text
+              x={Math.min(x(data.length - 1) + 24, w - 4)}
+              y={Math.max(attY(last.attainment) - 12, 16)}
+              textAnchor="end"
+              fontSize="11"
+              fontWeight="700"
+              fill="var(--gold-light)"
+            >
+              {last.attainment.toFixed(1)}%{last.projected ? " (proj.)" : ""}
+            </text>
+
+            {/* month labels */}
+            {data.map((m, i) => (
+              <text key={m.month} x={x(i)} y={h - 4} textAnchor="middle" fontSize="11" className="fill-white/60">
+                {m.month}
+              </text>
+            ))}
+
+            {/* full-height hit targets, keyboard-reachable */}
+            {data.map((m, i) => (
+              <rect
+                key={m.month}
+                x={slot * i}
+                y="0"
+                width={slot}
+                height={h}
+                fill="transparent"
+                tabIndex={0}
+                aria-label={`${m.month}: attainment ${m.attainment.toFixed(1)} percent, comp spend $${m.spend.toFixed(2)} million${m.projected ? ", projected" : ""}`}
+                onPointerEnter={() => setHover(i)}
+                onFocus={() => setHover(i)}
+                onBlur={() => setHover(null)}
+              />
+            ))}
+          </svg>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -113,11 +345,13 @@ function CroView({ kpis }: ViewProps) {
           label: `Attainment (QTD) · ${selected.name}`,
           value: `${selected.attainment}%`,
           note: `${selected.reps} payees on plan`,
+          trend: monthly.map((m) => m.attainment),
         },
         {
           label: "Comp spend (QTD)",
           value: `$${selected.spend.toFixed(2)}M`,
           note: "of $4.28M company-wide",
+          trend: monthly.map((m) => m.spend),
         },
         {
           label: "Comp cost of revenue",
@@ -152,12 +386,10 @@ function CroView({ kpis }: ViewProps) {
       <KpiRow kpis={activeKpis} />
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <div className={panel}>
-          <h3 className={panelTitle}>
-            Attainment vs. comp spend{district === "all" ? "" : ` · ${district}`}
-          </h3>
-          <AttainmentVsSpendChart data={monthly} />
-        </div>
+        <TrendPanel
+          data={monthly}
+          heading={`Attainment & comp spend, Jan–Jun${district === "all" ? "" : ` · ${district}`}`}
+        />
         <div className={panel}>
           <h3 className={panelTitle}>Districts (QTD) · click a row to filter</h3>
           <table className="w-full text-left text-sm">
@@ -179,9 +411,9 @@ function CroView({ kpis }: ViewProps) {
                   }`}
                 >
                   <td className="py-2.5 font-semibold text-white">{d.name}</td>
-                  <td className="py-2.5">{d.attainment}%</td>
-                  <td className="py-2.5">${d.spend.toFixed(2)}M</td>
-                  <td className={`py-2.5 font-semibold ${d.pacing < 80 ? "text-gold-light" : ""}`}>
+                  <td className="py-2.5 tabular-nums">{d.attainment}%</td>
+                  <td className="py-2.5 tabular-nums">${d.spend.toFixed(2)}M</td>
+                  <td className={`py-2.5 font-semibold tabular-nums ${d.pacing < 80 ? "text-gold-light" : ""}`}>
                     {d.pacing}%{d.pacing < 80 ? " ⚑" : ""}
                   </td>
                 </tr>
@@ -256,28 +488,66 @@ function DistributionChart({
   selectedBin: string | null;
   onSelect: (bin: string) => void;
 }) {
+  const [hover, setHover] = useState<number | null>(null);
   const max = Math.max(...DISTRIBUTION.map((d) => d.count));
+  const total = DISTRIBUTION.reduce((sum, d) => sum + d.count, 0);
+
   return (
-    <div className="flex items-end gap-3" role="group" aria-label="Rep attainment distribution — click a bucket to drill in">
-      {DISTRIBUTION.map((d) => (
-        <button
-          key={d.bin}
-          onClick={() => onSelect(d.bin)}
-          aria-pressed={selectedBin === d.bin}
-          className={`flex flex-1 flex-col items-center gap-1 rounded-md pt-1 transition-colors ${
-            selectedBin === d.bin ? "bg-white/10" : "hover:bg-white/5"
-          }`}
+    <div className="relative">
+      {hover !== null && (
+        <div
+          className={`${tooltipBox} top-0 max-w-[230px]`}
+          style={{
+            left: `${Math.min(Math.max(((hover + 0.5) / DISTRIBUTION.length) * 100, 20), 80)}%`,
+            transform: "translate(-50%, -104%)",
+          }}
         >
-          <span className="text-xs font-semibold text-white/80">{d.count}</span>
-          <div
-            className={`w-full rounded-t ${d.flagged ? "bg-chart-gold" : "bg-chart-blue"} ${
-              selectedBin !== null && selectedBin !== d.bin ? "opacity-40" : ""
+          <p className="text-[11px] font-semibold text-white/60">
+            {DISTRIBUTION[hover].bin} attainment
+          </p>
+          <p className="mt-0.5 text-sm">
+            <span className="font-bold text-white">{DISTRIBUTION[hover].count} payees</span>{" "}
+            <span className="text-xs text-white/60">
+              · {Math.round((DISTRIBUTION[hover].count / total) * 100)}% of the force
+            </span>
+          </p>
+          {DISTRIBUTION[hover].flagged && (
+            <p className="mt-0.5 text-[11px] font-semibold text-gold-light">
+              Agent watch zone — outlier screening runs here
+            </p>
+          )}
+        </div>
+      )}
+      <div
+        className="flex items-end gap-3"
+        role="group"
+        aria-label="Rep attainment distribution — click a bucket to drill in"
+      >
+        {DISTRIBUTION.map((d, i) => (
+          <button
+            key={d.bin}
+            onClick={() => onSelect(d.bin)}
+            onMouseEnter={() => setHover(i)}
+            onMouseLeave={() => setHover(null)}
+            onFocus={() => setHover(i)}
+            onBlur={() => setHover(null)}
+            aria-pressed={selectedBin === d.bin}
+            aria-label={`${d.bin} attainment: ${d.count} payees${d.flagged ? ", agent watch zone" : ""}`}
+            className={`flex flex-1 flex-col items-center gap-1 rounded-md pt-1 transition-colors ${
+              selectedBin === d.bin ? "bg-white/10" : "hover:bg-white/5"
             }`}
-            style={{ height: `${(d.count / max) * 110 + 6}px` }}
-          />
-          <span className="text-[10px] text-white/50">{d.bin}</span>
-        </button>
-      ))}
+          >
+            <span className="text-xs font-semibold text-white/80">{d.count}</span>
+            <div
+              className={`w-full rounded-t ${d.flagged ? "bg-chart-gold" : "bg-chart-blue"} ${
+                selectedBin !== null && selectedBin !== d.bin ? "opacity-40" : ""
+              } ${hover === i ? "brightness-125" : ""}`}
+              style={{ height: `${(d.count / max) * 110 + 6}px` }}
+            />
+            <span className="text-[10px] text-white/50">{d.bin}</span>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -285,9 +555,14 @@ function DistributionChart({
 function VpView({ kpis }: ViewProps) {
   const [selectedBin, setSelectedBin] = useState<string | null>(null);
   const [whyOpen, setWhyOpen] = useState<string[]>([]);
+  const [agenda, setAgenda] = useState<string[]>([]);
 
   const bucket = selectedBin ? DISTRIBUTION.find((d) => d.bin === selectedBin) : null;
   const bucketReps = selectedBin ? BUCKET_REPS[selectedBin] : null;
+
+  function toggleAgenda(rep: string) {
+    setAgenda((prev) => (prev.includes(rep) ? prev.filter((r) => r !== rep) : [...prev, rep]));
+  }
 
   return (
     <div className="space-y-4">
@@ -337,6 +612,33 @@ function VpView({ kpis }: ViewProps) {
         </div>
         <div className={panel}>
           <h3 className={panelTitle}>Flagged this month</h3>
+          {agenda.length > 0 && (
+            <div className={`${inset} mb-3 p-3`}>
+              <p className="text-xs font-semibold uppercase tracking-wider text-gold-light">
+                Your 1:1 agenda · {agenda.length}
+              </p>
+              <div className="mt-1.5 flex flex-wrap gap-1.5">
+                {agenda.map((rep) => (
+                  <span
+                    key={rep}
+                    className="flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-xs font-semibold text-white/85"
+                  >
+                    {rep}
+                    <button
+                      onClick={() => toggleAgenda(rep)}
+                      aria-label={`Remove ${rep} from agenda`}
+                      className="text-white/40 hover:text-white"
+                    >
+                      ✕
+                    </button>
+                  </span>
+                ))}
+              </div>
+              <p className="mt-2 text-[11px] text-white/45">
+                On an engagement this exports to your calendar with the agent&rsquo;s brief attached.
+              </p>
+            </div>
+          )}
           <div className="space-y-3">
             {OUTLIERS.map((o) => (
               <div key={o.rep} className={`${inset} p-3`}>
@@ -353,21 +655,43 @@ function VpView({ kpis }: ViewProps) {
                   </span>
                 </div>
                 <p className="mt-1.5 text-xs text-white/70">{o.detail}</p>
-                {whyOpen.includes(o.rep) ? (
+                {whyOpen.includes(o.rep) && (
                   <div className="mt-2 rounded border-l-2 border-gold bg-chart-panel/60 p-2.5">
                     <p className="flex items-center gap-1.5 text-[11px] font-bold text-gold-light">
                       <Sparkles size={12} aria-hidden /> Agent explanation
                     </p>
                     <p className="mt-1 text-xs text-white/80">{o.agentWhy}</p>
                   </div>
-                ) : (
-                  <button
-                    onClick={() => setWhyOpen((prev) => [...prev, o.rep])}
-                    className="mt-2 text-xs font-semibold text-gold-light hover:text-gold"
-                  >
-                    Ask the agent why →
-                  </button>
                 )}
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                  {!whyOpen.includes(o.rep) && (
+                    <button
+                      onClick={() => setWhyOpen((prev) => [...prev, o.rep])}
+                      className="text-xs font-semibold text-gold-light hover:text-gold"
+                    >
+                      Ask the agent why →
+                    </button>
+                  )}
+                  {o.flag !== "Clean" &&
+                    (agenda.includes(o.rep) ? (
+                      <p className="text-xs font-bold text-emerald-300">
+                        ✓ On your 1:1 agenda
+                        <button
+                          onClick={() => toggleAgenda(o.rep)}
+                          className="ml-2 font-semibold text-white/40 hover:text-white"
+                        >
+                          Remove
+                        </button>
+                      </p>
+                    ) : (
+                      <button
+                        onClick={() => toggleAgenda(o.rep)}
+                        className="rounded border border-white/25 px-2.5 py-0.5 text-xs font-bold text-white/80 hover:border-gold/60 hover:text-gold-light"
+                      >
+                        + Add to 1:1 agenda
+                      </button>
+                    ))}
+                </div>
               </div>
             ))}
           </div>
@@ -380,26 +704,40 @@ function VpView({ kpis }: ViewProps) {
 /* ---------- CFO ---------- */
 
 function CfoView({ kpis }: ViewProps) {
-  const [scenario, setScenario] = useState(false);
+  const [att, setAtt] = useState<number>(CFO_BASELINE_ATT);
   const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
   const [auditFilter, setAuditFilter] = useState<"all" | "agent" | "human">("all");
 
+  const scenario = cfoWhatIf(att);
+  const isBaseline = att === CFO_BASELINE_ATT;
+
   const rows = ACCRUALS.map((row) =>
-    scenario && row.month.startsWith("June") ? { ...row, ...CFO_SCENARIO.june } : row
+    row.month.startsWith("June")
+      ? {
+          ...row,
+          calculated: scenario.juneCalculated,
+          variance: scenario.juneVariance,
+          status: scenario.juneStatus,
+          drivers: scenario.drivers,
+        }
+      : row
   );
   const max = Math.max(2.6, ...rows.map((r) => Math.max(r.booked, r.calculated)));
   const drill = selectedMonth ? rows.find((r) => r.month === selectedMonth) : null;
   const drillTotal = drill ? drill.drivers.reduce((sum, d) => sum + d.amountK, 0) : 0;
 
-  const activeKpis = scenario
-    ? kpis.map((k) =>
-        k.label === "Q2 liability (proj.)"
-          ? { ...k, value: CFO_SCENARIO.liability, note: CFO_SCENARIO.liabilityNote }
-          : k.label === "True-up exposure"
-            ? { ...k, value: CFO_SCENARIO.trueUp, delta: CFO_SCENARIO.trueUpDelta }
-            : k
-      )
-    : kpis;
+  const activeKpis = kpis.map((k) =>
+    k.label === "Q2 liability (proj.)"
+      ? { ...k, value: scenario.liability, note: `at ${att}% attainment` }
+      : k.label === "True-up exposure"
+        ? {
+            ...k,
+            value: `$${scenario.trueUpK}K`,
+            delta: scenario.breach ? "exceeds 1% tolerance — review" : "within 1% tolerance",
+            tone: scenario.breach ? ("warn" as const) : undefined,
+          }
+        : k
+  );
 
   const auditRows = AUDIT_TRAIL.filter((row) =>
     auditFilter === "all"
@@ -411,28 +749,47 @@ function CfoView({ kpis }: ViewProps) {
 
   return (
     <div className="space-y-4">
-      {/* Scenario toggle — recomputes June accrual, liability, and true-up */}
-      <button
-        onClick={() => setScenario(!scenario)}
-        aria-pressed={scenario}
-        className={`flex w-full items-center justify-between gap-3 rounded-lg border px-4 py-3 text-left text-sm font-semibold transition-colors ${
-          scenario
-            ? "border-gold bg-gold/10 text-gold-light"
-            : "border-white/15 bg-white/5 text-white/80 hover:border-gold/50"
-        }`}
-      >
-        <span className="flex items-center gap-2">
-          <Sparkles size={15} aria-hidden className="text-gold-light" />
-          Scenario: {CFO_SCENARIO.label}
-        </span>
-        <span
-          className={`shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-bold ${
-            scenario ? "bg-gold text-ink-deep" : "bg-white/10 text-white/60"
-          }`}
-        >
-          {scenario ? "ON — June recomputed" : "OFF"}
-        </span>
-      </button>
+      {/* What-if slider — June, liability, and true-up recompute live */}
+      <div className={`${panel} border transition-colors ${isBaseline ? "border-white/10" : "border-gold/60"}`}>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="flex items-center gap-2 text-sm font-semibold text-white/85">
+            <Sparkles size={15} aria-hidden className="text-gold-light" />
+            What-if: quarter-end attainment finishes at
+            <span className="text-lg font-bold text-gold-light tabular-nums">{att}%</span>
+          </p>
+          {!isBaseline && (
+            <button
+              onClick={() => setAtt(CFO_BASELINE_ATT)}
+              className="rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-white/60 hover:text-white"
+            >
+              ↺ Reset to current pace ({CFO_BASELINE_ATT}%)
+            </button>
+          )}
+        </div>
+        <input
+          type="range"
+          min={CFO_ATT_RANGE.min}
+          max={CFO_ATT_RANGE.max}
+          step={0.5}
+          value={att}
+          onChange={(e) => setAtt(parseFloat(e.target.value))}
+          className="mt-3 w-full accent-gold"
+          aria-label="Quarter-end attainment assumption, percent"
+        />
+        <div className="mt-1 flex justify-between text-[10px] text-white/40">
+          <span>{CFO_ATT_RANGE.min}%</span>
+          <span>current pace · {CFO_BASELINE_ATT}%</span>
+          <span>{CFO_ATT_RANGE.max}%</span>
+        </div>
+        <p className="mt-2 text-xs text-white/70" aria-live="polite">
+          June accrual recomputes to{" "}
+          <span className="font-semibold text-white">${scenario.juneCalculated.toFixed(2)}M</span> · true-up{" "}
+          <span className={`font-semibold ${scenario.breach ? "text-red-300" : "text-emerald-300"}`}>
+            ${scenario.trueUpK}K — {scenario.breach ? "exceeds" : "within"} the 1% tolerance
+          </span>
+          . April and May are actuals and don&rsquo;t move.
+        </p>
+      </div>
 
       <KpiRow kpis={activeKpis} />
 
@@ -449,13 +806,36 @@ function CfoView({ kpis }: ViewProps) {
                   selectedMonth === row.month ? "bg-white/10" : "hover:bg-white/5"
                 }`}
               >
-                <div className="mb-1 flex justify-between text-xs text-white/70">
-                  <span>{row.month}</span>
+                <div className="mb-1 flex justify-between gap-2 text-xs text-white/70">
+                  <span>
+                    {row.month}
+                    {row.month.startsWith("June") && !isBaseline && (
+                      <span className="ml-1.5 rounded-full bg-gold px-1.5 py-0.5 text-[10px] font-bold text-ink-deep">
+                        what-if {att}%
+                      </span>
+                    )}
+                  </span>
                   <span className="font-semibold text-gold-light">{row.variance}</span>
                 </div>
                 <div className="space-y-1">
-                  <div className="h-3 rounded bg-chart-blue" style={{ width: `${(row.booked / max) * 100}%` }} />
-                  <div className="h-3 rounded bg-chart-gold" style={{ width: `${(row.calculated / max) * 100}%` }} />
+                  <div className="flex items-center gap-2">
+                    <div
+                      className="h-3 rounded bg-chart-blue transition-all duration-300"
+                      style={{ width: `${(row.booked / max) * 80}%` }}
+                    />
+                    <span className="shrink-0 text-[10px] tabular-nums text-white/50">
+                      ${row.booked.toFixed(2)}M
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div
+                      className="h-3 rounded bg-chart-gold transition-all duration-300"
+                      style={{ width: `${(row.calculated / max) * 80}%` }}
+                    />
+                    <span className="shrink-0 text-[10px] tabular-nums text-white/50">
+                      ${row.calculated.toFixed(2)}M
+                    </span>
+                  </div>
                 </div>
               </button>
             ))}
@@ -485,7 +865,7 @@ function CfoView({ kpis }: ViewProps) {
                 {drill.drivers.map((d) => (
                   <div key={d.label} className="flex items-baseline justify-between gap-2 border-t border-white/10 pt-1.5 text-sm">
                     <span className="text-white/85">{d.label}</span>
-                    <span className="shrink-0 font-semibold text-gold-light">${d.amountK}K</span>
+                    <span className="shrink-0 font-semibold tabular-nums text-gold-light">${d.amountK}K</span>
                   </div>
                 ))}
               </div>
@@ -527,7 +907,8 @@ function CfoView({ kpis }: ViewProps) {
 
 /* ---------- RevOps ---------- */
 
-type QueueStatus = "open" | "approved" | "routed";
+type QueueStatus = "open" | "approved" | "routed" | "dismissed";
+type QueueFilter = "all" | "sla" | "done";
 
 function AgeBadge({ hours }: { hours: number }) {
   const cls =
@@ -548,12 +929,23 @@ function RevOpsView({ kpis }: ViewProps) {
     EXCEPTION_QUEUE.map((item) => ({ ...item, status: "open" as QueueStatus }))
   );
   const [suggestionOpen, setSuggestionOpen] = useState<number[]>([]);
+  const [filter, setFilter] = useState<QueueFilter>("all");
 
   const openCount = items.filter((i) => i.status === "open").length;
+  const doneCount = items.length - openCount;
+  const slaCount = items.filter((i) => i.status === "open" && i.ageHours > 24).length;
   const activeKpis = kpis.map((k) =>
     k.label === "Open exceptions"
       ? { ...k, value: String(openCount), note: openCount === 0 ? "queue clear" : "all with suggested fixes" }
       : k
+  );
+
+  const visible = items.filter((i) =>
+    filter === "all"
+      ? true
+      : filter === "sla"
+        ? i.status === "open" && i.ageHours > 24
+        : i.status !== "open"
   );
 
   function triage(id: number, status: QueueStatus) {
@@ -582,11 +974,32 @@ function RevOpsView({ kpis }: ViewProps) {
           </p>
         </div>
         <div className={panel}>
-          <h3 className={panelTitle}>
-            Exception queue · {openCount} open · SLA: review within 24h
-          </h3>
+          <h3 className={panelTitle}>Exception queue · SLA: review within 24h</h3>
+          <div className="mb-3 flex flex-wrap gap-1.5" role="group" aria-label="Filter the exception queue">
+            <button className={filterPill(filter === "all")} onClick={() => setFilter("all")}>
+              All ({items.length})
+            </button>
+            <button className={filterPill(filter === "sla")} onClick={() => setFilter("sla")}>
+              SLA risk ({slaCount})
+            </button>
+            <button className={filterPill(filter === "done")} onClick={() => setFilter("done")}>
+              Triaged ({doneCount})
+            </button>
+          </div>
+          <div className="mb-3">
+            <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
+              <div
+                className="h-full rounded-full bg-gold transition-all duration-300"
+                style={{ width: `${(doneCount / items.length) * 100}%` }}
+              />
+            </div>
+            <p className="mt-1 text-[11px] text-white/45">
+              {doneCount} of {items.length} triaged
+              {openCount === 0 ? " — queue clear; the repetitive 80% runs itself while your team designs plans" : ""}
+            </p>
+          </div>
           <div className="space-y-3">
-            {items.map((item) => (
+            {visible.map((item) => (
               <div key={item.id} className={`${inset} p-3 ${item.status !== "open" ? "opacity-80" : ""}`}>
                 <div className="flex items-start justify-between gap-2">
                   <p className="text-sm font-semibold text-white">{item.title}</p>
@@ -621,26 +1034,44 @@ function RevOpsView({ kpis }: ViewProps) {
                       Route to comp admin
                     </button>
                     <button
-                      onClick={() => setItems((prev) => prev.filter((i) => i.id !== item.id))}
+                      onClick={() => triage(item.id, "dismissed")}
                       className="rounded px-3 py-1 text-xs font-bold text-white/50 hover:text-white"
                     >
                       Dismiss
                     </button>
                   </div>
-                ) : item.status === "approved" ? (
-                  <p className="mt-2.5 text-xs font-bold text-emerald-300">
-                    ✓ Fix applied — logged to audit trail
-                  </p>
                 ) : (
-                  <p className="mt-2.5 text-xs font-bold text-gold-light">
-                    → Routed to comp admin with full context attached
-                  </p>
+                  <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2">
+                    {item.status === "approved" ? (
+                      <p className="text-xs font-bold text-emerald-300">
+                        ✓ Fix applied — logged to audit trail
+                      </p>
+                    ) : item.status === "routed" ? (
+                      <p className="text-xs font-bold text-gold-light">
+                        → Routed to comp admin with full context attached
+                      </p>
+                    ) : (
+                      <p className="text-xs font-bold text-white/60">
+                        Dismissed — decision logged, no plan action needed
+                      </p>
+                    )}
+                    <button
+                      onClick={() => triage(item.id, "open")}
+                      className="text-xs font-semibold text-white/40 hover:text-white"
+                    >
+                      Undo
+                    </button>
+                  </div>
                 )}
               </div>
             ))}
-            {items.length === 0 && (
+            {visible.length === 0 && (
               <p className="text-sm text-white/70">
-                Queue clear — the repetitive 80% runs itself; your team designs plans.
+                {filter === "sla"
+                  ? "Nothing open is breaching SLA — the two overdue items have been triaged."
+                  : filter === "done"
+                    ? "Nothing triaged yet — approve, route, or dismiss an exception to see it here."
+                    : "Queue clear — the repetitive 80% runs itself; your team designs plans."}
               </p>
             )}
           </div>
@@ -652,31 +1083,113 @@ function RevOpsView({ kpis }: ViewProps) {
 
 /* ---------- Shared Q&A + shell ---------- */
 
+type AskedQA = { qa: QA; shown: string; done: boolean };
+
 function AskTheData({ qa }: { qa: QA[] }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [asked, setAsked] = useState<AskedQA[]>([]);
+  const reducedMotion = useRef(false);
+
+  useEffect(() => {
+    reducedMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
+  /* Stream the active answer a couple of words per tick. */
+  useEffect(() => {
+    const idx = asked.findIndex((a) => !a.done);
+    if (idx < 0) return;
+    const words = asked[idx].qa.answer.split(" ");
+    const shownCount = asked[idx].shown === "" ? 0 : asked[idx].shown.split(" ").length;
+    const timer = setTimeout(() => {
+      setAsked((prev) =>
+        prev.map((a, i) =>
+          i === idx
+            ? {
+                ...a,
+                shown: words.slice(0, shownCount + 2).join(" "),
+                done: shownCount + 2 >= words.length,
+              }
+            : a
+        )
+      );
+    }, 40);
+    return () => clearTimeout(timer);
+  }, [asked]);
+
+  function ask(item: QA) {
+    setAsked((prev) => [
+      ...prev,
+      { qa: item, shown: reducedMotion.current ? item.answer : "", done: reducedMotion.current },
+    ]);
+  }
+
+  const remaining = qa.filter((item) => !asked.some((a) => a.qa.question === item.question));
+  const streaming = asked.some((a) => !a.done);
+
   return (
     <div className={panel}>
-      <h3 className={panelTitle}>Ask your comp data</h3>
-      <div className="space-y-3">
-        {qa.map((item, i) => (
-          <div key={item.question} className={inset}>
-            <button
-              className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-semibold text-white hover:text-gold-light"
-              onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              aria-expanded={openIndex === i}
-            >
-              <span>&ldquo;{item.question}&rdquo;</span>
-              <span aria-hidden className="text-gold-light">{openIndex === i ? "−" : "+"}</span>
-            </button>
-            {openIndex === i && (
-              <div className="border-t border-white/10 px-4 py-3">
-                <p className="text-sm text-white/85">{item.answer}</p>
-                <p className="mt-2 text-[11px] text-white/45">Sources: {item.sources}</p>
+      <div className="flex items-center justify-between gap-2">
+        <h3 className={panelTitle}>Ask your comp data</h3>
+        {asked.length > 0 && !streaming && (
+          <button
+            onClick={() => setAsked([])}
+            className="mb-4 text-xs font-semibold text-white/50 hover:text-white"
+          >
+            ↺ Start over
+          </button>
+        )}
+      </div>
+      <div className="space-y-3" aria-live="polite">
+        {asked.length === 0 && (
+          <p className="text-sm text-white/60">
+            Executives ask in plain English; the agent answers from live comp data, with sources.
+            Tap a question to see it.
+          </p>
+        )}
+        {asked.map((a) => (
+          <div key={a.qa.question} className="space-y-2">
+            <div className="flex justify-end">
+              <div className="max-w-[85%] rounded-lg bg-gold px-4 py-2.5 text-sm font-semibold text-ink-deep">
+                {a.qa.question}
               </div>
-            )}
+            </div>
+            <div className="flex justify-start">
+              <div className={`${inset} max-w-[85%] px-4 py-2.5`}>
+                <p className="text-sm text-white/90">
+                  {a.shown}
+                  {!a.done && (
+                    <span aria-hidden className="ml-0.5 inline-block animate-pulse text-gold-light">
+                      ▍
+                    </span>
+                  )}
+                </p>
+                {a.done && <p className="mt-2 text-[11px] text-white/45">Sources: {a.qa.sources}</p>}
+              </div>
+            </div>
           </div>
         ))}
       </div>
+      {remaining.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {remaining.map((item) => (
+            <button
+              key={item.question}
+              onClick={() => ask(item)}
+              disabled={streaming}
+              className={`rounded-full border border-gold px-3 py-1.5 text-xs font-semibold text-gold-light ${
+                streaming ? "opacity-40" : "hover:bg-gold hover:text-ink-deep"
+              }`}
+            >
+              {item.question}
+            </button>
+          ))}
+        </div>
+      )}
+      {remaining.length === 0 && !streaming && (
+        <p className="mt-4 text-[11px] text-white/45">
+          That&rsquo;s the scripted set — on an engagement this is a live agent over your comp
+          data, and any question is fair game.
+        </p>
+      )}
     </div>
   );
 }
@@ -735,8 +1248,8 @@ export default function DemoDashboard() {
         {/* Persona-specific panels (each renders its own KPI row) */}
         <View kpis={persona.kpis} />
 
-        {/* Natural-language Q&A */}
-        <AskTheData qa={persona.qa} />
+        {/* Natural-language Q&A — keyed so a persona switch starts a fresh thread */}
+        <AskTheData key={active} qa={persona.qa} />
       </div>
     </div>
   );
