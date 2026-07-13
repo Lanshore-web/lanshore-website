@@ -81,8 +81,8 @@ export default function GlossaryPage() {
           <Link href="/spm" className="font-semibold text-accent hover:text-accent-hover">
             See the SPM platforms Lanshore implements
           </Link>{" "}
-          — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, and
-          Akeron.
+          — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio,
+          Akeron, and Incentivate.
         </p>
       </section>
 

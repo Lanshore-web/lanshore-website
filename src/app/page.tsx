@@ -37,7 +37,7 @@ const HOME_FAQ: FaqItem[] = [
   {
     question: "Which SPM platforms does Lanshore support?",
     answer:
-      "Lanshore implements and operates Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, and Akeron. Agentic SPM works on top of any of these platforms; you don't need to switch systems.",
+      "Lanshore implements and operates Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, Akeron, and Incentivate. Agentic SPM works on top of any of these platforms; you don't need to switch systems.",
   },
   {
     question: "How is Agentic SPM different from my platform's built-in AI features?",

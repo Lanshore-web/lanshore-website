@@ -64,6 +64,7 @@ export const organizationSchema = {
     "Salesforce Spiff",
     "Performio",
     "Vulki by Akeron",
+    "Incentivate",
     "UiPath",
     "n8n",
     "Claude Code",

@@ -18,6 +18,7 @@ export const PLATFORMS = [
   "Salesforce Spiff",
   "Performio",
   "Akeron",
+  "Incentivate",
 ];
 
 export type NavItem = {
@@ -83,6 +84,7 @@ export const SPM_PLATFORM_LINKS = [
   { label: "Salesforce Spiff", href: "/spm/salesforce-spiff" },
   { label: "Performio", href: "/spm/performio" },
   { label: "Akeron", href: "/spm/akeron" },
+  { label: "Incentivate", href: "/spm/incentivate" },
 ];
 
 export const FOOTER_COLUMNS = [

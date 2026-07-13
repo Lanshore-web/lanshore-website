@@ -392,6 +392,55 @@ export const SPM_PLATFORMS: SpmPlatform[] = [
       },
     ],
   },
+  {
+    slug: "incentivate",
+    name: "Incentivate",
+    vendor: "Incentivate Solutions",
+    officialUrl: "https://incentivatesolutions.com",
+    titleTag: "Incentivate Implementation & Managed Services | Lanshore",
+    metaDescription:
+      "Lanshore implements and operates Incentivate — no-code incentive compensation with the Agent Dhara AI assistant — and builds agentic workflows on top of it.",
+    firstSentence:
+      "Incentivate is a sales commission and incentive compensation platform built around no-code plan configuration and its Agent Dhara AI assistant; Lanshore implements Incentivate, runs comp operations on it, and extends it with agents.",
+    positioning:
+      "Incentivate pairs a no-code, drag-and-drop plan builder with a calculation engine aimed at complex commission logic — lookup tables, matrices, multipliers, and qualifiers — and offers deployment flexibility that ICM SaaS rarely does, including private cloud and on-premise. It is also early to agentic AI, with Agent Dhara answering plan and payout questions in plain English.",
+    capabilities: [
+      "No-code plan configuration with a drag-and-drop builder",
+      "Commission calculation across lookup tables, rate matrices, multipliers, and qualifiers",
+      "Dispute and query management with payroll approval workflows",
+      "SQL-based data pipelines for transforming messy source data",
+      "Audit trails, embedded validations, and plan health dashboards",
+      "Flexible deployment — SaaS, private cloud, or on-premise",
+    ],
+    customerProfile:
+      "Enterprises with large rep populations and intricate plan mechanics — pharmaceuticals and medical devices, insurance, financial services, manufacturing, and distribution — especially those with data-residency or on-premise requirements.",
+    aiFeatures: [
+      "Agent Dhara — an agentic assistant that answers comp questions in plain English, investigates disputes, and traces plan changes",
+      "Natural-language report generation over commission data",
+    ],
+    lanshoreAngle: [
+      "Incentivate implementation: plan configuration, data pipelines, integrations, and go-live",
+      "Managed comp operations on Incentivate — calculation cycles, validations, and exception queues run by Lanshore agents with human review",
+      "Agentic augmentation alongside Agent Dhara for workflows that reach across CRM, ERP, and finance systems",
+    ],
+    faq: [
+      {
+        question: "Does Lanshore implement Incentivate?",
+        answer:
+          "Yes — plan configuration, data integration, testing, and go-live, followed by managed comp operations if you want Lanshore running the cycles.",
+      },
+      {
+        question: "What is Agent Dhara?",
+        answer:
+          "Agent Dhara is Incentivate's agentic AI assistant. It answers commission questions in plain English, investigates disputes, and traces plan changes inside the platform. Lanshore builds agents around it that span the rest of your stack.",
+      },
+      {
+        question: "Can Incentivate run on-premise?",
+        answer:
+          "Yes. Incentivate supports SaaS, private cloud, and on-premise deployment — which makes it worth evaluating when data residency or IT policy rules out multi-tenant ICM.",
+      },
+    ],
+  },
 ];
 
 /* Vendors we support but don't maintain dedicated pages for. */

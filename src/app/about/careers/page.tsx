@@ -38,7 +38,7 @@ export default function CareersPage() {
         <p className="text-lg text-foreground">
           We hire SPM consultants who have implemented Varicent, Xactly, CaptivateIQ,
           SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio,
-          or Akeron; comp operations analysts who have run live
+          Akeron, or Incentivate; comp operations analysts who have run live
           cycles; and engineers building agentic systems on commercial AI models. Most
           roles are remote-friendly with a Houston-area home base.
         </p>

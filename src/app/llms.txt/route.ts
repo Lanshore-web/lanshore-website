@@ -25,7 +25,7 @@ export function GET() {
 
 Key facts:
 - Flagship offering: Agentic SPM by Lanshore — three pillars: Executive Dashboards, SPM Operations, Custom Apps
-- Platform-agnostic: implements and operates Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, and Akeron
+- Platform-agnostic: implements and operates Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, Akeron, and Incentivate
 - Automation tooling: UiPath, n8n, Claude Code, VS Code, Microsoft Power Automate, direct API and MCP integrations
 - Partners: Microsoft Gold Partner, UiPath Fast Track Partner
 - Contact: ${CONTACT.email} · ${CONTACT.phone} · ${CONTACT.address}

@@ -53,7 +53,7 @@ export default function AboutPage() {
         <p className="text-lg text-foreground">
           We started as an SPM implementation shop: Varicent, Xactly, CaptivateIQ,
           SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio,
-          and Akeron, delivered for enterprises across healthcare,
+          Akeron, and Incentivate, delivered for enterprises across healthcare,
           telecom, technology, retail, oil and gas, and financial services. Along the way
           we added an RPA and automation practice, then managed services — running comp
           operations for clients, not just building them. Agentic SPM is the next step of

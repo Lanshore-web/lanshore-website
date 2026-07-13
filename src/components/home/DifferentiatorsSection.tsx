@@ -10,10 +10,10 @@ const STATS = [
   },
   {
     icon: LayoutGrid,
-    value: "8",
+    value: "9",
     label: "SPM Platforms",
     description:
-      "Supported — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, and Akeron",
+      "Supported — Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, Akeron, and Incentivate",
   },
   {
     icon: Bot,
