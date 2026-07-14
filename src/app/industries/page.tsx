@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { INDUSTRIES } from "@/lib/industries";
 
 export const metadata: Metadata = {
@@ -22,6 +24,23 @@ export const metadata: Metadata = {
 export default function IndustriesIndexPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Industries", href: "/industries" },
+        ])}
+      />
+      <JsonLd
+        data={itemListSchema(
+          "Industries Lanshore Serves",
+          "/industries",
+          INDUSTRIES.map((industry) => ({
+            name: industry.name,
+            href: `/industries/${industry.slug}`,
+          }))
+        )}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">

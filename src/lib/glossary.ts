@@ -4,6 +4,16 @@ export type GlossaryTerm = {
   linkTo?: string;
 };
 
+/* Anchor for a term, so each definition has its own addressable URL
+   (/resources/glossary#accelerator) that a search or answer engine can cite
+   and deep-link to, instead of only the page as a whole. */
+export function glossarySlug(term: string) {
+  return term
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 /* "Agentic SPM" is intentionally first; the rest are alphabetical. */
 export const GLOSSARY: GlossaryTerm[] = [
   {

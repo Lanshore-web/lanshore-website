@@ -100,7 +100,11 @@ export const FOOTER_COLUMNS = [
   },
   {
     heading: "SPM Platforms",
-    links: [{ label: "All Platforms", href: "/spm" }, ...SPM_PLATFORM_LINKS],
+    links: [
+      { label: "All Platforms", href: "/spm" },
+      { label: "Compare Platforms", href: "/spm/compare" },
+      ...SPM_PLATFORM_LINKS,
+    ],
   },
   {
     heading: "Company",

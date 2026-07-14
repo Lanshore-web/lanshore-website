@@ -139,7 +139,16 @@ export function faqSchema(items: FaqItem[]) {
   };
 }
 
-export function serviceSchema(pillarName: string, description: string, path: string) {
+/* `offerings` describes what's sold under this service. It's an OfferCatalog
+   rather than an ItemList because these are offerings, not child pages —
+   several of them point at the same URL, which an ItemList would misreport as
+   duplicate list entries. */
+export function serviceSchema(
+  pillarName: string,
+  description: string,
+  path: string,
+  offerings?: { name: string; description: string }[]
+) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -152,6 +161,20 @@ export function serviceSchema(pillarName: string, description: string, path: str
       { "@type": "Country", name: "United States" },
       { "@type": "Country", name: "Costa Rica" },
     ],
+    ...(offerings && {
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: `${pillarName} — offerings`,
+        itemListElement: offerings.map((offering) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: offering.name,
+            description: offering.description,
+          },
+        })),
+      },
+    }),
   };
 }
 
@@ -165,6 +188,155 @@ export function breadcrumbSchema(items: { name: string; href: string }[]) {
       name: item.name,
       item: item.href.startsWith("http") ? item.href : `${SITE_URL}${item.href}`,
     })),
+  };
+}
+
+const BLOG_ID = `${SITE_URL}/blog#blog`;
+
+/* Google truncates `headline` past ~110 chars and the Rich Results Test warns
+   on it. Cut on a word boundary so the ellipsis doesn't land mid-word; the
+   full, untruncated title still ships as `name`. */
+function headline(title: string) {
+  if (title.length <= 110) return title;
+  const cut = title.slice(0, 109);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${(lastSpace > 0 ? cut.slice(0, lastSpace) : cut).replace(/[\s,;:—-]+$/, "")}…`;
+}
+
+/**
+ * BlogPosting for a migrated post.
+ *
+ * Deliberately NO `datePublished`: these posts were migrated from the old
+ * lanshore.com, which never displayed a publish date, and nothing in git
+ * recovers one (all content landed in a single initial commit). Inventing a
+ * date would feed a false freshness signal to the exact engines this schema
+ * exists to inform. `dateModified` is real — it's when the post's content last
+ * actually changed — so freshness is still expressed, just honestly.
+ *
+ * `author` is the Lanshore org, not a Person: the site names no individual
+ * authors, and attributing posts to an invented byline would be worse than
+ * attributing them to the company that actually published them.
+ */
+export function blogPostingSchema(post: {
+  slug: string;
+  title: string;
+  description: string;
+  dateModified: string;
+}) {
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    headline: headline(post.title),
+    name: post.title,
+    description: post.description,
+    dateModified: post.dateModified,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    isPartOf: { "@id": BLOG_ID },
+    inLanguage: "en-US",
+  };
+}
+
+export function blogSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": BLOG_ID,
+    url: `${SITE_URL}/blog`,
+    name: "Lanshore Blog",
+    description:
+      "Practitioner writing on agentic AI, comp operations, and sales performance management.",
+    publisher: { "@id": ORG_ID },
+    inLanguage: "en-US",
+  };
+}
+
+/* Case studies carry the site's only quantified outcome claims (`results`),
+   which is exactly what answer engines lift and attribute. `about` and
+   `mentions` give them the industry and platform entities to hang it on. */
+export function caseStudySchema(study: {
+  slug: string;
+  title: string;
+  client: string;
+  industry: string;
+  pillar: string;
+  outcome: string;
+  results: string[];
+  stack: string[];
+  dateModified: string;
+}) {
+  const url = `${SITE_URL}/case-studies/${study.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: headline(study.title),
+    name: study.title,
+    description: study.outcome,
+    articleSection: "Case Study",
+    dateModified: study.dateModified,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    inLanguage: "en-US",
+    about: [
+      { "@type": "Thing", name: study.industry },
+      { "@type": "Thing", name: study.pillar },
+    ],
+    mentions: study.stack.map((name) => ({ "@type": "Thing", name })),
+    /* `results` are bare fragments ("Manual override layer removed"), so they
+       need punctuating — joined raw they read as one run-on sentence. */
+    abstract: study.results
+      .map((result) => result.replace(/[.\s]+$/, ""))
+      .join(". ")
+      .concat("."),
+  };
+}
+
+/* ItemList on index pages so a crawler can enumerate what's underneath one
+   without walking every link. */
+export function itemListSchema(
+  name: string,
+  path: string,
+  items: { name: string; href: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${SITE_URL}${path}#itemlist`,
+    name,
+    url: `${SITE_URL}${path}`,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      name: item.name,
+      url: `${SITE_URL}${item.href}`,
+    })),
+  };
+}
+
+export function webPageSchema(
+  type: "AboutPage" | "ContactPage" | "CollectionPage",
+  name: string,
+  description: string,
+  path: string
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": `${SITE_URL}${path}#webpage`,
+    name,
+    description,
+    url: `${SITE_URL}${path}`,
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": ORG_ID },
+    inLanguage: "en-US",
   };
 }
 

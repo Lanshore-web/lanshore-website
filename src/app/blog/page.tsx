@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
+import JsonLd from "@/components/JsonLd";
+import { blogSchema, breadcrumbSchema, itemListSchema } from "@/lib/schema";
+import { formatDate } from "@/lib/contentDates";
 import { BLOG_POSTS } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -22,6 +25,24 @@ export const metadata: Metadata = {
 export default function BlogIndexPage() {
   return (
     <>
+      <JsonLd data={blogSchema()} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Blog", href: "/blog" },
+        ])}
+      />
+      <JsonLd
+        data={itemListSchema(
+          "Lanshore Blog Posts",
+          "/blog",
+          BLOG_POSTS.map((post) => ({
+            name: post.title,
+            href: `/blog/${post.slug}`,
+          }))
+        )}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">
@@ -48,6 +69,10 @@ export default function BlogIndexPage() {
               <h2 className="text-xl font-bold text-ink group-hover:text-accent">
                 {post.title}
               </h2>
+              <p className="mt-1 text-xs text-muted">
+                Updated{" "}
+                <time dateTime={post.dateModified}>{formatDate(post.dateModified)}</time>
+              </p>
               <p className="mt-2 text-sm text-muted">{post.description}</p>
               <span className="mt-3 inline-block text-sm font-semibold text-accent">
                 Read the post →

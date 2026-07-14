@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "SPM Implementation, Managed Services & AI Development | Lanshore",
@@ -59,6 +61,24 @@ const SERVICES = [
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={serviceSchema(
+          "SPM Implementation, Managed Services & Agentic AI Development",
+          "Lanshore's services are how Agentic SPM gets delivered — from SPM platform implementation and managed comp operations to vendor evaluation and custom agentic AI development.",
+          "/services",
+          SERVICES.map((service) => ({
+            name: service.title,
+            description: service.description,
+          }))
+        )}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+        ])}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">

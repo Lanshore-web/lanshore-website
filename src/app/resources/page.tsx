@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Resources: Blog, White Papers, Glossary & Press | Lanshore",
@@ -61,6 +63,21 @@ const BLOG_POSTS = [
 export default function ResourcesPage() {
   return (
     <>
+      <JsonLd
+        data={webPageSchema(
+          "CollectionPage",
+          "Lanshore Resources",
+          "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, white papers, the SPM & agentic AI glossary, and press.",
+          "/resources"
+        )}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Resources", href: "/resources" },
+        ])}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import { INDUSTRIES, getIndustry } from "@/lib/industries";
 import { getCaseStudy } from "@/lib/caseStudies";
 
@@ -47,6 +47,13 @@ export default async function IndustryPage({
 
   return (
     <>
+      <JsonLd
+        data={serviceSchema(
+          `${industry.name} Sales Performance Management`,
+          industry.firstSentence,
+          `/industries/${industry.slug}`
+        )}
+      />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", href: "/" },

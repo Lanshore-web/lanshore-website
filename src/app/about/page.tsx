@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "About Lanshore | SPM Consultancy & Agentic AI Builders",
@@ -35,6 +37,21 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={webPageSchema(
+          "AboutPage",
+          "About Lanshore",
+          "Lanshore is a Houston-area consultancy that has implemented sales performance management for enterprises for 15+ years — and now builds the AI agents that run it.",
+          "/about"
+        )}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "About", href: "/about" },
+        ])}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">

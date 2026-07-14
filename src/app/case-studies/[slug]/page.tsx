@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, caseStudySchema } from "@/lib/schema";
+import { UPDATED } from "@/lib/contentDates";
 import { CASE_STUDIES, getCaseStudy } from "@/lib/caseStudies";
 import { PILLARS } from "@/lib/pillars";
 
@@ -47,6 +48,7 @@ export default async function CaseStudyDetail({
 
   return (
     <>
+      <JsonLd data={caseStudySchema({ ...study, dateModified: UPDATED.caseStudies })} />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", href: "/" },

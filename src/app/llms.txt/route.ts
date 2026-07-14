@@ -37,6 +37,7 @@ ${pillars}
 ## SPM Platforms
 
 - [SPM Platforms We Implement](${SITE_URL}/spm): technology-agnostic implementation, managed operations, and agentic augmentation across the leading SPM platforms.
+- [SPM Platform Comparison](${SITE_URL}/spm/compare): vendor-neutral comparison of the leading SPM platforms by best fit, core capabilities, AI capabilities, and analyst recognition. Lanshore resells none of them.
 ${platforms}
 
 ## Services

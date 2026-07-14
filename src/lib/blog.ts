@@ -8,6 +8,13 @@ export type BlogPost = {
   slug: string;
   title: string;
   description: string;
+  /* ISO date (YYYY-MM-DD) this post's content last changed. Feeds the visible
+     byline, BlogPosting.dateModified, and the sitemap's <lastmod>.
+     Bump it when you edit the copy — not when the page is restyled.
+     There is deliberately no `datePublished`: these posts were migrated from
+     the old lanshore.com, which never showed one, and no original publish date
+     survives. See blogPostingSchema() in lib/schema.ts. */
+  dateModified: string;
   /* Q&A also rendered in the post body — required for FAQPage schema,
      which must mirror visible content. */
   faq?: FaqItem[];
@@ -17,6 +24,7 @@ export type BlogPost = {
 export const BLOG_POSTS: BlogPost[] = [
   {
     "slug": "elevating-sales-performance-the-power-of-agentic-ai-in-spm",
+    "dateModified": "2026-07-11",
     "title": "Elevating Sales Performance: The Power of Agentic AI in SPM",
     "description": "What agentic AI changes in sales performance management: autonomous agents that accelerate deals, sharpen forecasts, and cut admin work — and what successful adoption requires.",
     "blocks": [
@@ -144,6 +152,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     "slug": "sales-performance-management-build-vs-buy-in-the-agentic-ai-era",
+    "dateModified": "2026-07-11",
     "title": "Sales Performance Management: Build vs. Buy in the Agentic AI Era",
     "description": "Build or buy your SPM stack? A decision framework for the agentic AI era: where platforms win, where custom builds win, and how hybrid approaches keep comp teams in control.",
     "blocks": [
@@ -267,6 +276,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     "slug": "beyond-dashboards-selecting-an-spm-system-in-the-age-of-agentic-ai",
+    "dateModified": "2026-07-11",
     "title": "Beyond Dashboards: Selecting an SPM System in the Age of Agentic AI",
     "description": "Selecting an SPM system in 2026 means looking past dashboards: how to evaluate platforms when AI agents, not analysts, will run your comp operations day to day.",
     "blocks": [
@@ -414,6 +424,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     "slug": "territory-white-space-in-sales-performance-management-what-it-is-why-it-matters-and-how-to-fix-it",
+    "dateModified": "2026-07-11",
     "title": "Territory White Space in Sales Performance Management: What It Is, Why It Matters, and How to Fix It",
     "description": "What territory white space is, why unworked market segments quietly drain revenue, and how SPM platforms, data, and AI-driven analytics find and fix coverage gaps.",
     "faq": [
@@ -791,6 +802,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     "slug": "the-agent-advantage-how-ai-powered-agents-are-transforming-dispute-management-across-hr-finance-crm-and-sales-performance-management",
+    "dateModified": "2026-07-11",
     "title": "The Agent Advantage: How AI-Powered Agents Are Transforming Dispute Management Across HR, Finance, CRM, and Sales Performance Management",
     "description": "How AI-powered agents transform dispute management across HR, finance, CRM, and sales comp: faster resolution, consistent outcomes, and audit trails manual processes can't match.",
     "blocks": [

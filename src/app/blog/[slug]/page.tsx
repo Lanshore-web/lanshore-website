@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { blogPostingSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { formatDate } from "@/lib/contentDates";
 import { BLOG_POSTS, getPost, type BlogBlock } from "@/lib/blog";
 
 export function generateStaticParams() {
@@ -87,6 +88,7 @@ export default async function BlogPostPage({
 
   return (
     <>
+      <JsonLd data={blogPostingSchema(post)} />
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", href: "/" },
@@ -101,6 +103,12 @@ export default async function BlogPostPage({
             Blog
           </p>
           <h1 className="text-3xl font-bold sm:text-4xl">{post.title}</h1>
+          {/* Mirrors BlogPosting.dateModified — structured data has to match
+              what a reader can actually see on the page. */}
+          <p className="mt-4 text-sm text-white/60">
+            Lanshore · Updated{" "}
+            <time dateTime={post.dateModified}>{formatDate(post.dateModified)}</time>
+          </p>
         </div>
       </section>
 

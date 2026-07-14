@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import CaseStudyGrid from "@/components/CaseStudyGrid";
 import CtaBand from "@/components/CtaBand";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { CASE_STUDIES } from "@/lib/caseStudies";
 
 export const metadata: Metadata = {
@@ -22,6 +24,23 @@ export const metadata: Metadata = {
 export default function CaseStudiesPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Case Studies", href: "/case-studies" },
+        ])}
+      />
+      <JsonLd
+        data={itemListSchema(
+          "Lanshore SPM & Agentic AI Case Studies",
+          "/case-studies",
+          CASE_STUDIES.map((study) => ({
+            name: study.title,
+            href: `/case-studies/${study.slug}`,
+          }))
+        )}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">

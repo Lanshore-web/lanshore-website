@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { CONTACT } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -21,6 +23,21 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={webPageSchema(
+          "ContactPage",
+          "Contact Lanshore",
+          "Contact Lanshore for an SPM assessment. US and Latin America offices; first step is a 30-minute assessment call.",
+          "/contact"
+        )}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Contact", href: "/contact" },
+        ])}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">

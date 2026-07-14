@@ -3,7 +3,7 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import CtaBand from "@/components/CtaBand";
 import { SPM_PLATFORMS, NEAR_MISS_VENDORS } from "@/lib/spmPlatforms";
-import { breadcrumbSchema } from "@/lib/schema";
+import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "SPM Platforms We Implement | Lanshore",
@@ -30,6 +30,16 @@ export default function SpmIndexPage() {
           { name: "SPM Platforms", href: "/spm" },
         ])}
       />
+      <JsonLd
+        data={itemListSchema(
+          "SPM Platforms Lanshore Implements",
+          "/spm",
+          SPM_PLATFORMS.map((platform) => ({
+            name: platform.name,
+            href: `/spm/${platform.slug}`,
+          }))
+        )}
+      />
 
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
@@ -45,6 +55,12 @@ export default function SpmIndexPage() {
             comp plans — not a reseller quota. Every platform below can be augmented with
             Agentic SPM by Lanshore.
           </p>
+          <Link
+            href="/spm/compare"
+            className="mt-6 inline-block font-bold text-gold hover:text-white"
+          >
+            Compare all platforms side by side →
+          </Link>
         </div>
       </section>
 
