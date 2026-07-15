@@ -21,7 +21,7 @@ export function GET() {
 
   const body = `# Lanshore
 
-> Lanshore is a sales performance management (SPM) consultancy delivering Agentic SPM: AI agents, executive dashboards, and custom apps for incentive compensation operations. 15+ years of SPM delivery converged with agentic AI. Offices in Katy, Texas (US) and San José, Costa Rica (LATAM delivery).
+> Lanshore is a sales performance management (SPM) consultancy delivering Agentic SPM: AI agents, executive dashboards, and custom apps for incentive compensation operations. 15+ years of SPM delivery converged with agentic AI. Office in Katy, Texas (US), with US and Latin America delivery.
 
 Key facts:
 - Flagship offering: Agentic SPM by Lanshore — three pillars: Executive Dashboards, SPM Operations, Custom Apps

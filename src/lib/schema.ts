@@ -43,7 +43,7 @@ export const organizationSchema = {
   ],
   areaServed: [
     { "@type": "Country", name: "United States" },
-    { "@type": "Country", name: "Costa Rica" },
+    { "@type": "AdministrativeArea", name: "Latin America" },
   ],
   sameAs: [
     "https://www.linkedin.com/company/lanshore-llc",
@@ -83,8 +83,7 @@ export const webSiteSchema = {
   publisher: { "@id": ORG_ID },
 };
 
-/* US office has full address + geocoords (1795 N Fry Rd, Katy TX);
-   LATAM office has city/country only. */
+/* US office has full address + geocoords (1795 N Fry Rd, Katy TX). */
 export const localBusinessSchemas = [
   {
     "@context": "https://schema.org",
@@ -104,24 +103,8 @@ export const localBusinessSchemas = [
       addressCountry: "US",
     },
     geo: { "@type": "GeoCoordinates", latitude: 29.8168, longitude: -95.7205 },
+    /* US office NAP only — LATAM coverage lives on Organization + contactPoints. */
     areaServed: { "@type": "Country", name: "United States" },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "ProfessionalService"],
-    "@id": `${SITE_URL}/#localbusiness-latam`,
-    name: "Lanshore — Latin America",
-    parentOrganization: { "@id": ORG_ID },
-    url: `${SITE_URL}/contact`,
-    telephone: "+506-6204-3938",
-    email: "infolatin@lanshore.com",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "San José",
-      addressCountry: "CR",
-    },
-    geo: { "@type": "GeoCoordinates", latitude: 9.9281, longitude: -84.0907 },
-    areaServed: { "@type": "AdministrativeArea", name: "Latin America" },
   },
 ];
 
@@ -159,7 +142,7 @@ export function serviceSchema(
     provider: { "@id": ORG_ID },
     areaServed: [
       { "@type": "Country", name: "United States" },
-      { "@type": "Country", name: "Costa Rica" },
+      { "@type": "AdministrativeArea", name: "Latin America" },
     ],
     ...(offerings && {
       hasOfferCatalog: {

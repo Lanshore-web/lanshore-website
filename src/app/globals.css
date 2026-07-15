@@ -18,9 +18,9 @@
   --button-hover: #6492a9;
   --cta: #1d7082; /* hero CTA button */
   --cta-hover: #155f73;
-  --gold: #c9a84c; /* Lanshore logo gold */
-  --gold-hover: #b8963e;
-  --gold-light: #e2c87a;
+  --gold: #C9A84C; /* Lanshore logo gold — brand token; use bg-gold / text-gold */
+  --gold-hover: #B8963E;
+  --gold-light: #E2C87A;
   --teal-light: #eef6f9; /* icon backgrounds, comparison header tint */
   --muted: #475467;
   --line: #e2e8f0;

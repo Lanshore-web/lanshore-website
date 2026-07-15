@@ -27,7 +27,7 @@ export default function ContactPage() {
         data={webPageSchema(
           "ContactPage",
           "Contact Lanshore",
-          "Contact Lanshore for an SPM assessment. US and Latin America offices; first step is a 30-minute assessment call.",
+          "Contact Lanshore for an SPM assessment. Houston-area presence with US and Latin America delivery; first step is a 30-minute assessment call.",
           "/contact"
         )}
       />
@@ -73,8 +73,7 @@ export default function ContactPage() {
           </div>
           <div>
             <h2 className="font-bold text-ink">Latin America</h2>
-            <p className="text-muted">San José, Costa Rica</p>
-            <p className="mt-1 text-muted">
+            <p className="text-muted">
               Nearshore delivery teams operating in your time zone.
             </p>
           </div>
