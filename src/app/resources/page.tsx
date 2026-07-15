@@ -9,14 +9,14 @@ import { WHITE_PAPERS } from "@/lib/whitePapers";
 export const metadata: Metadata = {
   title: "Resources: Blog, White Papers, Glossary & Press | Lanshore",
   description:
-    "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, white papers, the SPM & agentic AI glossary, and press.",
+    "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, gated white papers, the SPM & agentic AI glossary, and press.",
   alternates: { canonical: "/resources" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
     title: "Resources: Blog, White Papers, Glossary & Press | Lanshore",
     description:
-      "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, white papers, the SPM & agentic AI glossary, and press.",
+      "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, gated white papers, the SPM & agentic AI glossary, and press.",
     url: "/resources",
     type: "website",
   },
@@ -127,8 +127,9 @@ export default function ResourcesPage() {
           {hasPapers ? (
             <>
               <p className="mb-8 max-w-2xl text-muted">
-                In-depth guides on SPM platform selection, comp operations, and agentic
-                AI architecture. Enter your details to download.
+                Practical guides on commission strategy, SPM implementation, vendor
+                evaluation, nearshore delivery, and retail incentives. Enter your details
+                to download.
               </p>
               <div className="grid gap-6 md:grid-cols-2">
                 {WHITE_PAPERS.map((paper) => (

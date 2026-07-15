@@ -24,7 +24,7 @@ export const UPDATED = {
   industries: "2026-07-08",
   glossary: "2026-07-13",
   blogIndex: "2026-07-11",
-  resources: "2026-07-14",
+  resources: "2026-07-15",
 
   about: "2026-07-13",
   whyLanshore: "2026-07-09",
