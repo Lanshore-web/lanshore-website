@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileContactBar from "@/components/MobileContactBar";
+import HubSpotLoader from "@/components/HubSpotLoader";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema, webSiteSchema, localBusinessSchemas } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
@@ -68,12 +68,8 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <MobileContactBar />
-        {/* HubSpot tracking (portal 6603479, NA2) */}
-        <Script
-          id="hs-script-loader"
-          src="https://js-na2.hs-scripts.com/6603479.js"
-          strategy="afterInteractive"
-        />
+        {/* HubSpot tracking (portal 6603479, NA2) — host-gated in HubSpotLoader */}
+        <HubSpotLoader />
       </body>
     </html>
   );

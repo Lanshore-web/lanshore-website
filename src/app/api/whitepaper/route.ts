@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getFormId, submitHubSpotForm } from "@/lib/hubspot";
+import { getWhitePaper } from "@/lib/whitePapers";
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
@@ -10,11 +11,19 @@ export async function POST(request: Request) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(body.email))) {
     return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
   }
+  if (!body?.paper || typeof body.paper !== "string") {
+    return NextResponse.json({ error: "Paper is required." }, { status: 400 });
+  }
 
-  const formId = getFormId("contact");
+  const paper = getWhitePaper(body.paper);
+  if (!paper) {
+    return NextResponse.json({ error: "Unknown paper." }, { status: 400 });
+  }
+
+  const formId = getFormId("whitepaper");
   if (!formId) {
     console.error(
-      "HUBSPOT_FORM_ID is not set — contact submission not delivered:",
+      "HUBSPOT_FORM_ID_WHITEPAPER is not set — white paper submission not delivered:",
       JSON.stringify(body)
     );
     return NextResponse.json(
@@ -28,8 +37,11 @@ export async function POST(request: Request) {
     { objectTypeId: "0-1", name: "firstname", value: firstname },
     { objectTypeId: "0-1", name: "lastname", value: rest.join(" ") },
     { objectTypeId: "0-1", name: "email", value: body.email },
-    { objectTypeId: "0-1", name: "company", value: body.company ?? "" },
-    { objectTypeId: "0-1", name: "message", value: body.message ?? "" },
+    {
+      objectTypeId: "0-1",
+      name: "whitepaper_requested",
+      value: paper.hubspotValue,
+    },
   ].filter((f) => f.value !== "");
 
   const result = await submitHubSpotForm(formId, fields, {
@@ -42,5 +54,5 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Submission failed." }, { status: 502 });
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, url: paper.file });
 }

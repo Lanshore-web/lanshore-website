@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
+import WhitePaperGate from "@/components/WhitePaperGate";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { WHITE_PAPERS } from "@/lib/whitePapers";
 
 export const metadata: Metadata = {
   title: "Resources: Blog, White Papers, Glossary & Press | Lanshore",
@@ -61,6 +63,8 @@ const BLOG_POSTS = [
 ];
 
 export default function ResourcesPage() {
+  const hasPapers = WHITE_PAPERS.length > 0;
+
   return (
     <>
       <JsonLd
@@ -120,17 +124,33 @@ export default function ResourcesPage() {
       <section id="white-papers" className="scroll-mt-20 bg-paper">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <h2 className="mb-4 text-2xl font-bold text-ink sm:text-3xl">White Papers</h2>
-          <p className="max-w-2xl text-muted">
-            In-depth guides on SPM platform selection, comp operations, and agentic AI
-            architecture. Request any of our current white papers through the contact
-            form and we&rsquo;ll send them directly.
-          </p>
-          <Link
-            href="/contact"
-            className="mt-6 inline-block font-semibold text-accent hover:text-accent-hover"
-          >
-            Request a white paper →
-          </Link>
+          {hasPapers ? (
+            <>
+              <p className="mb-8 max-w-2xl text-muted">
+                In-depth guides on SPM platform selection, comp operations, and agentic
+                AI architecture. Enter your details to download.
+              </p>
+              <div className="grid gap-6 md:grid-cols-2">
+                {WHITE_PAPERS.map((paper) => (
+                  <WhitePaperGate key={paper.slug} paper={paper} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="max-w-2xl text-muted">
+                In-depth guides on SPM platform selection, comp operations, and agentic AI
+                architecture. Request any of our current white papers through the contact
+                form and we&rsquo;ll send them directly.
+              </p>
+              <Link
+                href="/contact"
+                className="mt-6 inline-block font-semibold text-accent hover:text-accent-hover"
+              >
+                Request a white paper →
+              </Link>
+            </>
+          )}
         </div>
       </section>
 
@@ -156,8 +176,8 @@ export default function ResourcesPage() {
           <p className="max-w-2xl text-muted">
             Find us at SPM and RevOps industry events, or reach our team for press
             inquiries at{" "}
-            <a href="mailto:info@lanshore.com" className="font-semibold text-accent">
-              info@lanshore.com
+            <a href="mailto:sales@lanshore.com" className="font-semibold text-accent">
+              sales@lanshore.com
             </a>
             .
           </p>

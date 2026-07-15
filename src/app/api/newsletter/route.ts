@@ -3,18 +3,17 @@ import { getFormId, submitHubSpotForm } from "@/lib/hubspot";
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
-  const name = body?.name != null ? String(body.name).trim() : "";
-  if (!body?.email || !name) {
-    return NextResponse.json({ error: "Name and email are required." }, { status: 400 });
+  if (!body?.email) {
+    return NextResponse.json({ error: "Email is required." }, { status: 400 });
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(body.email))) {
     return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
   }
 
-  const formId = getFormId("contact");
+  const formId = getFormId("newsletter");
   if (!formId) {
     console.error(
-      "HUBSPOT_FORM_ID is not set — contact submission not delivered:",
+      "HUBSPOT_FORM_ID_NEWSLETTER is not set — newsletter submission not delivered:",
       JSON.stringify(body)
     );
     return NextResponse.json(
@@ -23,14 +22,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const [firstname, ...rest] = name.split(/\s+/);
   const fields = [
-    { objectTypeId: "0-1", name: "firstname", value: firstname },
-    { objectTypeId: "0-1", name: "lastname", value: rest.join(" ") },
-    { objectTypeId: "0-1", name: "email", value: body.email },
-    { objectTypeId: "0-1", name: "company", value: body.company ?? "" },
-    { objectTypeId: "0-1", name: "message", value: body.message ?? "" },
-  ].filter((f) => f.value !== "");
+    { objectTypeId: "0-1", name: "email", value: String(body.email) },
+  ];
 
   const result = await submitHubSpotForm(formId, fields, {
     hutk: body.hutk,

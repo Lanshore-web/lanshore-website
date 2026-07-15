@@ -24,15 +24,16 @@ export const UPDATED = {
   industries: "2026-07-08",
   glossary: "2026-07-13",
   blogIndex: "2026-07-11",
-  resources: "2026-07-09",
+  resources: "2026-07-14",
 
   about: "2026-07-13",
   whyLanshore: "2026-07-09",
   partners: "2026-07-13",
-  careers: "2026-07-13",
-  contact: "2026-07-11",
-  privacy: "2026-07-09",
+  careers: "2026-07-14",
+  contact: "2026-07-14",
+  privacy: "2026-07-14",
 } as const;
+
 
 /* Render a YYYY-MM-DD content date for display. Forced to UTC: the bare date
    parses as UTC midnight, so formatting it in a negative-offset local zone

@@ -10,11 +10,22 @@ export async function POST(request: Request) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(body.email))) {
     return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
   }
+  if (!body?.message || !String(body.message).trim()) {
+    return NextResponse.json({ error: "Message is required." }, { status: 400 });
+  }
 
-  const formId = getFormId("contact");
+  const linkedin = body.linkedin ? String(body.linkedin).trim() : "";
+  if (linkedin && !/^https:\/\//i.test(linkedin)) {
+    return NextResponse.json(
+      { error: "LinkedIn URL must start with https://" },
+      { status: 400 }
+    );
+  }
+
+  const formId = getFormId("careers");
   if (!formId) {
     console.error(
-      "HUBSPOT_FORM_ID is not set — contact submission not delivered:",
+      "HUBSPOT_FORM_ID_CAREERS is not set — careers submission not delivered:",
       JSON.stringify(body)
     );
     return NextResponse.json(
@@ -28,8 +39,8 @@ export async function POST(request: Request) {
     { objectTypeId: "0-1", name: "firstname", value: firstname },
     { objectTypeId: "0-1", name: "lastname", value: rest.join(" ") },
     { objectTypeId: "0-1", name: "email", value: body.email },
-    { objectTypeId: "0-1", name: "company", value: body.company ?? "" },
-    { objectTypeId: "0-1", name: "message", value: body.message ?? "" },
+    { objectTypeId: "0-1", name: "linkedin_profile", value: linkedin },
+    { objectTypeId: "0-1", name: "message", value: String(body.message).trim() },
   ].filter((f) => f.value !== "");
 
   const result = await submitHubSpotForm(formId, fields, {

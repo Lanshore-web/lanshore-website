@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
+import NewsletterForm from "@/components/NewsletterForm";
 import { blogPostingSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { formatDate } from "@/lib/contentDates";
 import { BLOG_POSTS, getPost, type BlogBlock } from "@/lib/blog";
@@ -159,6 +160,18 @@ export default async function BlogPostPage({
           </Link>{" "}
           — the three pillars of Agentic SPM by Lanshore.
         </p>
+
+        {process.env.HUBSPOT_FORM_ID_NEWSLETTER ? (
+          <div className="mt-12 rounded-lg border border-line bg-paper p-6">
+            <h2 className="text-lg font-bold text-ink">
+              Get new SPM &amp; agentic AI posts by email
+            </h2>
+            <p className="mt-2 mb-4 text-sm text-muted">
+              Occasional notes from Lanshore — no spam, unsubscribe anytime.
+            </p>
+            <NewsletterForm variant="light" />
+          </div>
+        ) : null}
       </article>
 
       <CtaBand />

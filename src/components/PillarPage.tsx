@@ -257,7 +257,11 @@ export default function PillarPage({ pillar }: { pillar: Pillar }) {
         </p>
       </section>
 
-      <CtaBand />
+      <CtaBand
+        {...(process.env.HUBSPOT_MEETINGS_URL
+          ? { secondaryHref: "/contact#book", secondaryLabel: "Book a call" }
+          : {})}
+      />
     </>
   );
 }

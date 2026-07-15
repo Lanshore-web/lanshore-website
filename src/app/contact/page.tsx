@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
+import MeetingsEmbed from "@/components/MeetingsEmbed";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { CONTACT } from "@/lib/site";
@@ -21,6 +22,8 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const showMeetings = Boolean(process.env.HUBSPOT_MEETINGS_URL);
+
   return (
     <>
       <JsonLd
@@ -79,6 +82,23 @@ export default function ContactPage() {
           </div>
         </aside>
       </section>
+
+      {showMeetings ? (
+        <section id="book" className="scroll-mt-20 border-t border-line bg-paper">
+          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+            <h2 className="text-2xl font-bold text-ink sm:text-3xl">
+              Prefer to grab time directly?
+            </h2>
+            <p className="mt-3 max-w-2xl text-muted">
+              Book a 30-minute SPM assessment. Pick a slot that works — we&rsquo;ll
+              send a calendar invite.
+            </p>
+            <div className="mt-8">
+              <MeetingsEmbed />
+            </div>
+          </div>
+        </section>
+      ) : null}
     </>
   );
 }

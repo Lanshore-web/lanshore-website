@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import CareersForm from "@/components/CareersForm";
 import CtaBand from "@/components/CtaBand";
+import { CONTACT } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Careers at Lanshore | SPM & Agentic AI Consulting",
@@ -18,6 +20,8 @@ export const metadata: Metadata = {
 };
 
 export default function CareersPage() {
+  const showForm = Boolean(process.env.HUBSPOT_FORM_ID_CAREERS);
+
   return (
     <>
       <section className="bg-ink text-white">
@@ -42,13 +46,28 @@ export default function CareersPage() {
           cycles; and engineers building agentic systems on commercial AI models. Most
           roles are remote-friendly with a Houston-area home base.
         </p>
-        <p className="mt-6 text-muted">
-          No open role listed that fits? Send your background to{" "}
-          <a href="mailto:info@lanshore.com" className="font-semibold text-accent">
-            info@lanshore.com
-          </a>{" "}
-          — we read every one.
-        </p>
+
+        {showForm ? (
+          <div className="mt-10">
+            <h2 className="mb-4 text-xl font-bold text-ink">Apply or introduce yourself</h2>
+            <CareersForm />
+            <p className="mt-6 text-sm text-muted">
+              Attaching a résumé? Email it to{" "}
+              <a href={`mailto:${CONTACT.email}`} className="font-semibold text-accent">
+                {CONTACT.email}
+              </a>
+              .
+            </p>
+          </div>
+        ) : (
+          <p className="mt-6 text-muted">
+            No open role listed that fits? Send your background to{" "}
+            <a href={`mailto:${CONTACT.email}`} className="font-semibold text-accent">
+              {CONTACT.email}
+            </a>{" "}
+            — we read every one.
+          </p>
+        )}
       </section>
 
       <CtaBand

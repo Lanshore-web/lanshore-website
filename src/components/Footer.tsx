@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
+import NewsletterForm from "@/components/NewsletterForm";
 import { CONTACT } from "@/lib/site";
 
 const FOOTER_LINKS = [
@@ -24,6 +26,8 @@ function LinkedInIcon({ className }: { className?: string }) {
 }
 
 export default function Footer() {
+  const showNewsletter = Boolean(process.env.HUBSPOT_FORM_ID_NEWSLETTER);
+
   return (
     <footer className="bg-ink text-white">
       <div className="container-site flex flex-col gap-10 py-12 md:flex-row md:items-start md:justify-between">
@@ -41,6 +45,17 @@ export default function Footer() {
             Sales performance management expertise, converged with agentic AI. US and
             Latin America delivery.
           </p>
+          {showNewsletter && (
+            <div className="mt-6">
+              <h2 className="mb-2 text-sm font-semibold uppercase tracking-wider text-white/60">
+                Newsletter
+              </h2>
+              <p className="mb-3 text-sm text-white/60">
+                SPM &amp; agentic AI notes, occasionally.
+              </p>
+              <NewsletterForm variant="dark" />
+            </div>
+          )}
         </div>
 
         <div className="space-y-1 text-sm text-white/60">
@@ -91,9 +106,12 @@ export default function Footer() {
       <div className="border-t border-white/10 pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-0">
         <div className="container-site flex flex-wrap items-center justify-between gap-4 py-5 text-sm text-white/60">
           <span>© {new Date().getFullYear()} Lanshore. All rights reserved.</span>
-          <Link href="/privacy" className="hover:text-white">
-            Privacy
-          </Link>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link href="/privacy" className="hover:text-white">
+              Privacy
+            </Link>
+            <CookieSettingsButton className="cursor-pointer hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-ink" />
+          </div>
         </div>
       </div>
     </footer>

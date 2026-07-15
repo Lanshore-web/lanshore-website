@@ -177,6 +177,9 @@ export default async function SpmPlatformPage({
       <CtaBand
         heading={`Talk to ${platform.name} specialists`}
         body="A 30-minute call. We look at your stack, your plans, and whether this platform — or another — fits best."
+        {...(process.env.HUBSPOT_MEETINGS_URL
+          ? { secondaryHref: "/contact#book", secondaryLabel: "Book a call" }
+          : {})}
       />
     </>
   );

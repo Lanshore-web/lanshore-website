@@ -27,7 +27,7 @@ export const organizationSchema = {
     {
       "@type": "ContactPoint",
       telephone: "+1-408-899-0140",
-      email: "info@lanshore.com",
+      email: "sales@lanshore.com",
       contactType: "customer service",
       areaServed: "US",
       availableLanguage: "English",
@@ -93,7 +93,7 @@ export const localBusinessSchemas = [
     parentOrganization: { "@id": ORG_ID },
     url: `${SITE_URL}/contact`,
     telephone: "+1-408-899-0140",
-    email: "info@lanshore.com",
+    email: "sales@lanshore.com",
     address: {
       "@type": "PostalAddress",
       streetAddress: "1795 N Fry Rd Suite 289",

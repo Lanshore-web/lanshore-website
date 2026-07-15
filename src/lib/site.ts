@@ -3,7 +3,7 @@ export const SITE_NAME = "Lanshore";
 export const ENTITY = "Agentic SPM by Lanshore";
 
 export const CONTACT = {
-  email: "info@lanshore.com",
+  email: "sales@lanshore.com",
   phone: "408-899-0140",
   address: "1795 N Fry Rd Suite 289, Katy, TX 77449, USA",
   linkedin: "https://www.linkedin.com/company/lanshore-llc",
