@@ -123,3 +123,63 @@ h6 {
     bottom: calc(3.5rem + env(safe-area-inset-bottom)) !important;
   }
 }
+
+/* HubSpot cookie banner → compact bottom-right popup.
+   Portal defaults to a wide top card. Their IDs are stable; !important is
+   required against HubSpot's injected stylesheet. */
+#hs-eu-cookie-confirmation,
+#hs-banner-gpc {
+  top: auto !important;
+  right: 1rem !important;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
+  left: auto !important;
+  width: 22rem !important;
+  max-width: min(22rem, calc(100vw - 2rem)) !important;
+  max-height: min(50vh, 22rem) !important;
+  margin: 0 !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 10px 28px rgb(0 0 0 / 0.18), 0 2px 8px rgb(0 0 0 / 0.08) !important;
+}
+
+#hs-eu-cookie-confirmation-inner,
+#hs-banner-gpc-inner {
+  gap: 0.75rem !important;
+  padding: 1rem 1.15rem !important;
+}
+
+#hs-eu-policy-wording,
+#hs-eu-policy-wording p {
+  font-size: 0.8125rem !important;
+  line-height: 1.45 !important;
+}
+
+#hs-eu-cookie-confirmation-buttons-area {
+  justify-content: stretch !important;
+}
+
+#hs-eu-confirmation-button-group,
+#hs-eu-opt-in-buttons {
+  width: 100% !important;
+}
+
+#hs-eu-confirmation-button,
+#hs-eu-cookie-settings-button,
+#hs-eu-decline-button {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  height: 2.5rem !important;
+  font-size: 0.8125rem !important;
+}
+
+/* Sit above the fixed mobile contact bar (h-14). */
+@media (max-width: 767px) {
+  #hs-eu-cookie-confirmation,
+  #hs-banner-gpc {
+    top: auto !important;
+    right: 0.75rem !important;
+    bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px) + 0.75rem) !important;
+    left: 0.75rem !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+}
