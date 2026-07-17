@@ -1,4 +1,4 @@
-import { SITE_URL, CONTACT } from "@/lib/site";
+import { SITE_URL, CONTACT, GARTNER_2019 } from "@/lib/site";
 import { PILLARS } from "@/lib/pillars";
 import { SPM_PLATFORMS } from "@/lib/spmPlatforms";
 import { INDUSTRIES } from "@/lib/industries";
@@ -28,6 +28,7 @@ Key facts:
 - Platform-agnostic: implements and operates Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, Akeron, and Incentivate
 - Automation tooling: UiPath, n8n, Claude Code, VS Code, Microsoft Power Automate, direct API and MCP integrations
 - Partners: Microsoft Gold Partner, UiPath Fast Track Partner
+- Named in Gartner research on SPM implementation partner selection ("${GARTNER_2019.title}," ${GARTNER_2019.docId}, March 2019)
 - Contact: ${CONTACT.email} · ${CONTACT.phone} · ${CONTACT.address}
 
 ## Agentic SPM (flagship)
@@ -56,6 +57,10 @@ ${industries}
 - [SPM Glossary](${SITE_URL}/resources/glossary)
 - [About Lanshore](${SITE_URL}/about)
 - [Contact](${SITE_URL}/contact)
+
+---
+
+${GARTNER_2019.disclaimer}
 `;
 
   return new Response(body, {

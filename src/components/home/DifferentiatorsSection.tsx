@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Clock, LayoutGrid, Bot, Globe } from "lucide-react";
+import { GARTNER_2019 } from "@/lib/site";
 
 const STATS = [
   {
@@ -41,6 +42,16 @@ export default function DifferentiatorsSection() {
           </h2>
           <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
             Microsoft Gold Partner &nbsp;·&nbsp; UiPath Fast Track Partner
+          </p>
+          {/* claims.short only — the full citation lives once, on /about. */}
+          <p className="mx-auto mt-4 max-w-3xl text-sm text-white/60">
+            {GARTNER_2019.claims.short}{" "}
+            <Link
+              href="/about#analyst-recognition"
+              className="font-semibold text-link-hover hover:text-white"
+            >
+              Full citation →
+            </Link>
           </p>
         </div>
 

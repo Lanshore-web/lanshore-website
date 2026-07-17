@@ -1,4 +1,4 @@
-import { SITE_URL } from "./site";
+import { SITE_URL, GARTNER_2019 } from "./site";
 
 export type FaqItem = { question: string; answer: string };
 
@@ -51,6 +51,16 @@ export const organizationSchema = {
     "https://x.com/LanshoreLLC",
     "https://www.youtube.com/@Lanshore",
   ],
+  /* Deliberately no `url`: without a reprint license we neither link the doc
+     nor any unofficial PDF copy — identifier + publisher is the citation. */
+  subjectOf: {
+    "@type": "Article",
+    name: GARTNER_2019.title,
+    author: GARTNER_2019.analysts.map((name) => ({ "@type": "Person", name })),
+    publisher: { "@type": "Organization", name: GARTNER_2019.publisher },
+    datePublished: GARTNER_2019.published,
+    identifier: GARTNER_2019.docId,
+  },
   knowsAbout: [
     "Sales Performance Management",
     "Incentive Compensation Management",

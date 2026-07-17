@@ -7,6 +7,7 @@ import CtaBand from "@/components/CtaBand";
 import FaqSection from "@/components/FaqSection";
 import { SPM_PLATFORMS, getSpmPlatform } from "@/lib/spmPlatforms";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
+import { GARTNER_2019 } from "@/lib/site";
 
 export function generateStaticParams() {
   return SPM_PLATFORMS.map((platform) => ({ slug: platform.slug }));
@@ -143,6 +144,11 @@ export default async function SpmPlatformPage({
             </Link>
             .
           </p>
+          {platform.gartnerPartnerLeadIn && (
+            <p className="mt-3 text-sm text-muted">
+              {platform.gartnerPartnerLeadIn} {GARTNER_2019.claims.short}
+            </p>
+          )}
           <ul className="mt-5 space-y-3">
             {platform.lanshoreAngle.map((item) => (
               <li key={item} className="flex gap-3 text-sm leading-relaxed text-foreground">

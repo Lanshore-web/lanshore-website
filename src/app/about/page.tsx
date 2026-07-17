@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
+import { GARTNER_2019 } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Lanshore | SPM Consultancy & Agentic AI Builders",
@@ -76,6 +77,15 @@ export default function AboutPage() {
           operations for clients, not just building them. Agentic SPM is the next step of
           the same trajectory: the AI agents we build today do the work our consultants
           have done by hand for fifteen years, which is exactly why they work.
+        </p>
+
+        {/* Canonical Gartner citation — the one place the full citation lives;
+            other pages carry claims.short and link to this anchor. */}
+        <p
+          id="analyst-recognition"
+          className="mt-6 scroll-mt-24 text-lg text-foreground"
+        >
+          {GARTNER_2019.claims.standard}
         </p>
 
         <h2 className="mt-12 text-2xl font-bold text-ink">How we work</h2>
