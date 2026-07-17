@@ -2,15 +2,51 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { NAV } from "@/lib/site";
+
+/** Grace period before a desktop dropdown closes after pointer leaves. */
+const CLOSE_DELAY_MS = 220;
 
 export default function Header() {
   const [open, setOpen] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const desktopNavRef = useRef<HTMLElement>(null);
+  const baseId = useId();
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const openMenu = useCallback(
+    (label: string) => {
+      clearCloseTimer();
+      setOpen(label);
+    },
+    [clearCloseTimer],
+  );
+
+  const closeMenu = useCallback(() => {
+    clearCloseTimer();
+    setOpen(null);
+  }, [clearCloseTimer]);
+
+  const scheduleClose = useCallback(() => {
+    clearCloseTimer();
+    closeTimerRef.current = setTimeout(() => {
+      setOpen(null);
+      closeTimerRef.current = null;
+    }, CLOSE_DELAY_MS);
+  }, [clearCloseTimer]);
+
+  useEffect(() => () => clearCloseTimer(), [clearCloseTimer]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -19,13 +55,36 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Back/forward navigation bypasses the links' onClick close handlers.
-  const [prevPathname, setPrevPathname] = useState(pathname);
-  if (prevPathname !== pathname) {
-    setPrevPathname(pathname);
+  // Close on outside pointer or Escape while a desktop menu is open.
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node | null;
+      if (desktopNavRef.current && target && !desktopNavRef.current.contains(target)) {
+        closeMenu();
+      }
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, closeMenu]);
+
+  // Route changes (including back/forward) should dismiss open menus.
+  useEffect(() => {
     setMobileOpen(false);
-    setOpen(null);
-  }
+    closeMenu();
+  }, [pathname, closeMenu]);
 
   return (
     <header
@@ -51,6 +110,7 @@ export default function Header() {
 
         {/* Desktop nav */}
         <nav
+          ref={desktopNavRef}
           className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-1 lg:flex"
           aria-label="Main"
         >
@@ -59,13 +119,26 @@ export default function Header() {
               <div
                 key={item.label}
                 className="relative"
-                onMouseEnter={() => setOpen(item.label)}
-                onMouseLeave={() => setOpen(null)}
+                onMouseEnter={() => openMenu(item.label)}
+                onMouseLeave={scheduleClose}
+                onFocusCapture={() => openMenu(item.label)}
+                onBlurCapture={(event) => {
+                  const next = event.relatedTarget as Node | null;
+                  if (next && event.currentTarget.contains(next)) return;
+                  scheduleClose();
+                }}
               >
                 <button
-                  className="flex items-center gap-1 rounded px-3 py-2 text-sm font-semibold text-nav hover:text-accent"
+                  type="button"
+                  className="flex items-center gap-1 rounded px-3 py-2 text-sm font-semibold text-nav hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   aria-expanded={open === item.label}
-                  onClick={() => setOpen(open === item.label ? null : item.label)}
+                  aria-haspopup="true"
+                  aria-controls={`${baseId}-${item.label.replace(/\s+/g, "-").toLowerCase()}-panel`}
+                  id={`${baseId}-${item.label.replace(/\s+/g, "-").toLowerCase()}-trigger`}
+                  onClick={() => {
+                    clearCloseTimer();
+                    setOpen(open === item.label ? null : item.label);
+                  }}
                 >
                   {item.label}
                   <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden>
@@ -73,17 +146,26 @@ export default function Header() {
                   </svg>
                 </button>
                 {open === item.label && (
-                  <div className="absolute left-0 top-full w-60 rounded-md border border-line bg-white/90 py-2 shadow-card-hover backdrop-blur-md">
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.label}
-                        href={child.href}
-                        className="block px-4 py-2 text-sm text-nav hover:bg-teal-light hover:text-accent"
-                        onClick={() => setOpen(null)}
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
+                  // before: extends hit-area upward so diagonal paths still
+                  // count as “over the menu” without a visible gap under the trigger.
+                  <div
+                    id={`${baseId}-${item.label.replace(/\s+/g, "-").toLowerCase()}-panel`}
+                    role="region"
+                    aria-labelledby={`${baseId}-${item.label.replace(/\s+/g, "-").toLowerCase()}-trigger`}
+                    className="absolute left-0 top-full z-50 min-w-[15rem] before:absolute before:inset-x-0 before:-top-2 before:h-2 before:content-['']"
+                  >
+                    <div className="rounded-md border border-line bg-white/95 py-1 shadow-card-hover backdrop-blur-md">
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.label}
+                          href={child.href}
+                          className="block px-4 py-2.5 text-sm text-nav hover:bg-teal-light hover:text-accent focus-visible:bg-teal-light focus-visible:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
+                          onClick={closeMenu}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -91,7 +173,7 @@ export default function Header() {
               <Link
                 key={item.label}
                 href={item.href!}
-                className="rounded px-3 py-2 text-sm font-semibold text-nav hover:text-accent"
+                className="rounded px-3 py-2 text-sm font-semibold text-nav hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 {item.label}
               </Link>
@@ -101,14 +183,15 @@ export default function Header() {
 
         <Link
           href="/contact"
-          className="hidden rounded-md bg-gold px-4 py-2 text-sm font-bold text-ink-deep hover:bg-gold-hover lg:block"
+          className="hidden rounded-md bg-gold px-4 py-2 text-sm font-bold text-ink-deep hover:bg-gold-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:block"
         >
           Contact Us
         </Link>
 
         {/* Mobile toggle */}
         <button
-          className="text-nav lg:hidden"
+          type="button"
+          className="rounded text-nav focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden"
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -147,6 +230,7 @@ export default function Header() {
                 </>
               ) : (
                 <Link
+                  key={item.label}
                   href={item.href!}
                   className="block py-2.5 text-sm font-bold text-nav"
                   onClick={() => setMobileOpen(false)}
