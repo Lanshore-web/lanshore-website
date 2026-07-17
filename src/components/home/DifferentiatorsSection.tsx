@@ -1,14 +1,8 @@
 import Link from "next/link";
-import { Clock, LayoutGrid, Bot, Globe } from "lucide-react";
+import { LayoutGrid, Bot, Globe } from "lucide-react";
 import { GARTNER_2019 } from "@/lib/site";
 
 const STATS = [
-  {
-    icon: Clock,
-    value: "15+",
-    label: "Years",
-    description: "Delivering SPM & Agentic AI implementations across enterprise clients",
-  },
   {
     icon: LayoutGrid,
     value: "9",
@@ -55,7 +49,7 @@ export default function DifferentiatorsSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-3">
           {STATS.map((stat, i) => {
             const Icon = stat.icon;
             return (
