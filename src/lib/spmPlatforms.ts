@@ -18,6 +18,11 @@ export type SpmPlatform = {
      Gartner MQ for SPM 2026 placements may only be printed for Varicent,
      Xactly, and CaptivateIQ (Leaders) plus "recognized in" for Performio. */
   analystNote?: string;
+  /* Lead-in rendered before GARTNER_2019.claims.short on the platform page.
+     May ONLY be set for Xactly and SAP — the vendors the 2019 Gartner note
+     (G00380338) listed Lanshore against. Do not extend to other platforms:
+     stretching the claim beyond what Gartner printed is misattribution. */
+  gartnerPartnerLeadIn?: string;
   lanshoreAngle: string[];
   faq: FaqItem[];
 };
@@ -103,6 +108,8 @@ export const SPM_PLATFORMS: SpmPlatform[] = [
     ],
     analystNote:
       "Named a Leader in the 2026 Gartner® Magic Quadrant™ for Sales Performance Management.",
+    gartnerPartnerLeadIn:
+      "Lanshore has delivered Xactly implementations and managed operations for enterprise clients.",
     lanshoreAngle: [
       "Xactly Incent implementation, plan builds, and integration with CRM and ERP",
       "Managed comp operations — monthly cycles, validations, and exception handling run by Lanshore agents with human review",
@@ -198,6 +205,8 @@ export const SPM_PLATFORMS: SpmPlatform[] = [
     customerProfile:
       "Large enterprises — often SAP-first IT organizations — with high transaction volumes and complex, audited comp processes.",
     aiFeatures: ["Joule copilot integration across the SAP SuccessFactors portfolio"],
+    gartnerPartnerLeadIn:
+      "Lanshore's SAP incentive compensation practice dates back to the CallidusCloud era.",
     lanshoreAngle: [
       "Legacy deadline planning: support for legacy SAP Commissions stacks ends beyond 2026 — Lanshore assesses upgrade-vs-migrate and executes either path",
       "Implementation and plan builds on SAP SuccessFactors Incentive Management",

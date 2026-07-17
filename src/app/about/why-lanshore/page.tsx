@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
+import { GARTNER_2019 } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Why Lanshore | One Team From Platform to Agents",
@@ -24,7 +25,7 @@ const DIFFERENTIATORS = [
   },
   {
     title: "One team from platform to agents",
-    body: "Platform selection, implementation, managed operations, and agentic development sit in one practice. No handoff between a strategy firm that leaves and a delivery shop that starts over.",
+    body: "Platform selection, implementation, managed operations, and agentic development sit in one practice — dual SPM depth and agentic-build capability. You are not coordinating two vendors who hand off and blame each other when something breaks.",
   },
   {
     title: "We own outcomes",
@@ -62,6 +63,10 @@ export default function WhyLanshorePage() {
             </div>
           ))}
         </div>
+
+        {/* Heritage claim: analyst-documented automation DNA predating the AI
+            wave — deliberately in the narrative, not the hero. */}
+        <p className="mt-12 text-muted">{GARTNER_2019.claims.heritage}</p>
 
         <blockquote className="mt-16 border-l-4 border-accent bg-paper p-8">
           <p className="text-2xl font-semibold text-ink">
