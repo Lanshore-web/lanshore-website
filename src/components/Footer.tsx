@@ -1,8 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
 import CookieSettingsButton from "@/components/CookieSettingsButton";
+import GartnerFooterNote from "@/components/GartnerFooterNote";
 import NewsletterForm from "@/components/NewsletterForm";
 import { CONTACT } from "@/lib/site";
+import { SPM_PLATFORMS } from "@/lib/spmPlatforms";
+import { BLOG_POSTS } from "@/lib/blog";
+
+/* Every page that mentions Gartner must appear here so the required trademark
+   attribution renders in its footer. Data-driven pages are computed; the
+   static entries are the pages that hardcode GARTNER_2019 claims — extend this
+   list when adding a claim to a new page. */
+const GARTNER_PATHS = [
+  "/",
+  "/about",
+  "/about/why-lanshore",
+  "/spm",
+  "/spm/compare",
+  ...SPM_PLATFORMS.filter(
+    (p) => p.gartnerPartnerLeadIn || p.analystNote?.includes("Gartner")
+  ).map((p) => `/spm/${p.slug}`),
+  ...BLOG_POSTS.filter((p) => JSON.stringify(p).includes("Gartner")).map(
+    (p) => `/blog/${p.slug}`
+  ),
+];
 
 const FOOTER_LINKS = [
   { label: "Services", href: "/services" },
@@ -113,6 +134,7 @@ export default function Footer() {
             <CookieSettingsButton className="cursor-pointer hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-ink" />
           </div>
         </div>
+        <GartnerFooterNote paths={GARTNER_PATHS} />
       </div>
     </footer>
   );
