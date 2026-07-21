@@ -1,6 +1,6 @@
 # Token & model usage ledger
 
-**Template version:** 0.1.10  
+**Template version:** 0.1.11  
 **Last updated:** 2026-07-21  
 **Policy:** update **VERSION** + this ledger on **every git commit** (`scripts/prepare_commit_metrics.py` / pre-commit hook).  
 **Source of figures:** session stats (`/context`, `/session-info`, host UI) — never invent.
@@ -13,8 +13,8 @@
 | Total output tokens (measured) | 0 |
 | Total tokens (measured) | 0 |
 | Measured entries | 0 |
-| Unmeasured commit stamps | 12 |
-| All ledger entries | 12 |
+| Unmeasured commit stamps | 13 |
+| All ledger entries | 13 |
 
 ## By model (measured only)
 
@@ -38,6 +38,7 @@
 | 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.8: auto unmeasured (no metrics in env/pending file) [unmeasured] |
 | 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.9: content: normalize Agentic SPM to AI Assisted SPM across pages [unmeasured] |
 | 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.10: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.11: Header lint fix; model claude-fable-5; host did not report main-loop token usage [unmeasured] |
 
 <!-- LEDGER_END -->
 

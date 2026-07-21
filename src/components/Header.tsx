@@ -81,10 +81,14 @@ export default function Header() {
   }, [open, closeMenu]);
 
   // Route changes (including back/forward) should dismiss open menus.
-  useEffect(() => {
+  // Reset during render instead of in an effect; a pending close timer is
+  // harmless since it only re-sets `open` to null.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setMobileOpen(false);
-    closeMenu();
-  }, [pathname, closeMenu]);
+    setOpen(null);
+  }
 
   return (
     <header
