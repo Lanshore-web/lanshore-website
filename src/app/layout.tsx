@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   // Fallback only — every page sets its own `title`. No `title.template`: the
   // per-page strings already carry the "| Lanshore" suffix.
-  title: "Agentic SPM by Lanshore",
+  title: "AI Assisted SPM by Lanshore",
   description:
-    "Agentic SPM by Lanshore pairs 15+ years of sales performance management delivery with AI agents that run comp operations, answer executive questions, and fill platform gaps.",
+    "AI Assisted SPM by Lanshore pairs 15+ years of sales performance management delivery with AI agents that run comp operations, answer executive questions, and fill platform gaps.",
   openGraph: {
     siteName: "Lanshore",
     type: "website",

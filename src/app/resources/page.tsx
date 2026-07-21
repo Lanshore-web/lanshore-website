@@ -9,14 +9,14 @@ import { WHITE_PAPERS } from "@/lib/whitePapers";
 export const metadata: Metadata = {
   title: "Resources: Blog, White Papers, Glossary & Press | Lanshore",
   description:
-    "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, gated white papers, the SPM & agentic AI glossary, and press.",
+    "Resources from Lanshore on AI Assisted SPM and sales performance management: blog posts, gated white papers, the SPM & agentic AI glossary, and press.",
   alternates: { canonical: "/resources" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
     title: "Resources: Blog, White Papers, Glossary & Press | Lanshore",
     description:
-      "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, gated white papers, the SPM & agentic AI glossary, and press.",
+      "Resources from Lanshore on AI Assisted SPM and sales performance management: blog posts, gated white papers, the SPM & agentic AI glossary, and press.",
     url: "/resources",
     type: "website",
   },
@@ -26,7 +26,7 @@ const BLOG_POSTS = [
   {
     title: "Elevating Sales Performance: The Power of Agentic AI in SPM",
     summary:
-      "How agentic AI changes sales performance management: autonomous multi-step comp tasks, better forecasting, less administrative burden. The foundational read on Agentic SPM.",
+      "How agentic AI changes sales performance management: autonomous multi-step comp tasks, better forecasting, less administrative burden. The foundational read on AI Assisted SPM.",
     url: "/blog/elevating-sales-performance-the-power-of-agentic-ai-in-spm",
     featured: true,
   },
@@ -71,7 +71,7 @@ export default function ResourcesPage() {
         data={webPageSchema(
           "CollectionPage",
           "Lanshore Resources",
-          "Resources from Lanshore on Agentic SPM and sales performance management: blog posts, white papers, the SPM & agentic AI glossary, and press.",
+          "Resources from Lanshore on AI Assisted SPM and sales performance management: blog posts, white papers, the SPM & agentic AI glossary, and press.",
           "/resources"
         )}
       />
@@ -88,10 +88,10 @@ export default function ResourcesPage() {
             Resources
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">
-            Agentic SPM, explained in depth
+            AI Assisted SPM, explained in depth
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/75">
-            Blog posts, white papers, and the glossary behind Agentic SPM by Lanshore.
+            Blog posts, white papers, and the glossary behind AI Assisted SPM by Lanshore.
           </p>
         </div>
       </section>
@@ -159,7 +159,7 @@ export default function ResourcesPage() {
       <section id="glossary" className="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 sm:px-6">
         <h2 className="mb-4 text-2xl font-bold text-ink sm:text-3xl">FAQ & Glossary</h2>
         <p className="max-w-2xl text-muted">
-          Plain-English definitions of SPM and agentic AI terms — from Agentic SPM and
+          Plain-English definitions of SPM and agentic AI terms — from AI Assisted SPM and
           crediting to clawbacks, SPIFs, and true-ups.
         </p>
         <Link

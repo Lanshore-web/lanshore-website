@@ -53,7 +53,7 @@ export default function SpmIndexPage() {
             Lanshore is technology-agnostic: we implement, operate, and extend the leading
             sales performance management platforms, and we recommend the one that fits your
             comp plans — not a reseller quota. Every platform below can be augmented with
-            Agentic SPM by Lanshore.
+            AI Assisted SPM by Lanshore.
           </p>
           <Link
             href="/spm/compare"

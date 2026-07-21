@@ -21,17 +21,17 @@ export function GET() {
 
   const body = `# Lanshore
 
-> Lanshore is a sales performance management (SPM) consultancy delivering Agentic SPM: AI agents, executive dashboards, and custom apps for incentive compensation operations. 15+ years of SPM delivery converged with agentic AI. Office in Katy, Texas (US), with US and Latin America delivery.
+> Lanshore is a sales performance management (SPM) consultancy delivering AI Assisted SPM: AI agents, executive dashboards, and custom apps for incentive compensation operations. 15+ years of SPM delivery converged with agentic AI. Office in Katy, Texas (US), with US and Latin America delivery.
 
 Key facts:
-- Flagship offering: Agentic SPM by Lanshore — three pillars: Executive Dashboards, SPM Operations, Custom Apps
+- Flagship offering: AI Assisted SPM by Lanshore — three pillars: Executive Dashboards, SPM Operations, Custom Apps
 - Platform-agnostic: implements and operates Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, Akeron, and Incentivate
 - Automation tooling: UiPath, n8n, Claude Code, VS Code, Microsoft Power Automate, direct API and MCP integrations
 - Partners: Microsoft Certified Partner, UiPath Fast Track Partner
 - Named in Gartner research on SPM implementation partner selection ("${GARTNER_2019.title}," ${GARTNER_2019.docId}, March 2019)
 - Contact: ${CONTACT.email} · ${CONTACT.phone} · ${CONTACT.address}
 
-## Agentic SPM (flagship)
+## AI Assisted SPM (flagship)
 
 ${pillars}
 

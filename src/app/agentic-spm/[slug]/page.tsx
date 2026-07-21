@@ -45,7 +45,7 @@ export default async function Page({
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", href: "/" },
-          { name: "Agentic SPM", href: "/" },
+          { name: "AI Assisted SPM", href: "/" },
           { name: pillar.name, href: pillar.path },
         ])}
       />

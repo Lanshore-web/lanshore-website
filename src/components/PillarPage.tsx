@@ -77,7 +77,7 @@ export default function PillarPage({ pillar }: { pillar: Pillar }) {
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">
-              Agentic SPM · Pillar {pillar.pillarNumber} of 3
+              AI Assisted SPM · Pillar {pillar.pillarNumber} of 3
             </p>
             <h1 className="text-4xl font-bold sm:text-5xl">{pillar.h1}</h1>
             <p className="mt-4 text-xl text-white/85">{pillar.sub}</p>
@@ -232,7 +232,7 @@ export default function PillarPage({ pillar }: { pillar: Pillar }) {
       {/* Cross-link strip */}
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <p className="text-center text-muted">
-          One pillar of Agentic SPM by Lanshore — see also{" "}
+          One pillar of AI Assisted SPM by Lanshore — see also{" "}
           {others.map((other, i) => (
             <span key={other.slug}>
               <Link

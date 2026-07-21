@@ -9,14 +9,14 @@ import { BLOG_POSTS } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Blog: Agentic AI & Sales Performance Management | Lanshore",
   description:
-    "The Lanshore blog on Agentic SPM: agentic AI in sales performance management, platform selection, territory design, and dispute management.",
+    "The Lanshore blog on AI Assisted SPM: agentic AI in sales performance management, platform selection, territory design, and dispute management.",
   alternates: { canonical: "/blog" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
     title: "Blog: Agentic AI & Sales Performance Management | Lanshore",
     description:
-      "The Lanshore blog on Agentic SPM: agentic AI in sales performance management, platform selection, territory design, and dispute management.",
+      "The Lanshore blog on AI Assisted SPM: agentic AI in sales performance management, platform selection, territory design, and dispute management.",
     url: "/blog",
     type: "website",
   },
@@ -49,7 +49,7 @@ export default function BlogIndexPage() {
             Blog
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">
-            Agentic SPM, in writing
+            AI Assisted SPM, in writing
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/75">
             Practitioner writing on agentic AI, comp operations, and sales performance

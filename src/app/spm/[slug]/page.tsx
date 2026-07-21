@@ -140,7 +140,7 @@ export default async function SpmPlatformPage({
               href="/agentic-spm/executive-dashboards"
               className="font-semibold text-accent hover:text-accent-hover"
             >
-              Agentic SPM by Lanshore
+              AI Assisted SPM by Lanshore
             </Link>
             .
           </p>

@@ -5,14 +5,14 @@ import DemoDashboard from "@/components/DemoDashboard";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
-  title: "Executive Dashboard Live Demo | Agentic SPM by Lanshore",
+  title: "Executive Dashboard Live Demo | AI Assisted SPM by Lanshore",
   description:
-    "See the Executive Dashboards pillar of Agentic SPM by Lanshore in action: a working demo modeled on a financial institution, with views for the CRO, VP of Sales, CFO, and RevOps lead.",
+    "See the Executive Dashboards pillar of AI Assisted SPM by Lanshore in action: a working demo modeled on a financial institution, with views for the CRO, VP of Sales, CFO, and RevOps lead.",
   alternates: { canonical: "/agentic-spm/executive-dashboards/demo" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
-    title: "Executive Dashboard Live Demo | Agentic SPM by Lanshore",
+    title: "Executive Dashboard Live Demo | AI Assisted SPM by Lanshore",
     description:
       "A working executive comp dashboard demo with views for the CRO, VP of Sales, CFO, and RevOps lead.",
     url: "/agentic-spm/executive-dashboards/demo",
@@ -33,11 +33,11 @@ export default function DemoPage() {
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">
-            Agentic SPM · Executive Dashboards · Live Demo
+            AI Assisted SPM · Executive Dashboards · Live Demo
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">See it with your own numbers</h1>
           <p className="mt-6 max-w-2xl text-lg text-white/75">
-            This is the Executive Dashboards pillar of Agentic SPM by Lanshore, running on
+            This is the Executive Dashboards pillar of AI Assisted SPM by Lanshore, running on
             Meridian Trust Bank — a fictitious regional financial institution. Pick your
             role and see what the dashboard answers for you. Every figure below is
             illustrative; on an engagement, this runs on your comp platform, CRM, and
@@ -80,7 +80,7 @@ export default function DemoPage() {
           </tbody>
         </table>
         <p className="mt-6 text-muted">
-          This demo is one pillar of Agentic SPM by Lanshore — read more about{" "}
+          This demo is one pillar of AI Assisted SPM by Lanshore — read more about{" "}
           <Link href="/agentic-spm/executive-dashboards" className="font-semibold text-accent">
             Executive Dashboards
           </Link>

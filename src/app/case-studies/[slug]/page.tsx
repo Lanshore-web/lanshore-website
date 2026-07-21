@@ -102,7 +102,7 @@ export default async function CaseStudyDetail({
                 href={relatedPillar.path}
                 className="font-semibold text-accent hover:text-accent-hover"
               >
-                {relatedPillar.name} — Agentic SPM by Lanshore
+                {relatedPillar.name} — AI Assisted SPM by Lanshore
               </Link>
             </>
           ) : (
@@ -112,7 +112,7 @@ export default async function CaseStudyDetail({
                 href="/services"
                 className="font-semibold text-accent hover:text-accent-hover"
               >
-                How we deliver Agentic SPM
+                How we deliver AI Assisted SPM
               </Link>
             </>
           )}

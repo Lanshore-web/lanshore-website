@@ -92,7 +92,7 @@ export default function PartnersPage() {
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">Partners</h1>
           <p className="mt-6 text-lg text-white/75">
-            Lanshore partners across the platforms Agentic SPM runs on — so clients get
+            Lanshore partners across the platforms AI Assisted SPM runs on — so clients get
             supported patterns, vendor escalation paths, and consultants the vendors
             know.
           </p>

@@ -4,14 +4,14 @@ import CustomAppDemo from "@/components/CustomAppDemo";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
-  title: "Custom SPM App Live Demo | Agentic SPM by Lanshore",
+  title: "Custom SPM App Live Demo | AI Assisted SPM by Lanshore",
   description:
-    "See the Custom Apps pillar of Agentic SPM by Lanshore in action: a working custom comp tool with a statement viewer, dispute bot, approval workflows, and an interactive payout calculator.",
+    "See the Custom Apps pillar of AI Assisted SPM by Lanshore in action: a working custom comp tool with a statement viewer, dispute bot, approval workflows, and an interactive payout calculator.",
   alternates: { canonical: "/agentic-spm/custom-apps/demo" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
-    title: "Custom SPM App Live Demo | Agentic SPM by Lanshore",
+    title: "Custom SPM App Live Demo | AI Assisted SPM by Lanshore",
     description:
       "A working custom comp tool demo: statement viewer, dispute bot, approvals, and an interactive payout calculator.",
     url: "/agentic-spm/custom-apps/demo",
@@ -25,13 +25,13 @@ export default function CustomAppsDemoPage() {
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">
-            Agentic SPM · Custom Apps · Live Demo
+            AI Assisted SPM · Custom Apps · Live Demo
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">
             A comp app your platform can&rsquo;t ship
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-white/75">
-            This is the Custom Apps pillar of Agentic SPM by Lanshore: Meridian Comp Hub,
+            This is the Custom Apps pillar of AI Assisted SPM by Lanshore: Meridian Comp Hub,
             a purpose-built tool for a fictitious regional bank. You&rsquo;re signed in as
             a relationship manager — read your statement, ask the dispute bot why June
             came in low, track a SPIF approval, and drag the payout calculator&rsquo;s
@@ -61,7 +61,7 @@ export default function CustomAppsDemoPage() {
           weeks, documented and owned by you.
         </p>
         <p className="mt-6 text-muted">
-          This demo is one pillar of Agentic SPM by Lanshore — read more about{" "}
+          This demo is one pillar of AI Assisted SPM by Lanshore — read more about{" "}
           <Link href="/agentic-spm/custom-apps" className="font-semibold text-accent">
             Custom Apps
           </Link>

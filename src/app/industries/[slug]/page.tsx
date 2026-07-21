@@ -67,7 +67,7 @@ export default async function IndustryPage({
             Industries
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">
-            Agentic SPM for {industry.name}
+            AI Assisted SPM for {industry.name}
           </h1>
           <p className="mt-6 text-lg text-white/75">{industry.firstSentence}</p>
         </div>

@@ -31,7 +31,7 @@ export default function CareersPage() {
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">Careers</h1>
           <p className="mt-6 text-lg text-white/75">
-            Agentic SPM by Lanshore is built by people who know comp from the inside —
+            AI Assisted SPM by Lanshore is built by people who know comp from the inside —
             consultants, comp analysts, and engineers who want their work in production,
             not in a deck.
           </p>

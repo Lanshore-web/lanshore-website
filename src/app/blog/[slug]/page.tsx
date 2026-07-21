@@ -158,7 +158,7 @@ export default async function BlogPostPage({
           <Link href="/agentic-spm/custom-apps" className="font-semibold text-accent">
             Custom Apps
           </Link>{" "}
-          — the three pillars of Agentic SPM by Lanshore.
+          — the three pillars of AI Assisted SPM by Lanshore.
         </p>
 
         {process.env.HUBSPOT_FORM_ID_NEWSLETTER ? (

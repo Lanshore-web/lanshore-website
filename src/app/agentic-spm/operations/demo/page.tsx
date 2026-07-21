@@ -4,14 +4,14 @@ import OperationsDemo from "@/components/OperationsDemo";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
-  title: "SPM Operations Live Demo | Agentic SPM by Lanshore",
+  title: "SPM Operations Live Demo | AI Assisted SPM by Lanshore",
   description:
-    "See the SPM Operations pillar of Agentic SPM by Lanshore in action: an agent-run monthly comp cycle and a live Xactly-to-Varicent vendor migration, modeled on a fictitious financial institution.",
+    "See the SPM Operations pillar of AI Assisted SPM by Lanshore in action: an agent-run monthly comp cycle and a live Xactly-to-Varicent vendor migration, modeled on a fictitious financial institution.",
   alternates: { canonical: "/agentic-spm/operations/demo" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
-    title: "SPM Operations Live Demo | Agentic SPM by Lanshore",
+    title: "SPM Operations Live Demo | AI Assisted SPM by Lanshore",
     description:
       "An agent-run monthly comp cycle and a live Xactly-to-Varicent migration demo.",
     url: "/agentic-spm/operations/demo",
@@ -25,13 +25,13 @@ export default function OperationsDemoPage() {
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">
-            Agentic SPM · SPM Operations · Live Demo
+            AI Assisted SPM · SPM Operations · Live Demo
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">
             Watch a comp cycle run itself
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-white/75">
-            This is the SPM Operations pillar of Agentic SPM by Lanshore, running on
+            This is the SPM Operations pillar of AI Assisted SPM by Lanshore, running on
             Meridian Trust Bank — a fictitious regional financial institution. Two
             scenarios: the June comp cycle executed by agents with humans approving what
             matters, and a live migration from Xactly Incent to Varicent ICM. Try the
@@ -60,7 +60,7 @@ export default function OperationsDemoPage() {
           equivalent. Same team, both jobs.
         </p>
         <p className="mt-6 text-muted">
-          This demo is one pillar of Agentic SPM by Lanshore — read more about{" "}
+          This demo is one pillar of AI Assisted SPM by Lanshore — read more about{" "}
           <Link href="/agentic-spm/operations" className="font-semibold text-accent">
             SPM Operations
           </Link>

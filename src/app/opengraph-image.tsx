@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Agentic SPM by Lanshore — AI Agents for Sales Performance Management";
+export const alt = "AI Assisted SPM by Lanshore — AI Agents for Sales Performance Management";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -46,7 +46,7 @@ export default function Image() {
           <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: 2 }}>LANSHORE</div>
         </div>
         <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.1, maxWidth: 950 }}>
-          Agentic SPM by Lanshore
+          AI Assisted SPM by Lanshore
         </div>
         <div
           style={{

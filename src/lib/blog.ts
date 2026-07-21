@@ -206,7 +206,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         "type": "p",
-        "text": "The build case is also compelling when proprietary data is the competitive moat. If your organization has unique signals—real-time customer health scores, IoT-derived usage data, or proprietary market intelligence—that should directly drive quota recommendations or coaching interventions, a custom-built agentic SPM system can be trained on that data in ways a packaged vendor cannot easily replicate. The ROI here comes not from cost avoidance but from revenue uplift: smarter territory design, more accurate quota allocation, and more responsive incentive adjustments that keep top performers engaged."
+        "text": "The build case is also compelling when proprietary data is the competitive moat. If your organization has unique signals—real-time customer health scores, IoT-derived usage data, or proprietary market intelligence—that should directly drive quota recommendations or coaching interventions, a custom-built AI Assisted SPM system can be trained on that data in ways a packaged vendor cannot easily replicate. The ROI here comes not from cost avoidance but from revenue uplift: smarter territory design, more accurate quota allocation, and more responsive incentive adjustments that keep top performers engaged."
       },
       {
         "type": "h2",
@@ -242,7 +242,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         "type": "p",
-        "text": "2. Agentic AI Infrastructure Investment. If you are building in part to leverage agentic AI, you must plan for the underlying infrastructure: model training pipelines, evaluation frameworks, human-in-the-loop review processes, and the specialized expertise to deploy AI agents safely in a financial calculation context. Errors in an agentic SPM system are not merely inconvenient—they can result in significant overpayment, underpayment, and legal exposure. Building the guardrails and audit trails for agentic AI in compensation is a substantial engineering challenge that is often underestimated in initial scoping."
+        "text": "2. Agentic AI Infrastructure Investment. If you are building in part to leverage agentic AI, you must plan for the underlying infrastructure: model training pipelines, evaluation frameworks, human-in-the-loop review processes, and the specialized expertise to deploy AI agents safely in a financial calculation context. Errors in an AI Assisted SPM system are not merely inconvenient—they can result in significant overpayment, underpayment, and legal exposure. Building the guardrails and audit trails for agentic AI in compensation is a substantial engineering challenge that is often underestimated in initial scoping."
       },
       {
         "type": "p",
@@ -262,7 +262,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         "type": "p",
-        "text": "The build vs. buy decision for SPM in the current environment is best evaluated across three dimensions: strategic differentiation, time-to-value, and organizational capability. If your compensation model is genuinely unique—using proprietary data signals that no vendor can access and that directly drive competitive advantage—and you have the engineering capacity to build and sustain the system, a build may be justified. For the vast majority of organizations, however, the combination of accelerating vendor AI capabilities, compressed time-to-value, and the high ongoing cost of internal development makes buying from a specialized SPM vendor the strategically sound choice. Lanshore’s Agentic SPM services can help you evaluate and implement the right solution."
+        "text": "The build vs. buy decision for SPM in the current environment is best evaluated across three dimensions: strategic differentiation, time-to-value, and organizational capability. If your compensation model is genuinely unique—using proprietary data signals that no vendor can access and that directly drive competitive advantage—and you have the engineering capacity to build and sustain the system, a build may be justified. For the vast majority of organizations, however, the combination of accelerating vendor AI capabilities, compressed time-to-value, and the high ongoing cost of internal development makes buying from a specialized SPM vendor the strategically sound choice. Lanshore’s AI Assisted SPM services can help you evaluate and implement the right solution."
       },
       {
         "type": "p",
@@ -346,7 +346,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         "type": "h2",
-        "text": "The Lanshore Advantage: Building the Bridge to Agentic SPM"
+        "text": "The Lanshore Advantage: Building the Bridge to AI Assisted SPM"
       },
       {
         "type": "p",

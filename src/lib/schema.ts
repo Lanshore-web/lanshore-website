@@ -14,7 +14,7 @@ export const organizationSchema = {
   url: SITE_URL,
   logo: `${SITE_URL}/lanshore-logo.png`,
   description:
-    "Lanshore is a sales performance management consultancy delivering Agentic SPM: AI agents, executive dashboards, and custom apps for comp operations across the US and Latin America.",
+    "Lanshore is a sales performance management consultancy delivering AI Assisted SPM: AI agents, executive dashboards, and custom apps for comp operations across the US and Latin America.",
   address: {
     "@type": "PostalAddress",
     streetAddress: "1795 N Fry Rd Suite 289",
@@ -89,7 +89,7 @@ export const webSiteSchema = {
   url: SITE_URL,
   name: "Lanshore",
   description:
-    "Agentic SPM by Lanshore — sales performance management expertise converged with agentic AI.",
+    "AI Assisted SPM by Lanshore — sales performance management expertise converged with agentic AI.",
   publisher: { "@id": ORG_ID },
 };
 
@@ -145,7 +145,7 @@ export function serviceSchema(
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: `Agentic SPM by Lanshore — ${pillarName}`,
+    name: `AI Assisted SPM by Lanshore — ${pillarName}`,
     serviceType: pillarName,
     description,
     url: `${SITE_URL}${path}`,

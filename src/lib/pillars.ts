@@ -24,11 +24,11 @@ export const PILLARS: Pillar[] = [
     path: "/agentic-spm/executive-dashboards",
     name: "Executive Dashboards",
     pillarNumber: 1,
-    titleTag: "AI Executive Dashboards for Sales Comp | Agentic SPM by Lanshore",
+    titleTag: "AI Executive Dashboards for Sales Comp | AI Assisted SPM by Lanshore",
     metaDescription:
-      "Executive Dashboards from Agentic SPM by Lanshore: ask your comp data a question in plain language and get a current, sourced answer across platform, CRM, and spreadsheets.",
+      "Executive Dashboards from AI Assisted SPM by Lanshore: ask your comp data a question in plain language and get a current, sourced answer across platform, CRM, and spreadsheets.",
     firstSentence:
-      "Executive Dashboards are the visibility pillar of Agentic SPM by Lanshore: AI-assisted dashboards that answer leadership questions directly from your comp, CRM, and planning data.",
+      "Executive Dashboards are the visibility pillar of AI Assisted SPM by Lanshore: AI-assisted dashboards that answer leadership questions directly from your comp, CRM, and planning data.",
     h1: "Executive dashboards",
     sub: "Ask your comp data a question. Get an answer, not a ticket.",
     demoHref: "/agentic-spm/executive-dashboards/demo",
@@ -101,11 +101,11 @@ export const PILLARS: Pillar[] = [
     path: "/agentic-spm/operations",
     name: "SPM Operations",
     pillarNumber: 2,
-    titleTag: "AI Agents for Sales Comp Operations | Agentic SPM by Lanshore",
+    titleTag: "AI Agents for Sales Comp Operations | AI Assisted SPM by Lanshore",
     metaDescription:
-      "SPM Operations from Agentic SPM by Lanshore: AI agents that run calculations, validations, and exceptions inside Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, Akeron, or Incentivate — with a full audit trail.",
+      "SPM Operations from AI Assisted SPM by Lanshore: AI agents that run calculations, validations, and exceptions inside Varicent, Xactly, CaptivateIQ, SAP, Anaplan, Salesforce Spiff, Performio, Akeron, or Incentivate — with a full audit trail.",
     firstSentence:
-      "SPM Operations is the execution pillar of Agentic SPM by Lanshore: AI agents that run recurring comp administration — calculations, validations, and exceptions — inside the platform you already own.",
+      "SPM Operations is the execution pillar of AI Assisted SPM by Lanshore: AI agents that run recurring comp administration — calculations, validations, and exceptions — inside the platform you already own.",
     h1: "SPM operations",
     sub: "Your comp cycle, run by agents. Reviewed by humans. Closed on time.",
     demoHref: "/agentic-spm/operations/demo",
@@ -178,11 +178,11 @@ export const PILLARS: Pillar[] = [
     path: "/agentic-spm/custom-apps",
     name: "Custom Apps",
     pillarNumber: 3,
-    titleTag: "Custom Agentic Apps for SPM | Agentic SPM by Lanshore",
+    titleTag: "Custom Agentic Apps for SPM | AI Assisted SPM by Lanshore",
     metaDescription:
-      "Custom Apps from Agentic SPM by Lanshore: dispute bots, approval workflows, integrations, and calculators — purpose-built agentic applications that cover what your SPM platform can't.",
+      "Custom Apps from AI Assisted SPM by Lanshore: dispute bots, approval workflows, integrations, and calculators — purpose-built agentic applications that cover what your SPM platform can't.",
     firstSentence:
-      "Custom Apps is the build pillar of Agentic SPM by Lanshore: purpose-built agentic applications that cover what your SPM platform can't do out of the box.",
+      "Custom Apps is the build pillar of AI Assisted SPM by Lanshore: purpose-built agentic applications that cover what your SPM platform can't do out of the box.",
     h1: "Custom apps",
     sub: "When the platform stops short, we build the rest.",
     demoHref: "/agentic-spm/custom-apps/demo",
