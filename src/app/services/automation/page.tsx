@@ -41,7 +41,7 @@ const TOOLING = [
   {
     icon: Cpu,
     name: "Microsoft Power Automate",
-    body: "Microsoft-stack automation from a Microsoft Gold Partner — flows that live where your organization already works: Teams, SharePoint, Dynamics, Excel.",
+    body: "Microsoft-stack automation from a Microsoft Certified Partner — flows that live where your organization already works: Teams, SharePoint, Dynamics, Excel.",
   },
   {
     icon: Plug,

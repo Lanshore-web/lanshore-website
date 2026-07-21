@@ -41,7 +41,7 @@ export default function DifferentiatorsSection() {
             Proven SPM &amp; Agentic AI Expertise. Real Results.
           </h2>
           <p className="text-sm font-semibold uppercase tracking-widest text-white/60">
-            Microsoft Gold Partner &nbsp;·&nbsp; UiPath Fast Track Partner
+            Microsoft Certified Partner &nbsp;·&nbsp; UiPath Fast Track Partner
           </p>
           {/* claims.short only — the full citation lives once, on /about. */}
           <p className="mx-auto mt-4 max-w-3xl text-sm text-white/60">

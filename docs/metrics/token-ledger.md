@@ -1,7 +1,7 @@
 # Token & model usage ledger
 
-**Template version:** 0.1.4  
-**Last updated:** 2026-07-17  
+**Template version:** 0.1.6  
+**Last updated:** 2026-07-21  
 **Policy:** update **VERSION** + this ledger on **every git commit** (`scripts/prepare_commit_metrics.py` / pre-commit hook).  
 **Source of figures:** session stats (`/context`, `/session-info`, host UI) — never invent.
 
@@ -13,8 +13,8 @@
 | Total output tokens (measured) | 0 |
 | Total tokens (measured) | 0 |
 | Measured entries | 0 |
-| Unmeasured commit stamps | 6 |
-| All ledger entries | 6 |
+| Unmeasured commit stamps | 8 |
+| All ledger entries | 8 |
 
 ## By model (measured only)
 
@@ -32,6 +32,8 @@
 | 2026-07-17 | commit-2026-07-17 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.2: auto unmeasured (no metrics in env/pending file) [unmeasured] |
 | 2026-07-17 | commit-2026-07-17 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.3: auto unmeasured (no metrics in env/pending file) [unmeasured] |
 | 2026-07-17 | commit-2026-07-17 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.4: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.5: content: Microsoft Certified Partner + AI Assisted SPM naming [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.6: auto unmeasured (no metrics in env/pending file) [unmeasured] |
 
 <!-- LEDGER_END -->
 

@@ -14,14 +14,14 @@ import { faqSchema, type FaqItem } from "@/lib/schema";
 import { GARTNER_2019 } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Agentic SPM by Lanshore | AI Agents for Sales Performance Management",
+  title: "AI Assisted SPM by Lanshore | AI Agents for Sales Performance Management",
   description:
     "Lanshore is an SPM implementer with agentic-build capability: one practice that implements your comp platform and builds the agents that run it.",
   alternates: { canonical: "/" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
-    title: "Agentic SPM by Lanshore | AI Agents for Sales Performance Management",
+    title: "AI Assisted SPM by Lanshore | AI Agents for Sales Performance Management",
     description:
       "SPM implementation depth plus agentic-build capability in one practice: executive dashboards, comp operations, and custom apps on the platform you already run.",
     url: "/",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
 
 const HOME_FAQ: FaqItem[] = [
   {
-    question: "What is Agentic SPM?",
+    question: "What is AI Assisted SPM?",
     answer:
-      "Agentic SPM is Lanshore's approach to sales performance management that uses AI agents — software that completes multi-step work, not just chat. Agents run comp operations, answer executive questions from live data, and power custom apps that fill platform gaps. It runs alongside the SPM platforms you already own.",
+      "AI Assisted SPM is Lanshore's approach to sales performance management that uses AI agents — software that completes multi-step work, not just chat. Agents run comp operations, answer executive questions from live data, and power custom apps that fill platform gaps. It runs alongside the SPM platforms you already own.",
   },
   {
     question: "Why does agentic-build experience matter for SPM?",
@@ -53,17 +53,17 @@ const HOME_FAQ: FaqItem[] = [
   {
     question: "Which SPM platforms does Lanshore support?",
     answer:
-      "Lanshore implements and operates Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, Akeron, and Incentivate. Agentic SPM works on top of any of these platforms; you don't need to switch systems.",
+      "Lanshore implements and operates Varicent, Xactly, CaptivateIQ, SAP SuccessFactors Incentive Management, Anaplan, Salesforce Spiff, Performio, Akeron, and Incentivate. AI Assisted SPM works on top of any of these platforms; you don't need to switch systems.",
   },
   {
-    question: "How is Agentic SPM different from my platform's built-in AI features?",
+    question: "How is AI Assisted SPM different from my platform's built-in AI features?",
     answer:
-      "Platform AI follows a vendor roadmap inside one product. Agentic SPM is built around your end-to-end process — platform, CRM, spreadsheets, and the people who run the cycle — so agents solve your workflow, not only the features a single vendor ships next.",
+      "Platform AI follows a vendor roadmap inside one product. AI Assisted SPM is built around your end-to-end process — platform, CRM, spreadsheets, and the people who run the cycle — so agents solve your workflow, not only the features a single vendor ships next.",
   },
   {
-    question: "Do we need to replace our comp platform to use Agentic SPM?",
+    question: "Do we need to replace our comp platform to use AI Assisted SPM?",
     answer:
-      "No. Agentic SPM layers on top of your existing platform. Most engagements start with an assessment of your current stack and identify where agents remove manual work first.",
+      "No. AI Assisted SPM layers on top of your existing platform. Most engagements start with an assessment of your current stack and identify where agents remove manual work first.",
   },
   {
     question: "What is MCP, and why should buyers care?",
