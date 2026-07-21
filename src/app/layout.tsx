@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileContactBar from "@/components/MobileContactBar";
 import HubSpotLoader from "@/components/HubSpotLoader";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema, webSiteSchema, localBusinessSchemas } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
@@ -70,6 +71,8 @@ export default function RootLayout({
         <MobileContactBar />
         {/* HubSpot tracking (portal 6603479, NA2) — host-gated in HubSpotLoader */}
         <HubSpotLoader />
+        {/* GA4 (G-G61027WSXF) — host-gated in GoogleAnalytics; production only */}
+        <GoogleAnalytics />
       </body>
     </html>
   );

@@ -70,6 +70,23 @@ export default function PrivacyPage() {
           </li>
         </ul>
         <p>
+          We also use{" "}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-accent"
+          >
+            Google Analytics 4
+          </a>{" "}
+          (measurement ID G-G61027WSXF) for aggregated traffic and page-view metrics on
+          lanshore.com. Google may set cookies such as{" "}
+          <code className="text-sm text-ink">_ga</code> and{" "}
+          <code className="text-sm text-ink">_ga_*</code> to distinguish visitors and
+          sessions. The tag loads only on the production site (not preview or local
+          hosts).
+        </p>
+        <p>
           In the EU/EEA/UK, non-essential tracking cookies are set only after you accept
           the consent banner. Elsewhere you may see a lighter notice depending on our
           HubSpot privacy policy configuration. You can change your preference at any
