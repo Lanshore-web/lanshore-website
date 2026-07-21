@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import DemoDashboard from "@/components/DemoDashboard";
 import CtaBand from "@/components/CtaBand";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Executive Dashboard Live Demo | AI Assisted SPM by Lanshore",
@@ -30,6 +32,14 @@ const PERSONA_ROWS = [
 export default function DemoPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Executive Dashboards", href: "/agentic-spm/executive-dashboards" },
+          { name: "Live Demo", href: "/agentic-spm/executive-dashboards/demo" },
+        ])}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">

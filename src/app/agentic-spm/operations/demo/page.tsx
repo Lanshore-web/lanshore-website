@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import OperationsDemo from "@/components/OperationsDemo";
 import CtaBand from "@/components/CtaBand";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "SPM Operations Live Demo | AI Assisted SPM by Lanshore",
@@ -22,6 +24,14 @@ export const metadata: Metadata = {
 export default function OperationsDemoPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "SPM Operations", href: "/agentic-spm/operations" },
+          { name: "Live Demo", href: "/agentic-spm/operations/demo" },
+        ])}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">

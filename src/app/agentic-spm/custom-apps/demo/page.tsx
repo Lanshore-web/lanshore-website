@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import CustomAppDemo from "@/components/CustomAppDemo";
 import CtaBand from "@/components/CtaBand";
+import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Custom SPM App Live Demo | AI Assisted SPM by Lanshore",
@@ -22,6 +24,14 @@ export const metadata: Metadata = {
 export default function CustomAppsDemoPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Custom Apps", href: "/agentic-spm/custom-apps" },
+          { name: "Live Demo", href: "/agentic-spm/custom-apps/demo" },
+        ])}
+      />
+
       <section className="bg-ink text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">

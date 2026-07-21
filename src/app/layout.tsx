@@ -60,6 +60,9 @@ export default function RootLayout({
         {/* Answer-engine index. /llms.txt is found by convention; this link
             advertises it to crawlers that look for one. React hoists it. */}
         <link rel="alternate" type="text/plain" href="/llms.txt" />
+        {/* Fuller companion per llmstxt.org: the site's substantive text
+            inlined into one document for a single-fetch ingest. */}
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" />
         <JsonLd data={organizationSchema} />
         <JsonLd data={webSiteSchema} />
         {localBusinessSchemas.map((schema) => (
