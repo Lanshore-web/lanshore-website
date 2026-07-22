@@ -28,6 +28,9 @@ const GARTNER_PATHS = [
 const FOOTER_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
+  { label: "Resources", href: "/resources" },
+  { label: "Blog", href: "/blog" },
+  { label: "Glossary", href: "/resources/glossary" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
