@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
 import { SPM_PLATFORMS, NEAR_MISS_VENDORS } from "@/lib/spmPlatforms";
 import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 
@@ -53,7 +52,7 @@ export default function SpmIndexPage() {
             Lanshore is technology-agnostic: we implement, operate, and extend the leading
             sales performance management platforms, and we recommend the one that fits your
             comp plans — not a reseller quota. Every platform below can be augmented with
-            Agentic SPM by Lanshore.
+            AI Assisted SPM by Lanshore.
           </p>
           <Link
             href="/spm/compare"
@@ -101,8 +100,6 @@ export default function SpmIndexPage() {
           listed, <Link href="/contact" className="font-semibold text-accent hover:text-accent-hover">talk to us</Link> — odds are we&apos;ve worked in it.
         </p>
       </section>
-
-      <CtaBand />
     </>
   );
 }

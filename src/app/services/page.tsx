@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "SPM Implementation, Managed Services & AI Development | Lanshore",
   description:
-    "Lanshore's services are how Agentic SPM gets delivered — from platform implementation to ongoing managed operations. One team from platform selection to agents in production.",
+    "Lanshore's services are how AI Assisted SPM gets delivered — from platform implementation to ongoing managed operations. One team from platform selection to agents in production.",
   alternates: { canonical: "/services" },
   openGraph: {
     siteName: "Lanshore",
@@ -64,7 +63,7 @@ export default function ServicesPage() {
       <JsonLd
         data={serviceSchema(
           "SPM Implementation, Managed Services & Agentic AI Development",
-          "Lanshore's services are how Agentic SPM gets delivered — from SPM platform implementation and managed comp operations to vendor evaluation and custom agentic AI development.",
+          "Lanshore's services are how AI Assisted SPM gets delivered — from SPM platform implementation and managed comp operations to vendor evaluation and custom agentic AI development.",
           "/services",
           SERVICES.map((service) => ({
             name: service.title,
@@ -84,9 +83,9 @@ export default function ServicesPage() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gold">
             Services
           </p>
-          <h1 className="text-4xl font-black sm:text-5xl">How we deliver Agentic SPM</h1>
+          <h1 className="text-4xl font-black sm:text-5xl">How we deliver AI Assisted SPM</h1>
           <p className="mt-6 max-w-2xl text-lg text-white/75">
-            Lanshore&rsquo;s services are how Agentic SPM gets delivered — from platform
+            Lanshore&rsquo;s services are how AI Assisted SPM gets delivered — from platform
             implementation to ongoing managed operations. One team takes you from platform
             selection to agents in production. No handoffs between a &ldquo;strategy
             firm&rdquo; and a &ldquo;delivery shop.&rdquo;
@@ -113,8 +112,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-
-      <CtaBand />
     </>
   );
 }

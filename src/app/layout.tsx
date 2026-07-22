@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileContactBar from "@/components/MobileContactBar";
 import HubSpotLoader from "@/components/HubSpotLoader";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema, webSiteSchema, localBusinessSchemas } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
@@ -33,9 +34,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   // Fallback only — every page sets its own `title`. No `title.template`: the
   // per-page strings already carry the "| Lanshore" suffix.
-  title: "Agentic SPM by Lanshore",
+  title: "AI Assisted SPM by Lanshore",
   description:
-    "Agentic SPM by Lanshore pairs 15+ years of sales performance management delivery with AI agents that run comp operations, answer executive questions, and fill platform gaps.",
+    "AI Assisted SPM by Lanshore pairs 15+ years of sales performance management delivery with AI agents that run comp operations, answer executive questions, and fill platform gaps.",
   openGraph: {
     siteName: "Lanshore",
     type: "website",
@@ -59,6 +60,9 @@ export default function RootLayout({
         {/* Answer-engine index. /llms.txt is found by convention; this link
             advertises it to crawlers that look for one. React hoists it. */}
         <link rel="alternate" type="text/plain" href="/llms.txt" />
+        {/* Fuller companion per llmstxt.org: the site's substantive text
+            inlined into one document for a single-fetch ingest. */}
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" />
         <JsonLd data={organizationSchema} />
         <JsonLd data={webSiteSchema} />
         {localBusinessSchemas.map((schema) => (
@@ -70,6 +74,8 @@ export default function RootLayout({
         <MobileContactBar />
         {/* HubSpot tracking (portal 6603479, NA2) — host-gated in HubSpotLoader */}
         <HubSpotLoader />
+        {/* GA4 (G-G61027WSXF) — host-gated in GoogleAnalytics; production only */}
+        <GoogleAnalytics />
       </body>
     </html>
   );

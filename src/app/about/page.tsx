@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { GARTNER_2019 } from "@/lib/site";
@@ -74,7 +73,7 @@ export default function AboutPage() {
           Akeron, and Incentivate, delivered for enterprises across healthcare,
           telecom, technology, retail, oil and gas, and financial services. Along the way
           we added an RPA and automation practice, then managed services — running comp
-          operations for clients, not just building them. Agentic SPM is the next step of
+          operations for clients, not just building them. AI Assisted SPM is the next step of
           the same trajectory: the AI agents we build today do the work our consultants
           have done by hand for fifteen years, which is exactly why they work.
         </p>
@@ -98,8 +97,6 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-
-      <CtaBand />
     </>
   );
 }

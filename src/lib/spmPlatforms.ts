@@ -75,7 +75,7 @@ export const SPM_PLATFORMS: SpmPlatform[] = [
           "Yes. Platform migrations are a core Lanshore service; our operations demo includes an agent-assisted Xactly-to-Varicent migration workflow that mirrors the real engagement pattern.",
       },
       {
-        question: "How does Agentic SPM work with Varicent's own AI assistants?",
+        question: "How does AI Assisted SPM work with Varicent's own AI assistants?",
         answer:
           "They're complementary. Varicent's assistants work inside Varicent; Lanshore's agents work across your whole stack — Varicent plus CRM, ERP, and spreadsheets — and around your specific comp plan.",
       },
@@ -130,7 +130,7 @@ export const SPM_PLATFORMS: SpmPlatform[] = [
       {
         question: "Can Lanshore's AI agents work with Xactly?",
         answer:
-          "Yes. Agentic SPM layers on top of Xactly — agents monitor calculation runs, flag anomalies before payout, and answer executive questions from unified Xactly, CRM, and spreadsheet data.",
+          "Yes. AI Assisted SPM layers on top of Xactly — agents monitor calculation runs, flag anomalies before payout, and answer executive questions from unified Xactly, CRM, and spreadsheet data.",
       },
     ],
   },

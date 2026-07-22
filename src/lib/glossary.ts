@@ -14,12 +14,12 @@ export function glossarySlug(term: string) {
     .replace(/^-|-$/g, "");
 }
 
-/* "Agentic SPM" is intentionally first; the rest are alphabetical. */
+/* "AI Assisted SPM" is intentionally first; the rest are alphabetical. */
 export const GLOSSARY: GlossaryTerm[] = [
   {
-    term: "Agentic SPM",
+    term: "AI Assisted SPM",
     definition:
-      "Agentic SPM is a term coined by Lanshore for sales performance management operated by AI agents: software that completes multi-step comp tasks — calculations, validations, exception handling, and reporting — autonomously, on top of the SPM platform a company already runs. It covers three areas: executive dashboards, comp operations, and custom applications.",
+      "AI Assisted SPM is a term coined by Lanshore for sales performance management operated by AI agents: software that completes multi-step comp tasks — calculations, validations, exception handling, and reporting — autonomously, on top of the SPM platform a company already runs. It covers three areas: executive dashboards, comp operations, and custom applications.",
     linkTo: "/",
   },
   {

@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { INDUSTRIES } from "@/lib/industries";
 
 export const metadata: Metadata = {
-  title: "Industries | Agentic SPM by Lanshore",
+  title: "Industries | AI Assisted SPM by Lanshore",
   description:
-    "Agentic SPM by Lanshore serves healthcare, telecom, technology, retail, oil & gas, and financial services sales organizations.",
+    "AI Assisted SPM by Lanshore serves healthcare, telecom, technology, retail, oil & gas, and financial services sales organizations.",
   alternates: { canonical: "/industries" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
-    title: "Industries | Agentic SPM by Lanshore",
+    title: "Industries | AI Assisted SPM by Lanshore",
     description:
-      "Agentic SPM by Lanshore serves healthcare, telecom, technology, retail, oil & gas, and financial services sales organizations.",
+      "AI Assisted SPM by Lanshore serves healthcare, telecom, technology, retail, oil & gas, and financial services sales organizations.",
     url: "/industries",
     type: "website",
   },
@@ -48,7 +47,7 @@ export default function IndustriesIndexPage() {
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">Where we work</h1>
           <p className="mt-4 max-w-2xl text-lg text-white/75">
-            Agentic SPM by Lanshore serves sales organizations whose comp complexity
+            AI Assisted SPM by Lanshore serves sales organizations whose comp complexity
             comes with the territory.
           </p>
         </div>
@@ -73,8 +72,6 @@ export default function IndustriesIndexPage() {
           ))}
         </div>
       </section>
-
-      <CtaBand />
     </>
   );
 }

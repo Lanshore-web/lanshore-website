@@ -23,14 +23,14 @@ export default function HeroSection() {
         <div className="mb-6 flex justify-center">
           <div className="inline-flex items-center gap-3 rounded-full border border-gold/40 bg-gold/[0.12] px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white/80">
             <ShieldCheck className="h-4 w-4 flex-shrink-0 text-gold" />
-            Microsoft Gold Partner &nbsp;·&nbsp; UiPath Fast Track Partner
+            Microsoft Certified Partner &nbsp;·&nbsp; UiPath Fast Track Partner
           </div>
         </div>
 
         {/* Headline */}
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="mb-5 text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
-            <span className="text-link-hover">Agentic SPM</span> by Lanshore
+            <span className="text-link-hover">AI Assisted SPM</span> by Lanshore
           </h1>
 
           {/* Focus areas */}
@@ -77,7 +77,7 @@ export default function HeroSection() {
               className="inline-flex items-center justify-center gap-2 rounded border border-white/40 px-7 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-white/10"
             >
               <Zap className="h-4 w-4" />
-              Explore Agentic SPM
+              Explore AI Assisted SPM
             </a>
           </div>
         </div>

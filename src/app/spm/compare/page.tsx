@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, faqSchema, itemListSchema, type FaqItem } from "@/lib/schema";
 import { SPM_PLATFORMS, NEAR_MISS_VENDORS } from "@/lib/spmPlatforms";
@@ -38,7 +37,7 @@ const COMPARE_FAQ: FaqItem[] = [
   {
     question: "Do I have to switch SPM platforms to use agentic AI?",
     answer:
-      "No. Agentic SPM by Lanshore runs on top of the SPM platform you already own. Every platform on this page can be augmented with AI agents for executive dashboards, comp operations, and custom apps — the agents sit above the system of record rather than replacing it. Replatforming is a separate decision, and it should be driven by whether the platform fits your comp plans, not by whether you want AI.",
+      "No. AI Assisted SPM by Lanshore runs on top of the SPM platform you already own. Every platform on this page can be augmented with AI agents for executive dashboards, comp operations, and custom apps — the agents sit above the system of record rather than replacing it. Replatforming is a separate decision, and it should be driven by whether the platform fits your comp plans, not by whether you want AI.",
   },
   {
     question: "Which SPM platforms have built-in AI features?",
@@ -242,8 +241,6 @@ export default function SpmComparePage() {
           ))}
         </dl>
       </section>
-
-      <CtaBand />
     </>
   );
 }

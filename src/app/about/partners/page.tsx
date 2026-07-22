@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
   title: "Partners | Microsoft, UiPath & SPM Platform Partnerships | Lanshore",
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
 
 const PARTNERS = [
   {
-    name: "Microsoft Gold Partner",
+    name: "Microsoft Certified Partner",
     href: "/services/automation",
     cta: "Microsoft automation services",
     body: "Gold-level competency across the Microsoft stack means the Power Automate flows, Azure infrastructure, and integrations we build for clients follow supported patterns Microsoft will stand behind — and your IT team can maintain them.",
@@ -92,7 +91,7 @@ export default function PartnersPage() {
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">Partners</h1>
           <p className="mt-6 text-lg text-white/75">
-            Lanshore partners across the platforms Agentic SPM runs on — so clients get
+            Lanshore partners across the platforms AI Assisted SPM runs on — so clients get
             supported patterns, vendor escalation paths, and consultants the vendors
             know.
           </p>
@@ -104,7 +103,7 @@ export default function PartnersPage() {
         <div className="mb-12 flex flex-wrap items-center gap-x-10 gap-y-6">
           <Image
             src="/images/partners/microsoft-gold.png"
-            alt="Microsoft Gold Partner"
+            alt="Microsoft Certified Partner"
             width={220}
             height={96}
             className="h-14 w-auto"
@@ -158,8 +157,6 @@ export default function PartnersPage() {
           .
         </p>
       </section>
-
-      <CtaBand />
     </>
   );
 }

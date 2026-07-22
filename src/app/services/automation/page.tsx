@@ -41,7 +41,7 @@ const TOOLING = [
   {
     icon: Cpu,
     name: "Microsoft Power Automate",
-    body: "Microsoft-stack automation from a Microsoft Gold Partner — flows that live where your organization already works: Teams, SharePoint, Dynamics, Excel.",
+    body: "Microsoft-stack automation from a Microsoft Certified Partner — flows that live where your organization already works: Teams, SharePoint, Dynamics, Excel.",
   },
   {
     icon: Plug,
@@ -217,7 +217,7 @@ export default function AutomationServicesPage() {
                 href="/agentic-spm/operations"
                 className="font-semibold text-accent hover:text-accent-hover"
               >
-                Agentic SPM by Lanshore
+                AI Assisted SPM by Lanshore
               </Link>
               : comp data moving between your SPM platform, CRM, and finance systems, and
               agents running the cycle on top. If your automation problem is

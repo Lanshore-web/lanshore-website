@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import CtaBand from "@/components/CtaBand";
 import { GARTNER_2019 } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Why Lanshore | One Team From Platform to Agents",
   description:
-    "Why teams pick Lanshore for Agentic SPM: we've run comp, not just advised on it; one team from platform to agents; and we own outcomes through managed services.",
+    "Why teams pick Lanshore for AI Assisted SPM: we've run comp, not just advised on it; one team from platform to agents; and we own outcomes through managed services.",
   alternates: { canonical: "/about/why-lanshore" },
   openGraph: {
     siteName: "Lanshore",
     locale: "en_US",
     title: "Why Lanshore | One Team From Platform to Agents",
     description:
-      "Why teams pick Lanshore for Agentic SPM: we've run comp, not just advised on it; one team from platform to agents; and we own outcomes through managed services.",
+      "Why teams pick Lanshore for AI Assisted SPM: we've run comp, not just advised on it; one team from platform to agents; and we own outcomes through managed services.",
     url: "/about/why-lanshore",
     type: "website",
   },
@@ -43,7 +42,7 @@ export default function WhyLanshorePage() {
           </p>
           <h1 className="text-4xl font-bold sm:text-5xl">Why Lanshore</h1>
           <p className="mt-6 text-lg text-white/75">
-            Agentic SPM by Lanshore exists because fifteen years of implementing and
+            AI Assisted SPM by Lanshore exists because fifteen years of implementing and
             running comp taught us exactly which work agents should take over.
           </p>
         </div>
@@ -75,8 +74,6 @@ export default function WhyLanshorePage() {
           </p>
         </blockquote>
       </section>
-
-      <CtaBand />
     </>
   );
 }

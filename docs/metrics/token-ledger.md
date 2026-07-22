@@ -1,7 +1,7 @@
 # Token & model usage ledger
 
-**Template version:** 0.1.4  
-**Last updated:** 2026-07-17  
+**Template version:** 0.1.16  
+**Last updated:** 2026-07-22  
 **Policy:** update **VERSION** + this ledger on **every git commit** (`scripts/prepare_commit_metrics.py` / pre-commit hook).  
 **Source of figures:** session stats (`/context`, `/session-info`, host UI) — never invent.
 
@@ -13,8 +13,8 @@
 | Total output tokens (measured) | 0 |
 | Total tokens (measured) | 0 |
 | Measured entries | 0 |
-| Unmeasured commit stamps | 6 |
-| All ledger entries | 6 |
+| Unmeasured commit stamps | 18 |
+| All ledger entries | 18 |
 
 ## By model (measured only)
 
@@ -32,6 +32,18 @@
 | 2026-07-17 | commit-2026-07-17 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.2: auto unmeasured (no metrics in env/pending file) [unmeasured] |
 | 2026-07-17 | commit-2026-07-17 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.3: auto unmeasured (no metrics in env/pending file) [unmeasured] |
 | 2026-07-17 | commit-2026-07-17 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.4: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.5: content: Microsoft Certified Partner + AI Assisted SPM naming [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.6: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.7: feat: production-gated Google Analytics 4 [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.8: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.9: content: normalize Agentic SPM to AI Assisted SPM across pages [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.10: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.11: Header lint fix; model claude-fable-5; host did not report main-loop token usage [unmeasured] |
+| 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.12: GEO audit package; subagents measured ~279k tokens (planner 83k, implementer 134k, reviewer 62k); main-loop usage unreported; model claude-fable-5 [unmeasured] |
+| 2026-07-22 | commit-2026-07-22 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.13: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-22 | commit-2026-07-22 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.14: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-22 | commit-2026-07-22 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.15: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-22 | commit-2026-07-22 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.16: auto unmeasured (no metrics in env/pending file) [unmeasured] |
 
 <!-- LEDGER_END -->
 

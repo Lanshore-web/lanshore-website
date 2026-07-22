@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import NewsletterForm from "@/components/NewsletterForm";
 import { blogPostingSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
@@ -158,7 +157,7 @@ export default async function BlogPostPage({
           <Link href="/agentic-spm/custom-apps" className="font-semibold text-accent">
             Custom Apps
           </Link>{" "}
-          — the three pillars of Agentic SPM by Lanshore.
+          — the three pillars of AI Assisted SPM by Lanshore.
         </p>
 
         {process.env.HUBSPOT_FORM_ID_NEWSLETTER ? (
@@ -173,8 +172,6 @@ export default async function BlogPostPage({
           </div>
         ) : null}
       </article>
-
-      <CtaBand />
     </>
   );
 }

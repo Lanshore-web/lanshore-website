@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BarChart3, RefreshCw, Blocks } from "lucide-react";
 
-/* The three cards map 1:1 to the Agentic SPM pillar pages and their demos. */
+/* The three cards map 1:1 to the AI Assisted SPM pillar pages and their demos. */
 const CARDS = [
   {
     icon: BarChart3,
@@ -46,7 +46,7 @@ export default function IntroAgenticSPM() {
 
         <div className="container-site relative max-w-4xl">
           <h2 className="mb-6 text-3xl font-black uppercase tracking-wide text-white lg:text-4xl">
-            Agentic SPM by Lanshore
+            AI Assisted SPM by Lanshore
           </h2>
           <p className="mx-auto mb-10 max-w-3xl text-base leading-relaxed text-white/80 lg:text-lg">
             An AI-native approach to Sales Performance Management built for the enterprise.
@@ -59,7 +59,7 @@ export default function IntroAgenticSPM() {
             href="/agentic-spm/executive-dashboards"
             className="inline-flex items-center justify-center gap-2 rounded border border-white px-8 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-white/[0.12]"
           >
-            Explore Agentic SPM by Lanshore
+            Explore AI Assisted SPM by Lanshore
           </Link>
         </div>
       </section>

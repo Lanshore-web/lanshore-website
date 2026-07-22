@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, caseStudySchema } from "@/lib/schema";
 import { UPDATED } from "@/lib/contentDates";
@@ -102,7 +101,7 @@ export default async function CaseStudyDetail({
                 href={relatedPillar.path}
                 className="font-semibold text-accent hover:text-accent-hover"
               >
-                {relatedPillar.name} — Agentic SPM by Lanshore
+                {relatedPillar.name} — AI Assisted SPM by Lanshore
               </Link>
             </>
           ) : (
@@ -112,14 +111,12 @@ export default async function CaseStudyDetail({
                 href="/services"
                 className="font-semibold text-accent hover:text-accent-hover"
               >
-                How we deliver Agentic SPM
+                How we deliver AI Assisted SPM
               </Link>
             </>
           )}
         </p>
       </article>
-
-      <CtaBand />
     </>
   );
 }
