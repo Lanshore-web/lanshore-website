@@ -1,6 +1,6 @@
 # Token & model usage ledger
 
-**Template version:** 0.1.14  
+**Template version:** 0.1.15  
 **Last updated:** 2026-07-22  
 **Policy:** update **VERSION** + this ledger on **every git commit** (`scripts/prepare_commit_metrics.py` / pre-commit hook).  
 **Source of figures:** session stats (`/context`, `/session-info`, host UI) — never invent.
@@ -13,8 +13,8 @@
 | Total output tokens (measured) | 0 |
 | Total tokens (measured) | 0 |
 | Measured entries | 0 |
-| Unmeasured commit stamps | 16 |
-| All ledger entries | 16 |
+| Unmeasured commit stamps | 17 |
+| All ledger entries | 17 |
 
 ## By model (measured only)
 
@@ -42,6 +42,7 @@
 | 2026-07-21 | commit-2026-07-21 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.12: GEO audit package; subagents measured ~279k tokens (planner 83k, implementer 134k, reviewer 62k); main-loop usage unreported; model claude-fable-5 [unmeasured] |
 | 2026-07-22 | commit-2026-07-22 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.13: auto unmeasured (no metrics in env/pending file) [unmeasured] |
 | 2026-07-22 | commit-2026-07-22 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.14: auto unmeasured (no metrics in env/pending file) [unmeasured] |
+| 2026-07-22 | commit-2026-07-22 | unmeasured | 0 | 0 | 0 | commit metrics v0.1.15: auto unmeasured (no metrics in env/pending file) [unmeasured] |
 
 <!-- LEDGER_END -->
 
