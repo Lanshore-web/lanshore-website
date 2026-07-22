@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { INDUSTRIES } from "@/lib/industries";
@@ -73,8 +72,6 @@ export default function IndustriesIndexPage() {
           ))}
         </div>
       </section>
-
-      <CtaBand />
     </>
   );
 }

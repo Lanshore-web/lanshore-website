@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import WhitePaperGate from "@/components/WhitePaperGate";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
@@ -184,8 +183,6 @@ export default function ResourcesPage() {
           </p>
         </div>
       </section>
-
-      <CtaBand />
     </>
   );
 }

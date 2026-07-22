@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
 import { SPM_PLATFORMS, NEAR_MISS_VENDORS } from "@/lib/spmPlatforms";
 import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 
@@ -101,8 +100,6 @@ export default function SpmIndexPage() {
           listed, <Link href="/contact" className="font-semibold text-accent hover:text-accent-hover">talk to us</Link> — odds are we&apos;ve worked in it.
         </p>
       </section>
-
-      <CtaBand />
     </>
   );
 }

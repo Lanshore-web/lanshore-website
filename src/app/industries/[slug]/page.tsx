@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import { INDUSTRIES, getIndustry } from "@/lib/industries";
@@ -106,8 +105,6 @@ export default async function IndustryPage({
           </Link>
         )}
       </section>
-
-      <CtaBand />
     </>
   );
 }

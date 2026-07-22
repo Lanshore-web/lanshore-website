@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { GARTNER_2019 } from "@/lib/site";
@@ -98,8 +97,6 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-
-      <CtaBand />
     </>
   );
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 
@@ -113,8 +112,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-
-      <CtaBand />
     </>
   );
 }

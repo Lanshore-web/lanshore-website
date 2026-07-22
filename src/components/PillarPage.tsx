@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import JsonLd from "@/components/JsonLd";
 import FaqSection from "@/components/FaqSection";
-import CtaBand from "@/components/CtaBand";
 import CustomAppDemo from "@/components/CustomAppDemo";
 import DemoDashboard from "@/components/DemoDashboard";
 import OperationsDemo from "@/components/OperationsDemo";
@@ -256,12 +255,6 @@ export default function PillarPage({ pillar }: { pillar: Pillar }) {
           </Link>
         </p>
       </section>
-
-      <CtaBand
-        {...(process.env.HUBSPOT_MEETINGS_URL
-          ? { secondaryHref: "/contact#book", secondaryLabel: "Book a call" }
-          : {})}
-      />
     </>
   );
 }

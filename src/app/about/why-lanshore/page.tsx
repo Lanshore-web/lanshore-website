@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import CtaBand from "@/components/CtaBand";
 import { GARTNER_2019 } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -75,8 +74,6 @@ export default function WhyLanshorePage() {
           </p>
         </blockquote>
       </section>
-
-      <CtaBand />
     </>
   );
 }

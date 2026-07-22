@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import CtaBand from "@/components/CtaBand";
 import { breadcrumbSchema } from "@/lib/schema";
 import { GLOSSARY, glossarySlug } from "@/lib/glossary";
 import { SITE_URL } from "@/lib/site";
@@ -129,8 +128,6 @@ export default function GlossaryPage() {
           Akeron, and Incentivate.
         </p>
       </section>
-
-      <CtaBand />
     </>
   );
 }

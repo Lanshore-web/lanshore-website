@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, caseStudySchema } from "@/lib/schema";
 import { UPDATED } from "@/lib/contentDates";
@@ -118,8 +117,6 @@ export default async function CaseStudyDetail({
           )}
         </p>
       </article>
-
-      <CtaBand />
     </>
   );
 }

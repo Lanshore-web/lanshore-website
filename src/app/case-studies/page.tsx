@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import CaseStudyGrid from "@/components/CaseStudyGrid";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { CASE_STUDIES } from "@/lib/caseStudies";
@@ -56,8 +55,6 @@ export default function CaseStudiesPage() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <CaseStudyGrid studies={CASE_STUDIES} />
       </section>
-
-      <CtaBand />
     </>
   );
 }

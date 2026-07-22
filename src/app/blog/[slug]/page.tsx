@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import NewsletterForm from "@/components/NewsletterForm";
 import { blogPostingSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
@@ -173,8 +172,6 @@ export default async function BlogPostPage({
           </div>
         ) : null}
       </article>
-
-      <CtaBand />
     </>
   );
 }

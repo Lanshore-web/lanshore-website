@@ -9,7 +9,6 @@ import AutomationSection from "@/components/home/AutomationSection";
 import SPMComparisonSection from "@/components/home/SPMComparisonSection";
 import TestimonialSection from "@/components/home/TestimonialSection";
 import IndustriesSection from "@/components/home/IndustriesSection";
-import HomeContactSection from "@/components/home/HomeContactSection";
 import { faqSchema } from "@/lib/schema";
 import { HOME_FAQ } from "@/lib/homeFaq";
 
@@ -43,7 +42,6 @@ export default function HomePage() {
       <TestimonialSection />
       <IndustriesSection />
       <FaqSection items={HOME_FAQ} />
-      <HomeContactSection />
     </>
   );
 }

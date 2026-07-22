@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
   title: "Partners | Microsoft, UiPath & SPM Platform Partnerships | Lanshore",
@@ -158,8 +157,6 @@ export default function PartnersPage() {
           .
         </p>
       </section>
-
-      <CtaBand />
     </>
   );
 }

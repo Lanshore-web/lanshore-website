@@ -19,7 +19,7 @@ export default function HomeContactSection() {
               Get In Touch
             </p>
             <h2 className="mb-4 text-3xl font-black text-white lg:text-4xl">
-              Get an SPM Assessment
+              Let&rsquo;s talk
             </h2>
             <p className="mb-6 text-lg leading-relaxed text-white/70 sm:mb-8">
               A Lanshore representative will reach out to discuss how we can help optimize

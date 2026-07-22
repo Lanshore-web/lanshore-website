@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbSchema, faqSchema, itemListSchema, type FaqItem } from "@/lib/schema";
 import { SPM_PLATFORMS, NEAR_MISS_VENDORS } from "@/lib/spmPlatforms";
@@ -242,8 +241,6 @@ export default function SpmComparePage() {
           ))}
         </dl>
       </section>
-
-      <CtaBand />
     </>
   );
 }

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CtaBand from "@/components/CtaBand";
 import JsonLd from "@/components/JsonLd";
 import { blogSchema, breadcrumbSchema, itemListSchema } from "@/lib/schema";
 import { formatDate } from "@/lib/contentDates";
@@ -81,8 +80,6 @@ export default function BlogIndexPage() {
           ))}
         </div>
       </section>
-
-      <CtaBand />
     </>
   );
 }
